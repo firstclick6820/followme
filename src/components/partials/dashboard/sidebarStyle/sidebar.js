@@ -44,7 +44,7 @@ const Sidebar = () => {
                         <li className={`${location.pathname === '/dashboard/app/friend-profile' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/friend-profile" ><i className="las la-user-friends"></i><span>WEBTRADER</span></Link>
                         </li>
-                        <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
+                        {/* <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
                            <CustomToggle eventKey="sidebar-aboutus" onClick={(activeKey) => setActiveMenu(activeKey)}>
                                  <i className="lab la-blogger"></i>
                                  <span>ImTrader</span>
@@ -81,7 +81,7 @@ const Sidebar = () => {
                                
                               </ul>
                            </Accordion.Collapse>
-                        </Accordion.Item>
+                        </Accordion.Item> */}
                         <li className={`${location.pathname === '/dashboards/app/profile-images' ? 'active' : ''}`}>
                            <Link to="/dashboards/app/profile-images" ><i className="las la-image"></i><span>Notification</span></Link>
                         </li>
