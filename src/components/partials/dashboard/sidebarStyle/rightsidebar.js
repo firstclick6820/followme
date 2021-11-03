@@ -27,7 +27,7 @@ const RightSidebar = () => {
                                     </div>
                                     <div className="ms-3">
                                         <h6 className="mb-0">Anna Sthesia</h6>
-                                        <p className="mb-0">before four minutes</p>
+                                        <p className="mb-0">before five minutes</p>
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center mb-4">
