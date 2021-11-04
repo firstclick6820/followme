@@ -17,6 +17,7 @@ import Weather from '../views/dashboard/app/weather'
 import Music from '../views/dashboard/app/music';
 import aboutus from '../views/dashboard/app/aboutus';
 import download from '../views/dashboard/app/download';
+import contactus from '../views/dashboard/app/contactus';
 import CatergoryGrid from '../views/dashboard/store/store-category-grid';
 import CatergoryList from '../views/dashboard/store/store-category-list';
 import StoreDetail from '../views/dashboard/store/store-detail';
@@ -26,6 +27,7 @@ const Layout1Router = () => {
     return (
         <>
             <Switch>
+            <Route path="/dashboard/app/contactus"                component={contactus}></Route>
                 <Route path="/dashboards/app/aboutus"                component={aboutus}></Route>
                 <Route path="/dashboards/app/download"          component={download}></Route>    
                 <Route path="/dashboards/app/groups"                component={Groups}></Route>

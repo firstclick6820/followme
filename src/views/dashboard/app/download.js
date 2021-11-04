@@ -1,36 +1,15 @@
 import React from 'react'
 import { Row, Col, Container, Dropdown, Tooltip, OverlayTrigger } from 'react-bootstrap'
 import Card from '../../../components/Card'
-import { Link } from 'react-router-dom'
+
 
 
 //profile-header
 import ProfileHeader from '../../../components/profile-header'
 
 ////img
-import gi1 from '../../../assets/images/page-img/gi-1.jpg'
-import gi2 from '../../../assets/images/page-img/gi-2.jpg'
-import gi3 from '../../../assets/images/page-img/gi-3.jpg'
-import gi4 from '../../../assets/images/page-img/gi-4.jpg'
-import gi5 from '../../../assets/images/page-img/gi-5.jpg'
-import gi6 from '../../../assets/images/page-img/gi-6.jpg'
-import gi7 from '../../../assets/images/page-img/gi-7.jpg'
-import gi8 from '../../../assets/images/page-img/gi-8.jpg'
-import gi9 from '../../../assets/images/page-img/gi-9.jpg'
-import user05 from '../../../assets/images/user/05.jpg'
-import user06 from '../../../assets/images/user/06.jpg'
-import user07 from '../../../assets/images/user/07.jpg'
-import user08 from '../../../assets/images/user/08.jpg'
-import user09 from '../../../assets/images/user/09.jpg'
-import user10 from '../../../assets/images/user/10.jpg'
-import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
-import img2 from '../../../assets/images/page-img/profile-bg2.jpg'
-import img3 from '../../../assets/images/page-img/profile-bg3.jpg'
-import img4 from '../../../assets/images/page-img/profile-bg4.jpg'
+
 import img5 from '../../../assets/images/page-img/profile-bg5.jpg'
-import img6 from '../../../assets/images/page-img/profile-bg6.jpg'
-import img7 from '../../../assets/images/page-img/profile-bg7.jpg'
-import img9 from '../../../assets/images/page-img/profile-bg9.jpg'
 import apple from '../../../assets/images/apple'
 import and from '../../../assets/images/and.png'
 import macos from '../../../assets/images/macos.png'

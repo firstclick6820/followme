@@ -81,6 +81,7 @@ import PrivacyPolicy from '../views/dashboard/extrapages/privacy-policy';
 import TermsofService from '../views/dashboard/extrapages/terms-of-service';
 import BlankPage from '../views/dashboard/extrapages/blankpage';
 import Settings from '../views/dashboard/app/settings'
+import contactus from '../views/dashboard/app/contactus';
 const DefaultRouter = () => {
     return (
         <TransitionGroup>
@@ -89,6 +90,7 @@ const DefaultRouter = () => {
                     <Route path="/"  exact component={Index} />
 
                     {/* app */}
+                    <Route path="/dashboard/app/contactus"                component={contactus}></Route>
                     <Route path="/dashboard/app/profile"                  component={userProfile} />
                     <Route path="/dashboard/app/settings"                  component={Settings} />
                     <Route path="/dashboard/app/user-privacy-setting"     component={UserPrivacySetting}/>
