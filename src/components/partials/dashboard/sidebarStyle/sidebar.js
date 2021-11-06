@@ -35,6 +35,61 @@ const Sidebar = () => {
                         <li className={`${location.pathname === '/' ? 'active' : ''} `}>
                            <Link to="/" ><i className="las la-home"></i><span>Community</span></Link>
                         </li>
+
+                        <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
+                           <CustomToggle eventKey="sidebar-blog" onClick={(activeKey) => setActiveMenu(activeKey)}>
+                                 <i className="lab la-blogger"></i>
+                                 <span>Profile</span>
+                                 <i className="ri-arrow-right-s-line iq-arrow-right"></i>
+                           </CustomToggle>
+                           <Accordion.Collapse eventKey="sidebar-blog">
+                              <ul id="blog" className="iq-submenu " >
+                                 <li className={`${location.pathname === '/dashboard/blog/blog-grid' ? 'active' : ''}`}>
+                                    <Link to="/dashboard/blog/blog-grid">
+                                       <i className="ri-grid-line"></i>
+                                       Friend List
+                                    </Link>
+                                 </li>
+                                 <li className={`${location.pathname === '/dashboard/blog/blog-list' ? 'active' : ''}`}>
+                                    <Link to="/dashboard/blog/blog-list">
+                                       <i className="ri-list-check-2"></i>Friends Follower
+                                    </Link>
+                                 </li>
+                                 <li className={`${location.pathname === '/dashboard/blog/blog-detail' ? 'active' : ''}`}>
+                                    <Link to="/dashboard/blog/blog-detail">
+                                       <i className="ri-information-line"></i>Group
+                                    </Link>
+                                 </li>
+                                
+                              </ul>
+                           </Accordion.Collapse>
+                        </Accordion.Item>
+                        <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-event"  >
+                           <CustomToggle eventKey="sidebar-event" onClick={(activeKey) => setActiveMenu(activeKey)}>
+                                 <i className="lab la-blogger"></i>
+                                 <span>Events</span>
+                                 <i className="ri-arrow-right-s-line iq-arrow-right"></i>
+                           </CustomToggle>
+                           <Accordion.Collapse eventKey="sidebar-event">
+                              <ul id="blog" className="iq-submenu " >
+                                 <li className={`${location.pathname === '/dashboard/blog/blog-grid' ? 'active' : ''}`}>
+                                    <Link to="/dashboard/blog/blog-grid">
+                                       <i className="ri-grid-line"></i>
+                                       Calender
+                                    </Link>
+                                 </li>
+                                 <li className={`${location.pathname === '/dashboard/blog/blog-list' ? 'active' : ''}`}>
+                                    <Link to="/dashboard/blog/blog-list">
+                                       <i className="ri-list-check-2"></i>Birthday
+                                    </Link>
+                                 </li>
+                             
+                                
+                              </ul>
+                           </Accordion.Collapse>
+                        </Accordion.Item>
+                       
+                      
                         <li className={`${location.pathname === '/dashboard/app/profile' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/profile" ><i className="las la-user"></i><span>Market</span></Link>
                         </li>
@@ -83,7 +138,7 @@ const Sidebar = () => {
                            </Accordion.Collapse>
                         </Accordion.Item> */}
                         <li className={`${location.pathname === '/dashboards/app/profile-images' ? 'active' : ''}`}>
-                           <Link to="/dashboards/app/profile-images" ><i className="las la-image"></i><span>Notification</span></Link>
+                           <Link to="/dashboards/app/profile-images" ><i className="las la-image"></i><span>My-Image</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboards/app/aboutus' ? 'active' : ''}`}>
                            <Link to="/dashboards/app/aboutus" ><i class="las la-exclamation-circle"></i><span> About us</span></Link>
@@ -104,7 +159,7 @@ const Sidebar = () => {
                            <Link to="/dashboard/app/profile-forum" ><i className="lab la-wpforms"></i><span>News</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboard/app/notification' ? 'active' : ''}`}>
-                           <Link to="/dashboard/app/notification" ><i className="las la-bell"></i><span>Invite</span></Link>
+                           <Link to="/dashboard/app/notification" ><i className="las la-bell"></i><span>Notification</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboard/app/file' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/file" ><i className="las la-file"></i><span>Ranking</span></Link>
