@@ -9,7 +9,7 @@ import ProfileHeader from '../../../components/profile-header'
 
 ////img
 
-import img5 from '../../../assets/images/page-img/profile-bg5.jpg'
+import img5 from '../../../assets/images/page-img/profile-bg3.jpg'
 import address from '../../../assets/images/address.png'
 import corporation from '../../../assets/images/corporation.png'
 import feedback from '../../../assets/images/feedback.png'
@@ -23,7 +23,7 @@ const contactus =()=> {
     return(
       <>
           <ProfileHeader title="Contact Us" img={img5} alt="jhjh"/>
-              <div id="contactus-page" className="contactus-page">
+              <div id="contactus-page " className="contactus-page">
                 <Container>
                 
                     <div className="d-grid gap-1 d-grid-template-1fr-15 mt-4 mb-4">
@@ -31,7 +31,7 @@ const contactus =()=> {
                                
                                 <Card.Body className=" text-center d-flex flex-column justify-content-center align-items-center">
                                     <div>
-                                    <img src={address} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
+                                    <img src={address} className="img-fluid w-50 mb-3 mt-3" alt="group-bg"/>
                                     </div>
                                     <p style={{fontWeight:"600",color:"black",fontSize:"16px"}}>Address</p>
                                    
@@ -48,7 +48,7 @@ const contactus =()=> {
                             <Card className="mb-0">
                                <Card.Body className=" text-center d-flex flex-column justify-content-center align-items-center">
                                    <div>
-                                   <img src={corporation} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
+                                   <img src={corporation} className="img-fluid w-50 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p style={{fontWeight:"600",color:"black",fontSize:"16px"}}>Cooperation</p>
                                    <p>Advertising Cooperation / Ads Cooperation
@@ -61,7 +61,7 @@ const contactus =()=> {
                             <Card className="mb-0">
                               <Card.Body className=" text-center d-flex flex-column justify-content-center align-items-center">
                                    <div>
-                                   <img src={feedback} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
+                                   <img src={feedback} className="img-fluid w-50 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p style={{fontWeight:"600",color:"black",fontSize:"16px"}}>Feedback</p>
                                    <p>Suggestions

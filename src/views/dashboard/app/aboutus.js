@@ -17,7 +17,7 @@ import ProfileHeader from "../../../components/profile-header";
 
 import img51 from "../../../assets/images/page-img/s1.jpg";
 import img52 from "../../../assets/images/page-img/52.jpg";
-import img5 from "../../../assets/images/page-img/profile-bg5.jpg";
+import img5 from "../../../assets/images/page-img/profile-bg1.jpg";
 
 const Aboutus = () => {
   return (
@@ -42,6 +42,7 @@ const Aboutus = () => {
                   src={img51}
                   className="img-fluid rounded"
                   alt="Responsive"
+                  
                 />
                 Orders
               </div>
@@ -266,7 +267,7 @@ const Aboutus = () => {
             <h2 className="text-center mt-4 mb-4">Products</h2>
             <Col lg="3">
               <Card>
-                <h4 className="text-center mb-3 mt-3">Search Engine</h4>
+                <h4 className="text-center mb-3 mt-3 "style={{color:"green"}}>Search Engine</h4>
                 <p className="m-3 text-sm text-left">
                   CFD trading, margin trading and other vertical areas of the
                   entire network content collection
@@ -276,30 +277,30 @@ const Aboutus = () => {
             </Col>
             <Col lg="3">
               <Card>
-                <h4 className="text-center mb-3 mt-3">AI Content Engine</h4>
+                <h4 className="text-center mb-3 mt-3 " style={{color:"orange"}}> AI Content Engine</h4>
                 <p className="m-3 text-sm text-left">
                   recommend personalized content according to the user's
                   behavior and habits, the content recommendation is precise and
                   refined that is customized for each individual.
                 </p>
-                <p className="m-3 text-sm text-center">-Community-</p>
+                <p className="m-3 text-sm text-center ">-Community-</p>
               </Card>
             </Col>
             <Col lg="3">
               <Card>
-                <h4 className="text-center mb-3 mt-3">COPYTRADE</h4>
+                <h4 className="text-center mb-3 mt-3 " style={{color:"red"}}>COPYTRADE</h4>
                 <p className="m-3 text-sm text-left">
                   Support to connect more than 3,000 traders worldwide. When the
                   trading account is connected with FOLLOWME, users can
                   automatically copy the transaction through COPYTRADE. There
                   are two connection methods: MANAGER API and CLIENT API.
                 </p>
-                <p className="m-3 text-sm text-center">-Trades-</p>
+                <p className="m-3 text-sm text-center ">-Trades-</p>
               </Card>
             </Col>
             <Col lg="3">
               <Card>
-                <h4 className="text-center mb-3 mt-3">FOLLOWGUARD</h4>
+                <h4 className="text-center mb-3 mt-3 "style={{color:"navy"}}>FOLLOWGUARD</h4>
                 <p className="m-3 text-sm text-left">
                   After the trading account is connected with FOLLOWME, users
                   can enable FOLLOWGUARD to monitor the account status in real

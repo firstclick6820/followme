@@ -9,7 +9,7 @@ import ProfileHeader from '../../../components/profile-header'
 
 ////img
 
-import img5 from '../../../assets/images/page-img/profile-bg5.jpg'
+import img5 from '../../../assets/images/page-img/profile-bg4.jpg'
 import apple from '../../../assets/images/apple'
 import and from '../../../assets/images/and.png'
 import macos from '../../../assets/images/macos.png'
@@ -38,7 +38,7 @@ const download =()=> {
                                    
                             
                                   
-                                    <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                    <button type="submit" className="btn btn-secondary d-block w-50 btn-soft-primary"style={{fontSize:"10px",border:"0" ,fontWeight:"600" }}>Download</button>
                                 </Card.Body>
                             </Card>
                             <Card className="mb-0">
@@ -49,8 +49,8 @@ const download =()=> {
                                    </div>
                                    <p>Android</p>
                                 
-                                   <button type="submit" className="btn btn-secondary d-block w-50 mb-3 " style={{fontSize:"10px"}}>Android APK</button>
-                                   <button type="submit" className="btn btn-secondary d-block w-50" style={{fontSize:"10px"}}>Google play</button>
+                                   <button type="submit" className="btn btn-secondary btn-soft-warning d-block w-50 mb-3 " style={{fontSize:"10px",border:"0",fontWeight:"600"}}>Android APK</button>
+                                   <button type="submit" className="btn btn-secondary  btn-soft-danger d-block w-50" style={{fontSize:"10px" ,border:"0",fontWeight:"600" }}>Google play</button>
                                </Card.Body>
                            </Card>
                          
@@ -64,7 +64,7 @@ const download =()=> {
                                    <img src={macos} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p>Mac OS</p>
-                                   <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                   <button type="submit" className="btn btn-secondary btn-soft-success d-block w-50"style={{fontSize:"10px" ,border:"0",fontWeight:"600" }}>Download</button>
                                 </Card.Body>
                            </Card>
                            <Card className="mb-0">
@@ -73,7 +73,7 @@ const download =()=> {
                                    <img src={windows} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p>Windows</p>
-                                   <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                   <button type="submit" className="btn btn-secondary btn-soft-info d-block w-50"style={{fontSize:"10px" ,border:"0",fontWeight:"600"}}>Download</button>
                                 </Card.Body>
                            </Card>
                            </div>
@@ -93,7 +93,7 @@ const download =()=> {
                                    
                             
                                   
-                                    <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                    <button type="submit" className="btn btn-secondary btn-soft-danger d-block w-50"style={{fontSize:"10px" ,border:"0",fontWeight:"600"}}>Download</button>
                                 </Card.Body>
                             </Card>
                             <Card className="mb-0">
@@ -103,7 +103,7 @@ const download =()=> {
                                    <img src={and} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p>Android</p>
-                                   <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                   <button type="submit" className="btn btn-secondary btn-soft-info d-block w-50"style={{fontSize:"10px" ,border:"0",fontWeight:"600"}}>Download</button>
                                    
                                </Card.Body>
                            </Card>
@@ -118,7 +118,7 @@ const download =()=> {
                                    <img src={macos} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p>Mac OS</p>
-                                   <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                   <button type="submit" className="btn btn-secondary btn-soft-warning d-block w-50"style={{fontSize:"10px" ,border:"0",fontWeight:"600" }}>Download</button>
                                 </Card.Body>
                            </Card>
                            <Card className="mb-0">
@@ -127,7 +127,7 @@ const download =()=> {
                                    <img src={windows} className="img-fluid w-25 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p>Windows</p>
-                                   <button type="submit" className="btn btn-secondary d-block w-50"style={{fontSize:"10px"}}>Download</button>
+                                   <button type="submit" className="btn btn-secondary btn-soft-success d-block w-50"style={{fontSize:"10px",border:"0",fontWeight:"600"}}>Download</button>
                                 </Card.Body>
                            </Card>
                            </div>
