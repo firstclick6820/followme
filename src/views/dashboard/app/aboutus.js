@@ -15,7 +15,9 @@ import ProfileHeader from "../../../components/profile-header";
 
 ////img
 
-import img51 from "../../../assets/images/page-img/s1.jpg";
+import accountconnection from "../../../assets/images/accountconnection.jpg";
+import orders from "../../../assets/images/orders.jpg";
+import trade from "../../../assets/images/trade.png";
 import img52 from "../../../assets/images/page-img/52.jpg";
 import img5 from "../../../assets/images/page-img/profile-bg1.jpg";
 
@@ -29,8 +31,8 @@ const Aboutus = () => {
             <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3 mt-3">
                 <img
-                  src={img51}
-                  className="img-fluid rounded"
+                  src={accountconnection}
+                  className="img-fluid rounded w-25"
                   alt="Responsive"
                 />
                 Account connection
@@ -39,8 +41,8 @@ const Aboutus = () => {
             <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3 mt-3">
                 <img
-                  src={img51}
-                  className="img-fluid rounded"
+                  src={orders}
+                  className="img-fluid rounded w-25"
                   alt="Responsive"
                   
                 />
@@ -50,8 +52,8 @@ const Aboutus = () => {
             <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3 mt-3">
                 <img
-                  src={img51}
-                  className="img-fluid rounded"
+                  src={trade}
+                  className="img-fluid rounded w-25"
                   alt="Responsive"
                 />
                 Trading Volume (USD)
