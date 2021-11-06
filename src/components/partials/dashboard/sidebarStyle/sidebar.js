@@ -170,6 +170,10 @@ const Sidebar = () => {
                         <li className={`${location.pathname === '/dashboard/app/chat' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/chat"><i className="lab la-rocketchat"></i><span>Fcoin</span></Link>
                         </li>
+                        <li className={`${location.pathname === '/dashboard/app/contactus' ? 'active' : ''}`}>
+                           <Link to="/dashboard/app/contactus"><i class="las la-phone-volume"></i><span>Contact Us</span></Link>
+                        </li>
+                     
                      
                         
                         <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
