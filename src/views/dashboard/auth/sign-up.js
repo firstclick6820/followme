@@ -1,8 +1,8 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Row,Col,Container,Form,Button,Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-
+import {SignUpapi} from '../../../api/auth/login'
 //swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from 'swiper';
@@ -21,6 +21,17 @@ import login3 from '../../../assets/images/login/3.png'
 SwiperCore.use([Navigation, Autoplay]);
 
 const SignUp = () => {
+   const [signup,setSignup] =useState({
+      FullName:'',
+      Email:'',
+      Password:'',
+  })
+  const handleClick= async ()=>{
+await SignUpapi(signup)
+history.push('/')
+alert('we signup successful')
+  }
+
    let history =useHistory()
    return (
       <>
@@ -71,22 +82,31 @@ const SignUp = () => {
                         <Form className="mt-4">
                            <Form.Group className="form-group">
                               <Form.Label>Your Full Name</Form.Label>
-                              <Form.Control type="email" className="mb-0" id="exampleInputEmail1" placeholder="Your Full Name"/>
+                              <Form.Control type="email" className="mb-0" id="exampleInputEmail1" placeholder="Your Full Name" onChange={(e)=> setSignup({
+                                 ...signup,
+                                 FullName:e.target.value
+                              })}/>
                            </Form.Group>
                            <Form.Group className="form-group">
                               <Form.Label>Email address</Form.Label>
-                              <Form.Control type="email" className="mb-0" id="exampleInputEmail2" placeholder="Enter email"/>
+                              <Form.Control type="email" className="mb-0" id="exampleInputEmail2" placeholder="Enter email"onChange={(e)=> setSignup({
+                                 ...signup,
+                                 Email:e.target.value
+                              })}/>
                            </Form.Group>
                            <Form.Group className="form-group">
                               <Form.Label>Password</Form.Label>
-                              <Form.Control type="password" className="mb-0" id="exampleInputPassword1" placeholder="Password"/>
+                              <Form.Control type="password" className="mb-0" id="exampleInputPassword1" placeholder="Password" onChange={(e)=> setSignup({
+                                 ...signup,
+                                 Password:e.target.value
+                              })}/>
                            </Form.Group>
                            <div className="d-inline-block w-100">
                               <Form.Check className="d-inline-block mt-2 pt-1">
                                     <Form.Check.Input type="checkbox" className="me-2" id="customCheck1"/>
                                     <Form.Check.Label>I accept <Link to="#">Terms and Conditions</Link></Form.Check.Label>
                               </Form.Check>
-                              <Button type="button" className="btn-primary float-end" onClick={() => history.push('/')}>Sign Up</Button>
+                              <Button type="button" className="btn-primary float-end" onClick={() => handleClick()}>Sign Up</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Already Have Account ? <Link to="/auth/sign-in">Log In</Link></span>

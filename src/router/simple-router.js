@@ -7,7 +7,8 @@ import LockScreen from '../views/dashboard/auth/lock-screen'
 import Recoverpw from '../views/dashboard/auth/recoverpw'
 import SignIn from '../views/dashboard/auth/sign-in'
 import SignUp from '../views/dashboard/auth/sign-up'
-
+import ForgetPassword from '../views/dashboard/auth/forgetpassword'
+import ResetPassword from '../views/dashboard/auth/resetPassword'
 // errors
 import Error404 from '../views/dashboard/errors/error404'
 import Error500 from '../views/dashboard/errors/error500'
@@ -27,6 +28,8 @@ const SimpleRouter = () => {
                 <Route  path="/auth/recoverpw"                  component={Recoverpw}/>
                 <Route  path="/auth/sign-in"                    component={SignIn}/>
                 <Route  path="/auth/sign-up"                    component={SignUp}/>  
+                <Route  path="/auth/forgetpassword"                    component={ForgetPassword}/>  
+                <Route  path="/auth/Resetpassword"                    component={ResetPassword}/>  
                 
                 {/* error */}
                 <Route  path="/errors/error404"                 component={Error404}/>  

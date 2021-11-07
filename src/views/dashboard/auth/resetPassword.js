@@ -3,7 +3,7 @@ import { Login } from '../../../api/auth/login'
 import {Row, Col, Container, Form, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-
+import {CheckValidaty} from '../../../api/auth/login'
 //swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from 'swiper';
@@ -21,16 +21,27 @@ import login3 from '../../../assets/images/login/3.png'
 // install Swiper modules
 SwiperCore.use([Navigation, Autoplay]);
 
-const SignIn = ()=>{ 
-   const [signin,setSignin] = useState({
-      Email:'',
-      Password:''
+const ResetPassword = ()=>{ 
+   const [newpassword,setNewpassword] = useState({
+    Code:'',
+    Password:'',
+    Confirmedpassword:''
+
    })
+
+   const  handleChange=(e)=>{
+    setNewpassword({
+      ...newpassword,
+      [e.target.name]: e.target.value
+    });
+  }
+  const compareFields = ()=>{
+      newpassword['Password']===newpassword['Confirmedpassword']?alert('its same')
+      :alert('differice')
+  }
+
    const handleClick = async ()=>{
-  
-     console.log(signin)
-      await Login(signin).then(res => res.data)
-      alert('first api success')
+    compareFields()
    }
    return (
       <>
@@ -79,30 +90,25 @@ const SignIn = ()=>{
 
                   <Col md="6" className="bg-white pt-5 pt-5 pb-lg-0 pb-5">
                      <div className="sign-in-from">
-                        <h1 className="mb-0">Sign in</h1>
-                        <p>Enter your email address and password to access admin panel.</p>
+                        <h1 className="mb-0">Reset Password</h1>
+                        <p>Enter your email address To Receive The Verfication Code.</p>
                         <Form className="mt-4">
                            <Form.Group className="form-group">
-                              <Form.Label>Email address</Form.Label>
-                              <Form.Control type="email" className="mb-0" id="exampleInputEmail1" placeholder="Enter email" onChange={(e)=>setSignin({
-                                 ...signin,
-                                 Email:e.target.value
-                              })}/>
+                              <Form.Label>Code</Form.Label>
+                              <Form.Control type="email" className="mb-0" name ='Code' id="exampleInputEmail1" placeholder="Enter email" onChange={handleChange}/>
                            </Form.Group>
                            <Form.Group className="form-group">
-                              <Form.Label>Password</Form.Label>
-                              <Link to="/auth/forgetpassword" className="float-end">Forgot password?</Link>
-                              <Form.Control type="password" className="mb-0" id="exampleInputPassword1" placeholder="Password" onChange={(e)=>setSignin({
-                                 ...signin,
-                                 Password:e.target.value
-                              })}/>
+                              <Form.Label> New Password</Form.Label>
+                              <Form.Control type="password" className="mb-0" name='Password' id="exampleInputEmail1" placeholder="Enter New Password" onChange={handleChange}/>
                            </Form.Group>
+                           <Form.Group className="form-group">
+                              <Form.Label>Confirm the Password</Form.Label>
+                              <Form.Control type="password" className="mb-0" name='Confirmedpassword' id="exampleInputEmail1" placeholder="Enter email" onChange={handleChange}/>
+                           </Form.Group>handleChange
+                     
                            <div className="d-inline-block w-100">
-                              <Form.Check className="d-inline-block mt-2 pt-1">
-                                 <Form.Check.Input type="checkbox" className="me-2" id="customCheck11"/>
-                                 <Form.Check.Label>Remember Me</Form.Check.Label>{' '}
-                              </Form.Check>
-                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Sign in</Button>
+                            
+                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Send</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Don't have an account? <Link to="/auth/sign-up">Sign up</Link></span>
@@ -122,4 +128,4 @@ const SignIn = ()=>{
    )
 }
 
-export default SignIn
+export default ResetPassword
