@@ -287,7 +287,7 @@ const Header = () => {
                                     <Dropdown.Toggle href="#" as={Button} bsPrefix="d-flex align-items-center search-toggle" >
                                         <Image src={user1} className="img-fluid rounded-circle me-3" alt="user"/>
                                         <div className="caption">
-                                            <h6 className="mb-0 line-height">Mostafa Dbagh</h6>
+                                            <h6 className="mb-0 line-height">{localStorage.getItem('first_name')}</h6>
                                         </div>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu className="sub-drop dropdown-menu caption-menu" aria-labelledby="drop-down-arrow">

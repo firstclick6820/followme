@@ -22,16 +22,50 @@ import login3 from '../../../assets/images/login/3.png'
 SwiperCore.use([Navigation, Autoplay]);
 
 const SignIn = ()=>{ 
+   const history = useHistory();
    const [signin,setSignin] = useState({
       Email:'',
       Password:''
    })
-   const handleClick = async ()=>{
+   const  checkEmail = (em)=> {
+      var EMAIL_REGEXP = new RegExp('^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$', 'i');
+      if( EMAIL_REGEXP.test(em))return true;
+      else{
+         alert("Kindly provide Your Email ya arsa")
+         return false;
+      }
+  }
+  const sessionFunc =(data)=>{
+  const {user_name,email,first_name,last_name,phone_no,date_of_birth,city,marital_status,age,country,state,address,url,profile_image} = data['Result'];
+
+  for(let i  in data['Result']){
+ localStorage.setItem(i,data['Result'][i])
+  }
+  history.push('/')
   
-     console.log(signin)
-      await Login(signin).then(res => res.data)
-      alert('first api success')
+  
+  }
+   const handleClick = async ()=>{
+      const {Email,Password}=signin;
+      if(checkEmail(Email) && Email && Password !==''){
+         await Login(signin).then(res => res.data['Result'] ==="Invalid Email or Password" ?
+        alert('you have to sign up bro ')
+          : sessionFunc(res.data)
+         )  
+      }    
+      else return ;  
+     
+     
    }
+   // const handleClick = async ()=>{
+   //    const {Email,Password}=signin;
+   //    if(checkEmail(Email) && Email && Password !==''){
+   //       await Login(signin).then(res => console.log(res.data)  )  
+   //    }    
+   //    else return ;  
+     
+     
+   // }
    return (
       <>
          <section className="sign-in-page">

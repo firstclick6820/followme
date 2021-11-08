@@ -27,6 +27,8 @@ const SignUp = () => {
       Password:'',
   })
   const handleClick= async ()=>{
+
+   
 await SignUpapi(signup)
 history.push('/')
 alert('we signup successful')
