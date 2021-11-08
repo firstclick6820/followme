@@ -565,7 +565,7 @@ const friendProfile =() =>{
                                     <div className="w-100">
                                        <div className="d-flex justify-content-between flex-wrap">
                                           <div>
-                                             <h5 className="mb-0 d-inline-block"><Link to="#">Bni Cyst</Link></h5>
+                                             <h5 className="mb-0 d-inline-block"><Link to="#">{localStorage.getItem('first_name')}</Link></h5>
                                              <p className="ms-1 mb-0 d-inline-block">Update his Status</p>
                                              <p className="mb-0">7 hour ago</p>
                                           </div>
@@ -747,7 +747,7 @@ const friendProfile =() =>{
                                     <div className="w-100">
                                        <div className="d-flex justify-content-between flex-wrap">
                                           <div>
-                                             <h5 className="mb-0 d-inline-block"><Link to="#">Bni Cyst</Link></h5>
+                                             <h5 className="mb-0 d-inline-block"><Link to="#">{localStorage.getItem('first_name')}</Link></h5>
                                              <p className="ms-1 mb-0 d-inline-block">Update his Status</p>
                                              <p className="mb-0">7 hour ago</p>
                                           </div>

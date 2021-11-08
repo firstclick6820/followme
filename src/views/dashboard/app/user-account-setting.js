@@ -18,15 +18,15 @@ const UserAccountSetting =() =>{
                         <Form>
                             <Form.Group className="form-group">
                                 <Form.Label htmlFor="uname" className="form-label">User Name:</Form.Label>
-                                <Form.Control type="text" className="form-control" id="uname" defaultValue="Bni@01"/>
+                                <Form.Control type="text" className="form-control" id="uname" defaultValue={localStorage.getItem('first_name')} />
                             </Form.Group>
                             <Form.Group className="form-group">
                                 <Form.Label htmlFor="email" className="form-label">Email Id:</Form.Label>
-                                <Form.Control type="email" className="form-control" id="email" defaultValue="Bnijohn@gmail.com"/>
+                                <Form.Control type="email" className="form-control" id="email" defaultValue={localStorage.getItem('email')}/>
                             </Form.Group>
                             <Form.Group className="form-group">
                                 <Form.Label htmlFor="altemail" className="form-label">Alternate Email:</Form.Label>
-                                <Form.Control type="email" className="form-control" id="altemail" defaultValue="designtheme@gmail.com"/>
+                                <Form.Control type="email" className="form-control" id="altemail" defaultValue="example@gmail.com"/>
                             </Form.Group>
                             <Form.Group className="form-group">
                                 <Form.Label className="d-block form-label">Language Known:</Form.Label>

@@ -65,7 +65,7 @@ const Invoice = () => {
                                     </Col>
                                     <Col sm="12">
                                         <hr className="mt-3"/>
-                                        <h5 className="mb-0">Hello, Bni Cysts</h5>
+                                        <h5 className="mb-0">Hello, {localStorage.getItem('first_name')}</h5>
                                         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                                     </Col>
                                 </Row>
@@ -91,15 +91,15 @@ const Invoice = () => {
                                                             <p className="mb-0">
                                                                 PO Box 16122 Collins Street West<br/>Victoria 8007 Australia<br/>
                                                                 Phone: +123 456 7890<br/>
-                                                                Email: demo@SocialV.com<br/>
-                                                                Web: www.SocialV.com
+                                                                Email: demo@bluebridge.com<br/>
+                                                                Web: www.greatbluebridge.com
                                                             </p>
                                                         </td>
                                                         <td>
                                                             <p className="mb-0">PO Box 16122 Collins Street West<br/>Victoria 8007 Australia<br/>
                                                                 Phone: +123 456 7890<br/>
-                                                                Email: demo@SocialV.com<br/>
-                                                                Web: www.SocialV.com
+                                                                Email: demo@bluebridge.com<br/>
+                                                                Web: www.greatbluebridge.com
                                                             </p>
                                                         </td>
                                                     </tr>

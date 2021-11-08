@@ -55,7 +55,7 @@ const Footer = (props) => {
                                 </ul>
                             </Col>
                             <Col lg="6" className="d-flex justify-content-end">
-                                <span>Copyright 2020<Link to="#"> SocialV </Link> All Rights Reserved.</span>
+                                <span>Copyright 2021<Link to="#"> Blue Bridge </Link> All Rights Reserved.</span>
                             </Col>
                         </Row>
                     </Container>

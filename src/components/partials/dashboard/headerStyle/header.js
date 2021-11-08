@@ -294,7 +294,7 @@ const Header = () => {
                                         <Card className="shadow-none m-0">
                                             <Card.Header className="bg-primary">
                                                 <div className="header-title">
-                                                    <h5 className="mb-0 text-white">Hello Mostafa Dbagh</h5>
+                                                    <h5 className="mb-0 text-white">Hello {localStorage.getItem('first_name')}</h5>
                                                     <span className="text-white font-size-12">Available</span>
                                                 </div>
                                             </Card.Header>

@@ -13,7 +13,7 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/components/navigation/navigation.scss';
 
 //img
-import logo from '../../../assets/images/logo-full.png'
+
 import login1 from '../../../assets/images/login/1.png'
 import login2 from '../../../assets/images/login/2.png'
 import login3 from '../../../assets/images/login/3.png'
@@ -80,9 +80,10 @@ const SignIn = ()=>{
                <Row className="no-gutters">
                   <Col md="6" className="text-center pt-5">
                      <div className="sign-in-detail text-white">
-                        <Link className="sign-in-logo mb-5" to="#">
+                        {/* <Link className="sign-in-logo mb-5" to="#">
                            <Image src={logo} className="img-fluid" alt="logo"/>
-                        </Link>
+                        </Link> */}
+                        <h1 style={{color:"white"}}>ACE <br /></h1> <h2 style={{color:"white"}}>Trading Platform</h2>
                         <div className="sign-slider overflow-hidden ">
                            <Swiper 
                               spaceBetween={30} 

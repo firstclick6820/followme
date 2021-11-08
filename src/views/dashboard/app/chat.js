@@ -364,7 +364,7 @@ const Chat=()=>{
                                                                 <div className="chat-detail">
                                                                     <div className="chat-message">
                                                                         <p>Absolutely!</p>
-                                                                        <p>SocialV Dashboard is the responsive bootstrap 5 admin template.</p>
+                                                                        <p> Dashboard is the responsive bootstrap 5 admin template.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -546,7 +546,7 @@ const Chat=()=>{
                                                                 <div className="chat-detail">
                                                                     <div className="chat-message">
                                                                         <p>Absolutely!</p>
-                                                                        <p>SocialV Dashboard is the responsive bootstrap 5 admin template.</p>
+                                                                        <p> Dashboard is the responsive bootstrap 5 admin template.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -912,7 +912,7 @@ const Chat=()=>{
                                                                 <div className="chat-detail">
                                                                     <div className="chat-message">
                                                                         <p>Absolutely!</p>
-                                                                        <p>SocialV Dashboard is the responsive bootstrap 5 admin template.</p>
+                                                                        <p> Dashboard is the responsive bootstrap 5 admin template.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1278,7 +1278,7 @@ const Chat=()=>{
                                                                 <div className="chat-detail">
                                                                     <div className="chat-message">
                                                                         <p>Absolutely!</p>
-                                                                        <p>SocialV Dashboard is the responsive bootstrap 5 admin template.</p>
+                                                                        <p> Dashboard is the responsive bootstrap 5 admin template.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1644,7 +1644,7 @@ const Chat=()=>{
                                                                 <div className="chat-detail">
                                                                     <div className="chat-message">
                                                                         <p>Absolutely!</p>
-                                                                        <p>SocialV Dashboard is the responsive bootstrap 5 admin template.</p>
+                                                                        <p> Dashboard is the responsive bootstrap 5 admin template.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -2010,7 +2010,7 @@ const Chat=()=>{
                                                                 <div className="chat-detail">
                                                                     <div className="chat-message">
                                                                         <p>Absolutely!</p>
-                                                                        <p>SocialV Dashboard is the responsive bootstrap 5 admin template.</p>
+                                                                        <p> Dashboard is the responsive bootstrap 5 admin template.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>

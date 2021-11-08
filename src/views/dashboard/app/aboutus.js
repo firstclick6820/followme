@@ -63,7 +63,7 @@ const Aboutus = () => {
               <div className="user-images position-relative overflow-hidden mb-3">
                 <div className="ratio ratio-16x9">
                   <iframe
-                    src="https://www.youtube.com/embed/Ml4XCF-JS0k"
+                    src="https://www.youtube.com"
                     title="v1"
                   ></iframe>
                 </div>
@@ -74,8 +74,8 @@ const Aboutus = () => {
             <div className="para-aboutus text-align-center mt-4 mb-4">
               <h1 className="text-center">About us</h1>
               <p>
-                FOLLOWME is a FINTECH company, setup by a team of tech savvy
-                programmers in 2015. We provide an open community trading
+                Blue bridge is a IT company, setup by a team of tech savvy
+                programmers in 2021. We provide an open community trading
                 platform where Traders or Investors around the world can post
                 and share in real-time, their trading strategies, ideas and
                 experiences. These traders hold real trading accounts with any
@@ -88,8 +88,8 @@ const Aboutus = () => {
                 set their trading preference as to how much investment they like
                 to copy. Every trader’s activities are recorded and published
                 systematically and presented in a comprehensive format to allow
-                easy access to Followers. Currently, FOLLOWME has garnered more
-                than 800,000 registered users worldwide and we will continue to
+                easy access to Followers. Currently, this platform has garnered a lot 
+                 registered users worldwide and we will continue to
                 innovate and strive to evolve and become the most popular
                 community trading platform globally. Let’s trade with clarity
                 and ease where technology can help traders achieve supreme
@@ -141,15 +141,13 @@ const Aboutus = () => {
                       </div>
                       <div className="d-inline-block w-100">
                         <p>
-                          • In June imTrader trading contest S8 season, the
-                          number of participating accounts was 4,836, and the
-                          participating capital was 38 million US dollars.
+                        started the project
                         </p>
 
-                        <p>• March global multi-language system online</p>
+                        <p>• Under development</p>
                       </div>
                     </li>
-                    <li>
+                    {/* <li>
                       <div className="timeline-dots"></div>
                       <div className="d-flex align-items-center justify-content-between">
                         <h5 className="mb-1">2020</h5>
@@ -259,7 +257,7 @@ const Aboutus = () => {
                         </p>
                         <p>• Birth of FOLLOWME</p>
                       </div>
-                    </li>
+                    </li> */}
                   </ul>
                 </Card.Body>
               </Card>
