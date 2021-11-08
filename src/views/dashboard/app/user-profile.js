@@ -105,7 +105,7 @@ const UserProfile =() =>{
                                  <img src={img2} alt="profile-img1" className="avatar-130 img-fluid" />
                               </div>
                               <div className="profile-detail">
-                                 <h3>Bni Cyst</h3>
+                                 <h3>{localStorage.getItem('first_name')}</h3>
                               </div>
                            </div>
                            <div className="profile-info p-3 d-flex align-items-center justify-content-between position-relative">
@@ -448,7 +448,7 @@ const UserProfile =() =>{
                                                    <div className="w-100">
                                                       <div className="d-flex justify-content-between flex-wrap">
                                                          <div>
-                                                            <h5 className="mb-0 d-inline-block"><Link to="#">Bni Cyst</Link></h5>
+                                                            <h5 className="mb-0 d-inline-block"><Link to="#">{localStorage.getItem('first_name')}</Link></h5>
                                                             <p className="ms-1 mb-0 d-inline-block">Add New Post</p>
                                                             <p className="mb-0">3 hour ago</p>
                                                          </div>
@@ -625,7 +625,7 @@ const UserProfile =() =>{
                                                    <div className="w-100">
                                                       <div className="d-flex justify-content-between">
                                                          <div>
-                                                            <h5 className="mb-0 d-inline-block me-1"><Link to="#">Bni Cyst</Link></h5>
+                                                            <h5 className="mb-0 d-inline-block me-1"><Link to="#">{localStorage.getItem('first_name')}</Link></h5>
                                                             <p className="mb-0 d-inline-block">Share Anna Mull's Post</p>
                                                             <p className="mb-0">5 hour ago</p>
                                                          </div>
@@ -802,7 +802,7 @@ const UserProfile =() =>{
                                                    <div className="w-100">
                                                       <div className="d-flex justify-content-between">
                                                          <div>
-                                                            <h5 className="mb-0 d-inline-block"><Link to="#">Bni Cyst</Link></h5>
+                                                            <h5 className="mb-0 d-inline-block"><Link to="#">{localStorage.getItem('first_name')}</Link></h5>
                                                             <p className="ms-1 mb-0 d-inline-block">Update his Status</p>
                                                             <p className="mb-0">7 hour ago</p>
                                                          </div>
@@ -979,7 +979,7 @@ const UserProfile =() =>{
                                                    <div className="w-100">
                                                       <div className="d-flex justify-content-between">
                                                          <div>
-                                                            <h5 className="mb-0 d-inline-block me-1"><Link to="#">Bni Cyst</Link></h5>
+                                                            <h5 className="mb-0 d-inline-block me-1"><Link to="#">{localStorage.getItem('first_name')}</Link></h5>
                                                             <p className=" mb-0 d-inline-block">Change Profile Picture</p>
                                                             <p className="mb-0">3 day ago</p>
                                                          </div>
@@ -1187,19 +1187,19 @@ const UserProfile =() =>{
                                                       <h6>Email</h6>
                                                    </div>
                                                    <div className="col-9">
-                                                      <p className="mb-0">Bnijohn@gmail.com</p>
+                                                      <p className="mb-0">{localStorage.getItem('email')}</p>
                                                    </div>
                                                    <div className="col-3">
                                                       <h6>Mobile</h6>
                                                    </div>
                                                    <div className="col-9">
-                                                      <p className="mb-0">(001) 4544 565 456</p>
+                                                      <p className="mb-0">{localStorage.getItem('phone_no')}</p>
                                                    </div>
                                                    <div className="col-3">
                                                       <h6>Address</h6>
                                                    </div>
                                                    <div className="col-9">
-                                                      <p className="mb-0">United States of America</p>
+                                                      <p className="mb-0">{localStorage.getItem('address')}</p>
                                                    </div>
                                                 </Row>
                                                 <h4 className="mt-3">Websites and Social Links</h4>
@@ -1225,14 +1225,10 @@ const UserProfile =() =>{
                                                       <h6>Birth Date</h6>
                                                    </div>
                                                    <div className="col-9">
-                                                      <p className="mb-0">24 January</p>
+                                                      <p className="mb-0">{localStorage.getItem('date_of_birth')}</p>
                                                    </div>
-                                                   <div className="col-3">
-                                                      <h6>Birth Year</h6>
-                                                   </div>
-                                                   <div className="col-9">
-                                                      <p className="mb-0">1994</p>
-                                                   </div>
+                                                   
+                                                   
                                                    <div className="col-3">
                                                       <h6>Gender</h6>
                                                    </div>

@@ -764,7 +764,7 @@ const Index = () => {
                                             <div className="w-100">
                                                 <div className="d-flex justify-content-between">
                                                     <div>
-                                                        <h5 className="mb-0 d-inline-block">Bni Cyst</h5>
+                                                        <h5 className="mb-0 d-inline-block">{localStorage.getItem('first_name')}</h5>
                                                         <p className="ms-1 mb-0 ps-1 d-inline-block">Changed Profile Picture</p>
                                                         <p className="mb-0">3 day ago</p>
                                                     </div>

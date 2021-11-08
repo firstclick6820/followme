@@ -67,19 +67,19 @@ const UserProfileEdit =() =>{
                                           <Row className="align-items-center">
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label htmlFor="fname"  className="form-label">First Name:</Form.Label>
-                                                  <Form.Control type="text" className="form-control" id="fname" placeholder="Bni"/>
+                                                  <Form.Control type="text" className="form-control" id="fname" placeholder={localStorage.getItem('first_name')}/>
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label htmlFor="lname" className="form-label">Last Name:</Form.Label>
-                                                  <Form.Control type="text" className="form-control" id="lname" placeholder="Jhon"/>
+                                                  <Form.Control type="text" className="form-control" id="lname" placeholder={localStorage.getItem('last_name')}/>
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label htmlFor="uname" className="form-label">User Name:</Form.Label>
-                                                  <Form.Control type="text" className="form-control" id="uname" placeholder="Bni@01"/>
+                                                  <Form.Control type="text" className="form-control" id="uname" placeholder={localStorage.getItem('user_name')}/>
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label htmlFor="cname" className="form-label">City:</Form.Label>
-                                                  <Form.Control type="text" className="form-control" id="cname" placeholder="Atlanta"/>
+                                                  <Form.Control type="text" className="form-control" id="cname" placeholder={localStorage.getItem('city')}/>
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label className="form-label d-block">Gender:</Form.Label>
@@ -94,7 +94,7 @@ const UserProfileEdit =() =>{
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label htmlFor="dob" className="form-label">Date Of Birth:</Form.Label>
-                                                  <Form.Control className="form-control" id="dob" placeholder="1984-01-24"/>
+                                                  <Form.Control className="form-control" id="dob" placeholder={localStorage.getItem('date_of_birth')}/>
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-6">
                                                   <Form.Label className="form-label">Marital Status:</Form.Label>
@@ -135,10 +135,7 @@ const UserProfileEdit =() =>{
                                               </Form.Group>
                                               <Form.Group className="form-group col-sm-12">
                                                   <Form.Label className="form-label">Address:</Form.Label>
-                                                  <Form.Control as="textarea" className="form-control" rows={5} style={{lineHeight: "22px"}} placeholder=" 37 Cardinal Lane
-                                                  Petersburg, VA 23803
-                                                  United States of America
-                                                  Zip Code: 85001">
+                                                  <Form.Control as="textarea" className="form-control" rows={5} style={{lineHeight: "22px"}} placeholder={localStorage.getItem('address')}>
                                                   </Form.Control>
                                               </Form.Group>
                                           </Row>
