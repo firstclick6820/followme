@@ -56,7 +56,7 @@ const UserProfileEdit =() =>{
                                           <Form.Group className="form-group align-items-center">
                                               <Col md="12">
                                                   <div className="profile-img-edit">
-                                                    <img className="profile-pic" src={img1} alt="profile-pic"/>
+                                                    <img className="profile-pic" src={localStorage.getItem('profile_image')} alt="profile-pic"/>
                                                     <div className="p-image">
                                                         <i className="ri-pencil-line upload-button text-white"></i>
                                                         <input className="file-upload" type="file" accept="image/*"/>

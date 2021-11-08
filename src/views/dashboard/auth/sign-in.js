@@ -83,6 +83,7 @@ const SignIn = ()=>{
                         {/* <Link className="sign-in-logo mb-5" to="#">
                            <Image src={logo} className="img-fluid" alt="logo"/>
                         </Link> */}
+                        <h1 style={{color:"white"}}>ACE <br /></h1> <h2 style={{color:"white"}}>Trading Platform</h2>
                         <div className="sign-slider overflow-hidden ">
                            <Swiper 
                               spaceBetween={30} 
