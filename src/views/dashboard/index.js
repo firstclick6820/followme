@@ -11,6 +11,8 @@ import user01 from '../../assets/images/user/01.jpg'
 import user2 from '../../assets/images/user/02.jpg'
 import user3 from '../../assets/images/user/03.jpg'
 import user4 from '../../assets/images/user/04.jpg'
+import user8 from '../../assets/images/user/08.jpg'
+import user6 from '../../assets/images/user/06.jpg'
 import img1 from '../../assets/images/small/07.png'
 import img2 from '../../assets/images/small/08.png'
 import img3 from '../../assets/images/small/09.png'
@@ -1132,7 +1134,7 @@ const Index = () => {
                             <Card.Body>
                                 <ul className="media-story list-inline m-0 p-0">
                                     <li className="d-flex mb-4 align-items-center ">
-                                        <img src={s4} alt="story1" className="rounded-circle img-fluid"/>
+                                        <img src={user8} alt="story1" className="rounded-circle img-fluid"/>
                                         <div className="stories-data ms-3">
                                             <h6>imTraderTradingContest</h6>
                                             <p className="mb-0"><span>438 views</span> </p>
@@ -1140,7 +1142,7 @@ const Index = () => {
                                         </div>
                                     </li>
                                     <li className="d-flex mb-4 align-items-center ">
-                                        <img src={s4} alt="story1" className="rounded-circle img-fluid"/>
+                                        <img src={user2} alt="story1" className="rounded-circle img-fluid"/>
                                         <div className="stories-data ms-3">
                                             <h6>BeginnerTalk</h6>
                                             <p className="mb-0"><span>438 views</span> </p>
@@ -1148,7 +1150,7 @@ const Index = () => {
                                         </div>
                                     </li>
                                     <li className="d-flex mb-4 align-items-center ">
-                                        <img src={s4} alt="story1" className="rounded-circle img-fluid"/>
+                                        <img src={user6} alt="story1" className="rounded-circle img-fluid"/>
                                         <div className="stories-data ms-3">
                                             <h6>FollowMe Report</h6>
                                             <p className="mb-0"><span>438 views</span> </p>

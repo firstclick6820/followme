@@ -56,7 +56,7 @@ const UserProfileEdit =() =>{
                                           <Form.Group className="form-group align-items-center">
                                               <Col md="12">
                                                   <div className="profile-img-edit">
-                                                    <img className="profile-pic" src={localStorage.getItem('profile_image')} alt="profile-pic"/>
+                                                    <img className="profile-pic" src={img1} alt="profile-pic"/>
                                                     <div className="p-image">
                                                         <i className="ri-pencil-line upload-button text-white"></i>
                                                         <input className="file-upload" type="file" accept="image/*"/>
@@ -140,7 +140,7 @@ const UserProfileEdit =() =>{
                                               </Form.Group>
                                           </Row>
                                           <Button type="submit" className="btn btn-primary me-2">Submit</Button>
-                                          <Button type="reset" className="btn bg-soft-danger">Cancel</Button>
+                                          <Button type="reset" className="btn btn-light">Cancel</Button>
                                       </Form>
                                   </Card.Body>
                               </Card>
@@ -168,7 +168,7 @@ const UserProfileEdit =() =>{
                                             <Form.Control type="Password" className="form-control" id="vpass" defaultValue=""/>
                                         </Form.Group>
                                         <Button type="submit" className="btn btn-primary me-2">Submit</Button>
-                                        <Button type="reset" className="btn bg-soft-danger">Cancel</Button>
+                                        <Button type="reset" className="btn btn-light">Cancel</Button>
                                     </Form>
                                   </Card.Body>
                               </Card>
@@ -235,7 +235,7 @@ const UserProfileEdit =() =>{
                                           </Col>
                                       </Form.Group>
                                       <Button type="submit" className="btn btn-primary me-2">Submit</Button>
-                                      <Button type="reset" className="btn bg-soft-danger">Cancel</Button>
+                                      <Button type="reset" className="btn btn-light">Cancel</Button>
                                   </Form>
                                   </Card.Body>
                               </Card>
@@ -251,18 +251,18 @@ const UserProfileEdit =() =>{
                                       <Form>
                                           <Form.Group className="form-group">
                                               <Form.Label htmlFor="cno"  className="form-label">Contact Number:</Form.Label>
-                                              <Form.Control type="text" className="form-control" id="cno" defaultValue="001 2536 123 458"/>
+                                              <Form.Control type="text" className="form-control" id="cno" defaultValue={localStorage.getItem('phone_no')}/>
                                           </Form.Group>
                                           <Form.Group className="form-group">
                                               <Form.Label htmlFor="email"  className="form-label">Email:</Form.Label>
-                                              <Form.Control type="text" className="form-control" id="email" defaultValue="Bnijone@demo.com"/>
+                                              <Form.Control type="text" className="form-control" id="email" defaultValue={localStorage.getItem('email')}/>
                                           </Form.Group>
                                           <Form.Group className="form-group">
                                               <Form.Label htmlFor="url"  className="form-label">Url:</Form.Label>
                                               <Form.Control type="text" className="form-control" id="url" defaultValue="https://getbootstrap.com"/>
                                           </Form.Group>
                                           <Button type="submit" className="btn btn-primary me-2">Submit</Button>
-                                          <Button type="reset" className="btn bg-soft-danger">Cancel</Button>
+                                          <Button type="reset" className="btn btn-light">Cancel</Button>
                                       </Form>
                                   </Card.Body>
                               </Card>

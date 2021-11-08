@@ -13,7 +13,7 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/components/navigation/navigation.scss';
 
 //img
-import logo from '../../../assets/images/logo-full.png'
+
 import login1 from '../../../assets/images/login/1.png'
 import login2 from '../../../assets/images/login/2.png'
 import login3 from '../../../assets/images/login/3.png'
@@ -57,9 +57,7 @@ const ResetPassword = ()=>{
                <Row className="no-gutters">
                   <Col md="6" className="text-center pt-5">
                      <div className="sign-in-detail text-white">
-                        <Link className="sign-in-logo mb-5" to="#">
-                           <Image src={logo} className="img-fluid" alt="logo"/>
-                        </Link>
+                     <h1 style={{color:"white"}}>ACE <br /></h1> <h2 style={{color:"white"}}>Trading Platform</h2>
                         <div className="sign-slider overflow-hidden ">
                            <Swiper 
                               spaceBetween={30} 
@@ -104,11 +102,11 @@ const ResetPassword = ()=>{
                            <Form.Group className="form-group">
                               <Form.Label>Confirm the Password</Form.Label>
                               <Form.Control type="password" className="mb-0" name='Confirmedpassword' id="exampleInputEmail1" placeholder="Enter email" onChange={handleChange}/>
-                           </Form.Group>handleChange
+                           </Form.Group>
                      
                            <div className="d-inline-block w-100">
                             
-                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Send</Button>
+                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Submit</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Don't have an account? <Link to="/auth/sign-up">Sign up</Link></span>
