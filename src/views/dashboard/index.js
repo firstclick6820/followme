@@ -40,13 +40,24 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
-
+import { CreatePost } from '../../api/auth/login'
 
 const Index = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const [post,setPost] = useState({
+        user_id:0,
+        description:'',
+        imageurl:'',
+        post_visibility:0
+    })
+    const handleClick =async ()=>{
+        alert('before')
+        console.log(post  )
+await CreatePost(post)
+alert('after')
+    }
     return (
         <>
             <Container>
@@ -116,7 +127,10 @@ const Index = () => {
                                                 <img src={user1} alt="user1" className="avatar-60 rounded-circle img-fluid"/>
                                             </div>
                                             <form className="post-text ms-3 w-100 "  data-bs-toggle="modal" data-bs-target="#post-modal">
-                                            <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}}/>
+                                            <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}} onChange={(e)=>setPost({
+                                                ...post,
+                                                description:e.target.value
+                                            })}/>
                                         </form>
                                         </div>
                                         <hr/>
@@ -210,7 +224,7 @@ const Index = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        <button type="submit" className="btn btn-primary d-block w-100 mt-3">Post</button>
+                                        <button type="submit" onClick={()=>handleClick()} className="btn btn-primary d-block w-100 mt-3">Post</button>
                                     </Modal.Body>
                                 </Modal>
                             </Card>
