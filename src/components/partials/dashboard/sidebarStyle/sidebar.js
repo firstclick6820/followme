@@ -36,7 +36,7 @@ const Sidebar = () => {
                            <Link to="/" ><i className="las la-home"></i><span>Community</span></Link>
                         </li>
 
-                        <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
+                        {/* <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
                            <CustomToggle eventKey="sidebar-blog" onClick={(activeKey) => setActiveMenu(activeKey)}>
                            <i className="lar la-user"></i>
                                  <span>Profile</span>
@@ -63,8 +63,8 @@ const Sidebar = () => {
                                 
                               </ul>
                            </Accordion.Collapse>
-                        </Accordion.Item>
-                        <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-event"  >
+                        </Accordion.Item> */}
+                        {/* <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-event"  >
                            <CustomToggle eventKey="sidebar-event" onClick={(activeKey) => setActiveMenu(activeKey)}>
                            <i class="las la-calendar-day"></i>
                                  <span>Events</span>
@@ -87,7 +87,7 @@ const Sidebar = () => {
                                 
                               </ul>
                            </Accordion.Collapse>
-                        </Accordion.Item>
+                        </Accordion.Item> */}
                        
                       
                         <li className={`${location.pathname === '/dashboard/app/profile' ? 'active' : ''}`}>
@@ -137,9 +137,9 @@ const Sidebar = () => {
                               </ul>
                            </Accordion.Collapse>
                         </Accordion.Item> */}
-                        <li className={`${location.pathname === '/dashboards/app/profile-images' ? 'active' : ''}`}>
+                        {/* <li className={`${location.pathname === '/dashboards/app/profile-images' ? 'active' : ''}`}>
                            <Link to="#/dashboards/app/profile-images" ><i class="las la-camera-retro"></i><span>My-Image</span></Link>
-                        </li>
+                        </li> */}
                         <li className={`${location.pathname === '/dashboards/app/aboutus' ? 'active' : ''}`}>
                            <Link to="/dashboards/app/aboutus" ><i class="las la-exclamation-circle"></i><span> About us</span></Link>
                         </li>
@@ -148,7 +148,7 @@ const Sidebar = () => {
                         </li>
 
 
-                    
+{/*                     
                         <li className={`${location.pathname === '/dashboards/app/profile-events' ? 'active' : ''}`}>
                            <Link to="#/dashboards/app/profile-events" ><i class="las la-trophy"></i><span>Prize</span></Link>
                         </li>
@@ -166,10 +166,10 @@ const Sidebar = () => {
                         </li>
                         <li className={`${location.pathname === '#/dashboard/app/friend-request' ? 'active' : ''}`}>
                            <Link to="#/dashboard/app/friend-request" ><i className="las la-user-plus"></i><span>Friend Follower</span></Link>
-                        </li>
-                        <li className={`${location.pathname === '#/dashboard/app/chat' ? 'active' : ''}`}>
+                        </li> */}
+                        {/* <li className={`${location.pathname === '#/dashboard/app/chat' ? 'active' : ''}`}>
                            <Link to="#/dashboard/app/chat"><i class="las la-coins"></i><span>Fcoin</span></Link>
-                        </li>
+                        </li> */}
                         <li className={`${location.pathname === '/dashboard/app/contactus' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/contactus"><i class="las la-phone-volume"></i><span>Contact Us</span></Link>
                         </li>
