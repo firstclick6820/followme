@@ -178,7 +178,7 @@ const Sidebar = () => {
                         
                         <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
                            <CustomToggle eventKey="sidebar-blog" onClick={(activeKey) => setActiveMenu(activeKey)}>
-                           <i class="las la-angle-double-right"></i>
+                           <i class="las la-ellipsis-h"></i>
                                  <span>More</span>
                                  <i className="ri-arrow-right-s-line iq-arrow-right"></i>
                            </CustomToggle>
