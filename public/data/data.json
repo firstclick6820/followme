@@ -2,15 +2,7 @@
     {
         "AboutAce": [
             { "title": "Aboutfollowme", "subtitle": ["Company Introduction"] },
-<<<<<<< HEAD
-            { "title": "Legal Notifications",
-             "subtitle":  [
-             {"heading":"Terms & Conditions","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password on the Connect Account page.  You can also create a new trading account of a top Broker on FOLLOWME. Accounts need to be connected to FOLLOWM   after successful creation."},
-            { "heading" : "Disclaimer","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password"},
-            {"heading":"privacy","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password"},
-            {"heading":"Rules &Regulation","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password"}]},
-            { "title": "Page", "subtitle": [{"heading":"Brand Page Policy","para":""},{"heading":"Brand Content Policy","para":""}] },
-=======
+
             {
                 "title": "Legal Notifications",
                 "subtitle": [{
@@ -24,7 +16,7 @@
                 ]
             },
             { "title": "Page", "subtitle": [{ "Brand Page Policy": "" }, { "Brand Content Policy": "" }] },
->>>>>>> e001a39476ce788dc05206a344addc7b1b92bd08
+
             { "title": "others", "subtitle": ["Career", "Contact Us"] }
 
         ]

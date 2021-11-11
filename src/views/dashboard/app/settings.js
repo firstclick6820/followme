@@ -62,7 +62,7 @@ const Settings = () => {
     <ul key={Math.random(10)} className="list-group" style={{borderBottom:"4px solid #ccc"}}>
     <li  className="list-group-item"  style={{fontWeight:"500",fontSize:"16px",color:"#50b5ff" }}><span>{i.title}</span></li>
    { i.subtitle.length >0 && i.subtitle.map((val) =>(
-<<<<<<< HEAD
+
 <>
 
                         <Accordion id="accordionExample" defaultActiveKey="0" >
@@ -85,16 +85,7 @@ const Settings = () => {
 
   
   </>
-=======
-    <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column'}} >
-   <li style={{listStyle:'none',margin:'0px 10px',fontWeight:'600',display:"flex",justifyContent:'space-between'}}>{val.heading}</li>
-   <button style={{border:'none',background:'none',outline:'none'}} onClick={()=>setShow(!show)}>{show ? <i className="fas fa-chevron-up"></i>:<i className="fas fa-chevron-down"></i>}</button>
 
-
-{show ? 
-<li style={{listStyle:'none',margin:'10px 20px',lineHeight:'30px'}}>{val.para}</li>
-:null}
->>>>>>> e001a39476ce788dc05206a344addc7b1b92bd08
 
    ))
  
