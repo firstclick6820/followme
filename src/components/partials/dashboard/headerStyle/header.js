@@ -57,7 +57,7 @@ const Header = () => {
                                     <Dropdown.Toggle href="#" as={Button} variant="search-toggle">
                                         <i className="ri-group-line"></i>
                                     </Dropdown.Toggle>
-                                    <Dropdown.Menu className="sub-drop sub-drop-large" aria-labelledby="group-drop">
+                                    <Dropdown.Menu className="sub-drop sub-drop-large" aria-labelledby="group-drop">z
                                         <Card className="shadow-none m-0">
                                             <Card.Header className="d-flex justify-content-between bg-primary">
                                                 <div className="header-title">
