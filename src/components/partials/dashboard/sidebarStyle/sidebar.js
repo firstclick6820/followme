@@ -91,13 +91,13 @@ const Sidebar = () => {
                        
                       
                         <li className={`${location.pathname === '/dashboard/app/profile' ? 'active' : ''}`}>
-                           <Link to="#/dashboard/app/profile" ><i class="las la-store-alt"></i><span>Market</span></Link>
+                           <Link to="/dashboard/app/profile" ><i class="las la-store-alt"></i><span>Market</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboards/app/friend-list' ? 'active' : ''}`}>
-                           <Link to="#/dashboards/app/friend-list" ><i class="las la-signal"></i><span>Signal</span></Link>
+                           <Link to="/dashboards/app/friend-list" ><i class="las la-signal"></i><span>Signal</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboard/app/friend-profile' ? 'active' : ''}`}>
-                           <Link to="#/dashboard/app/friend-profile" ><i className="las la-user-friends"></i><span>WEBTRADER</span></Link>
+                           <Link to="/dashboard/app/friend-profile" ><i className="las la-user-friends"></i><span>WEBTRADER</span></Link>
                         </li>
                         {/* <Accordion.Item as="li" className={`${location.pathname === '/dashboard/blog/blog-grid' || location.pathname === '/dashboard/blog/blog-list' || location.pathname === '/dashboard/blog/blog-detail' ?  'active' : ''}`} eventKey="sidebar-blog"  >
                            <CustomToggle eventKey="sidebar-aboutus" onClick={(activeKey) => setActiveMenu(activeKey)}>
@@ -173,6 +173,10 @@ const Sidebar = () => {
                         <li className={`${location.pathname === '/dashboard/app/contactus' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/contactus"><i class="las la-phone-volume"></i><span>Contact Us</span></Link>
                         </li>
+                        <li className={`${location.pathname === '/dashboard/extrapages/pages-faq' ? 'active' : ''}`}>
+                           <Link to="/dashboard/extrapages/pages-faq"><i class="las la-question"></i><span>FAQ</span></Link>
+                        </li>
+                     
                      
                      
                         
@@ -185,18 +189,18 @@ const Sidebar = () => {
                            <Accordion.Collapse eventKey="sidebar-blog">
                               <ul id="blog" className="iq-submenu " >
                                  <li className={`${location.pathname === '/dashboard/blog/blog-grid' ? 'active' : ''}`}>
-                                    <Link to="#/dashboard/blog/blog-grid">
+                                    <Link to="/dashboard/blog/blog-grid">
                                     <i class="las la-user-plus"></i>
                                        Connect Account
                                     </Link>
                                  </li>
                                  <li className={`${location.pathname === '/dashboard/blog/blog-list' ? 'active' : ''}`}>
-                                    <Link to="#/dashboard/blog/blog-list">
+                                    <Link to="/dashboard/blog/blog-list">
                                     <i class="las la-people-carry"></i>Be a Signal Provider
                                     </Link>
                                  </li>
                                  <li className={`${location.pathname === '/dashboard/blog/blog-detail' ? 'active' : ''}`}>
-                                    <Link to="#/dashboard/blog/blog-detail">
+                                    <Link to="/dashboard/blog/blog-detail">
                                     <i class="lar la-star"></i>FollowSTAR
                                     </Link>
                                  </li>
