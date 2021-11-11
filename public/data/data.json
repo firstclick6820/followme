@@ -1,9 +1,13 @@
 [{
         "AboutAce": [
             { "title": "Aboutfollowme", "subtitle": ["Company Introduction"] },
-            { "title": "Legal Notifications", "subtitle": ["Terms & Conditions", "Privacy", "Disclaimer", "Rules & Regulation"] },
-            { "title": "Page", "subtitle": ["Terms & Conditions", "Privacy", "Disclaimer", "Rules & Regulation"] },
+            { "title": "Legal Notifications", "subtitle": [{"show":false,"heading":"Terms & Conditions","para":"Please be advised that by using the services provided on the FOLLOWME website, that you are accepting the FOLLOWME Terms of Service (hereinafter referred to as the Terms). It is your responsibility that you read these terms carefully and completely so that you fully understand the contents of the FOLLOWME Terms of Service and the related laws and"},
+                 {"heading":"Privacy","para":"yes here is the privacy"},
+                 {"heading":"Disclaimer","para":"i dont know what taht"},
+                  {"heading":"Rules & Regulation","para":"Rules and Regulation aal yani"}] },
+            { "title": "Page", "subtitle": [{"Brand Page Policy":""}, {"Brand Content Policy":""}] },
             { "title": "others", "subtitle": ["Career", "Contact Us"] }
+        
         ]
     },
 
@@ -43,3 +47,5 @@
     }
 
 ]
+
+
