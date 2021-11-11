@@ -1,11 +1,14 @@
-[{
+[
+    {
         "AboutAce": [
             { "title": "Aboutfollowme", "subtitle": ["Company Introduction"] },
-            { "title": "Legal Notifications", "subtitle": [{"show":false,"heading":"Terms & Conditions","para":"Please be advised that by using the services provided on the FOLLOWME website, that you are accepting the FOLLOWME Terms of Service (hereinafter referred to as the Terms). It is your responsibility that you read these terms carefully and completely so that you fully understand the contents of the FOLLOWME Terms of Service and the related laws and"},
-                 {"heading":"Privacy","para":"yes here is the privacy"},
-                 {"heading":"Disclaimer","para":"i dont know what taht"},
-                  {"heading":"Rules & Regulation","para":"Rules and Regulation aal yani"}] },
-            { "title": "Page", "subtitle": [{"Brand Page Policy":""}, {"Brand Content Policy":""}] },
+            { "title": "Legal Notifications",
+             "subtitle":  [
+             {"heading":"Terms & Conditions","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password on the Connect Account page.  You can also create a new trading account of a top Broker on FOLLOWME. Accounts need to be connected to FOLLOWM   after successful creation."},
+            { "heading" : "Disclaimer","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password"},
+            {"heading":"privacy","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password"},
+            {"heading":"Rules &Regulation","para":"FOLLOWME supports the connections of more than 3,000 Brokers. You can connect to an existing trading account,  by searching the Broker’s MT4 server, entering the trading account login and password"}]},
+            { "title": "Page", "subtitle": [{"heading":"Brand Page Policy","para":""},{"heading":"Brand Content Policy","para":""}] },
             { "title": "others", "subtitle": ["Career", "Contact Us"] }
         
         ]

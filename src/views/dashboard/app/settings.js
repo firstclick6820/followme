@@ -1,10 +1,12 @@
+import { data } from "jquery";
 import React, { useEffect, useState } from "react";
+import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Settings = () => {
    const [content,setContent] = useState([]);
    let [dynamic,setDynamic] = useState([]);
-   const [show,setShow]=useState(false)
+
 
     useEffect(()=>{
         fetch('/data/data.json')
@@ -15,14 +17,10 @@ const Settings = () => {
     const Filterstate = (index,str)=>{
         setDynamic(content[index][str])
     }
-{console.log('this is dynamic')}
-{console.log(dynamic)}
-{console.log('this is all data')}
-{console.log(content)}
+
   return (
 
     <div style={{width:"75%",margin:'0 auto',height:'100%',display:'flex'}}>
-
        <div style={{marginLeft:'50px ',width:"25%", height:'100vh',boxShadow:'0 0 1px 0 rgb(10,20,30)'}} >
 
         <div>  
@@ -62,23 +60,33 @@ const Settings = () => {
 {dynamic.map(i=>(
    
     <ul key={Math.random(10)} className="list-group" style={{borderBottom:"4px solid #ccc"}}>
-    
     <li  className="list-group-item"  style={{fontWeight:"500",fontSize:"16px",color:"#50b5ff" }}><span>{i.title}</span></li>
-    
    { i.subtitle.length >0 && i.subtitle.map((val) =>(
-    <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column'}} >
-   <li style={{listStyle:'none'}}>{val.heading}</li>
-   <button style={{border:'none',background:'none',outline:'none'}} onClick={()=>setShow(!show)}>{show ? <i className="fas fa-chevron-up"></i>:<i className="fas fa-chevron-down"></i>}</button>
+<>
 
-
-
-{show ? 
-<li>{val.para}</li>
-:null}
-
-  </ul>
-   ))
+                        <Accordion id="accordionExample" defaultActiveKey="0" >
+                            <Accordion.Item className="mb-1" eventKey="0">
+                                <Accordion.Header id="heading1" className="accordion-collapse">
+                                <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column',border:'none',margin:'0'}} > 
+                                <li style={{listStyle:'none',}}>{val.heading}</li>
+                                </ul>
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                    <p>{val.para}</p>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            </Accordion>
+       
     
+   
+
+
+
+  
+  </>
+
+   ))
+ 
 }
     </ul>
   
