@@ -67,8 +67,8 @@ const Settings = () => {
 
                         <Accordion id="accordionExample" defaultActiveKey="0" >
                             <Accordion.Item className="mb-1" eventKey="0">
-                                <Accordion.Header id="heading1" className="accordion-collapse">
-                                <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column',border:'none',margin:'0'}} > 
+                                <Accordion.Header id="heading1" className="accordion-collapse" >
+                                <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column',border:'none',margin:'0',padding:'0'}} > 
                                 <li style={{listStyle:'none',}}>{val.heading}</li>
                                 </ul>
                                 </Accordion.Header>
