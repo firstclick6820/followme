@@ -67,13 +67,12 @@ const Settings = () => {
     
    { i.subtitle.length >0 && i.subtitle.map((val) =>(
     <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column'}} >
-   <li style={{listStyle:'none'}}>{val.heading}</li>
+   <li style={{listStyle:'none',margin:'0px 10px',fontWeight:'600',display:"flex",justifyContent:'space-between'}}>{val.heading}</li>
    <button style={{border:'none',background:'none',outline:'none'}} onClick={()=>setShow(!show)}>{show ? <i className="fas fa-chevron-up"></i>:<i className="fas fa-chevron-down"></i>}</button>
 
 
-
 {show ? 
-<li>{val.para}</li>
+<li style={{listStyle:'none',margin:'10px 20px',lineHeight:'30px'}}>{val.para}</li>
 :null}
 
   </ul>
