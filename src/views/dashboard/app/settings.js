@@ -64,22 +64,23 @@ const Settings = () => {
    { i.subtitle.length >0 && i.subtitle.map((val) =>(
 
 <>
-
+{ val.heading ?
                         <Accordion id="accordionExample" defaultActiveKey="0" >
-                            <Accordion.Item className="mb-1" eventKey="0">
-                                <Accordion.Header id="heading1" className="accordion-collapse" >
+                            <Accordion.Item className="mb-1" eventKey="0" >
+                                <Accordion.Header id="heading1"  >
                                 <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column',border:'none',margin:'0',padding:'0'}} > 
                                 <li style={{listStyle:'none',}}>{val.heading}</li>
                                 </ul>
                                 </Accordion.Header>
-                                <Accordion.Body>
-                                    <p>{val.para}</p>
+                                <Accordion.Body >
+                                    <p >{val.para}</p>
                                 </Accordion.Body>
                             </Accordion.Item>
                             </Accordion>
        
     
-   
+   :<ul className="list-group"><li className="list-group-item" style={{listStyle:'none',border:"0"}}>{val}</li></ul>
+   }
 
 
 
