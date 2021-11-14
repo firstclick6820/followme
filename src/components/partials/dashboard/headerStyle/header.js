@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Dropdown, Nav, Form, Card, Image} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
+import {postLogout} from '../../../../api/user/user'
 //image
 import logo from '../../../../assets/images/logo.png'
 import user1 from '../../../../assets/images/user/1.jpg'
@@ -287,14 +287,14 @@ const Header = () => {
                                     <Dropdown.Toggle href="#" as={Button} bsPrefix="d-flex align-items-center search-toggle" >
                                         <Image src={user1} className="img-fluid rounded-circle me-3" alt="user"/>
                                         <div className="caption">
-                                            <h6 className="mb-0 line-height">{localStorage.getItem('first_name')}</h6>
+                                            <h6 className="mb-0 line-height">{localStorage.getItem('FullName')}</h6>
                                         </div>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu className="sub-drop dropdown-menu caption-menu" aria-labelledby="drop-down-arrow">
                                         <Card className="shadow-none m-0">
                                             <Card.Header className="bg-primary">
                                                 <div className="header-title">
-                                                    <h5 className="mb-0 text-white">Hello {localStorage.getItem('first_name')}</h5>
+                                                    <h5 className="mb-0 text-white">Hello </h5>
                                                     <span className="text-white font-size-12">Available</span>
                                                 </div>
                                             </Card.Header>
@@ -345,7 +345,7 @@ const Header = () => {
                                                     </div>
                                                 </Link>
                                                 <div className="d-inline-block w-100 text-center p-3">
-                                                    <Link className="btn btn-primary iq-sign-btn" to="/auth/sign-in" role="button">Sign out
+                                                    <Link className="btn btn-primary iq-sign-btn" to="/auth/sign-in" role="button" >Sign out
                                                         <i className="ri-login-box-line ms-2"></i>
                                                     </Link>
                                                 </div>

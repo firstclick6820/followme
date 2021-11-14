@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-// import { Login } from '../../../api/auth/login'
+ import { postLogin } from '../../../api/user/user'
 import {Row, Col, Container, Form, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
@@ -29,15 +29,17 @@ const SignIn = ()=>{
    })
    const  checkEmail = (em)=> {
       var EMAIL_REGEXP = new RegExp('^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$', 'i');
-      if( EMAIL_REGEXP.test(em))return true;
+      if( EMAIL_REGEXP.test(em))
+      return true;
       else{
          alert("Kindly provide Your Email ya arsa")
          return false;
       }
   }
   const sessionFunc =(data)=>{
-  const {user_name,email,first_name,last_name,phone_no,date_of_birth,city,marital_status,age,country,state,address,url,profile_image} = data['Result'];
 
+  const {FullName,Email} = data['Result'];
+  console.log(FullName,Email)
   for(let i  in data['Result']){
  localStorage.setItem(i,data['Result'][i])
   }
@@ -45,18 +47,15 @@ const SignIn = ()=>{
   
   
   }
-   // const handleClick = async ()=>{
-   //    const {Email,Password}=signin;
-   //    if(checkEmail(Email) && Email && Password !==''){
-   //       await Login(signin).then(res => res.data['Result'] ==="Invalid Email or Password" ?
-   //      alert('you have to sign up bro ')
-   //        : sessionFunc(res.data)
-   //       )  
-   //    }    
-   //    else return ;  
+   const handleClick = async ()=>{
+      const {Email,Password}=signin;
+      if(checkEmail(Email) && Email && Password !==''){
+         await postLogin(signin).then(data=>  sessionFunc(data['data']))  
+      }    
+      else return ;  
      
      
-   // }
+   }
 
    return (
       <>
@@ -129,7 +128,7 @@ const SignIn = ()=>{
                                  <Form.Check.Input type="checkbox" className="me-2" id="customCheck11"/>
                                  <Form.Check.Label>Remember Me</Form.Check.Label>{' '}
                               </Form.Check>
-                              <Button variant="primary" type="button"  className="float-end" >Sign in</Button>
+                              <Button variant="primary" type="button"  className="float-end" onClick={handleClick} >Sign in</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Don't have an account? <Link to="/auth/sign-up">Sign up</Link></span>
