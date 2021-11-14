@@ -1,10 +1,11 @@
-import React, {useState}  from 'react'
+import React, {useState,useEffect}  from 'react'
 import { Row, Col, Container, Dropdown, OverlayTrigger, Tooltip, Modal} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Card from '../../components/Card'
 import CustomToggle from '../../components/dropdowns'
 import ShareOffcanvas from '../../components/share-offcanvas'
-
+import {getPosts} from '../../api/post/post'
+import axios from "axios";
 //image
 import user1 from '../../assets/images/user/1.jpg'
 import user01 from '../../assets/images/user/01.jpg'
@@ -42,7 +43,8 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
-import { CreatePost } from '../../api/auth/login'
+// import { CreatePost } from '../../api/auth/login'
+
 
 const Index = () => {
     const [show, setShow] = useState(false);
@@ -54,12 +56,18 @@ const Index = () => {
         imageurl:'',
         post_visibility:0
     })
-    const handleClick =async ()=>{
-        alert('before')
-        console.log(post  )
-await CreatePost(post)
-alert('after')
+//     const handleClick =async ()=>{
+//         alert('before')
+//         console.log(post  )
+// await CreatePost(post)
+// alert('after')
+//     }
+    const fetchPost = ()=>{
+      axios.get("http://192.168.0.115/api/Post/GetPosts").then(data => console.log(data)).then(console.log('hey execute the get post api'))
     }
+    useEffect(()=>{
+        fetchPost()
+    },[post])
     return (
         <>
             <Container>
@@ -226,7 +234,7 @@ alert('after')
                                                     </div>
                                                 </div>
                                             </div>
-                                        <button type="submit" onClick={()=>handleClick()} className="btn btn-primary d-block w-100 mt-3">Post</button>
+                                        <button type="submit"  className="btn btn-primary d-block w-100 mt-3">Post</button>
                                     </Modal.Body>
                                 </Modal>
                             </Card>

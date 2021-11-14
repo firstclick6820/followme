@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Login } from '../../../api/auth/login'
+// import { Login } from '../../../api/auth/login'
 import {Row, Col, Container, Form, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
@@ -45,27 +45,19 @@ const SignIn = ()=>{
   
   
   }
-   const handleClick = async ()=>{
-      const {Email,Password}=signin;
-      if(checkEmail(Email) && Email && Password !==''){
-         await Login(signin).then(res => res.data['Result'] ==="Invalid Email or Password" ?
-        alert('you have to sign up bro ')
-          : sessionFunc(res.data)
-         )  
-      }    
-      else return ;  
-     
-     
-   }
    // const handleClick = async ()=>{
    //    const {Email,Password}=signin;
    //    if(checkEmail(Email) && Email && Password !==''){
-   //       await Login(signin).then(res => console.log(res.data)  )  
+   //       await Login(signin).then(res => res.data['Result'] ==="Invalid Email or Password" ?
+   //      alert('you have to sign up bro ')
+   //        : sessionFunc(res.data)
+   //       )  
    //    }    
    //    else return ;  
      
      
    // }
+
    return (
       <>
          <section className="sign-in-page">
@@ -137,7 +129,7 @@ const SignIn = ()=>{
                                  <Form.Check.Input type="checkbox" className="me-2" id="customCheck11"/>
                                  <Form.Check.Label>Remember Me</Form.Check.Label>{' '}
                               </Form.Check>
-                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Sign in</Button>
+                              <Button variant="primary" type="button"  className="float-end" >Sign in</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Don't have an account? <Link to="/auth/sign-up">Sign up</Link></span>

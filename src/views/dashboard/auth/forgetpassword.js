@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
-import { Login } from '../../../api/auth/login'
+// import { Login } from '../../../api/auth/login'
 import {Row, Col, Container, Form, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-import {CheckValidaty} from '../../../api/auth/login'
+// import {CheckValidaty} from '../../../api/auth/login'
 //swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from 'swiper';
@@ -25,11 +25,11 @@ const ForgetPassword = ()=>{
     const history = useHistory()
    const [Email,setEmail] = useState('')
 
-   const handleClick = async ()=>{
+   // const handleClick = async ()=>{
 
-      await CheckValidaty({Email}).then(res=>res.data.StatusCode ===200 ?history.push('/auth/Resetpassword'):alert('the customer is not exist'))
+   //    await CheckValidaty({Email}).then(res=>res.data.StatusCode ===200 ?history.push('/auth/Resetpassword'):alert('the customer is not exist'))
 
-   }
+   // }
    return (
       <>
          <section className="sign-in-page">
@@ -87,7 +87,7 @@ const ForgetPassword = ()=>{
                      
                            <div className="d-inline-block w-100">
                             
-                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Send</Button>
+                              <Button variant="primary" type="button"  className="float-end" >Send</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Don't have an account? <Link to="/auth/sign-up">Sign up</Link></span>

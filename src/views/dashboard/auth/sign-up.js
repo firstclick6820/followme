@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {Row,Col,Container,Form,Button,Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-import {SignUpapi} from '../../../api/auth/login'
+// import {SignUpapi} from '../../../api/auth/login'
 //swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from 'swiper';
@@ -26,13 +26,13 @@ const SignUp = () => {
       Email:'',
       Password:'',
   })
-  const handleClick= async ()=>{
+//   const handleClick= async ()=>{
 
    
-await SignUpapi(signup)
-history.push("/auth/sign-in")
-alert('we signup successful')
-  }
+// await SignUpapi(signup)
+// history.push("/auth/sign-in")
+// alert('we signup successful')
+//   }
 
    let history =useHistory()
    return (
@@ -109,7 +109,7 @@ alert('we signup successful')
                                     <Form.Check.Input type="checkbox" className="me-2" id="customCheck1"/>
                                     <Form.Check.Label>I accept <Link to="#">Terms and Conditions</Link></Form.Check.Label>
                               </Form.Check>
-                              <Button type="button" className="btn-primary float-end" onClick={() => handleClick()}>Sign Up</Button>
+                              <Button type="button" className="btn-primary float-end" >Sign Up</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Already Have Account ? <Link to="/auth/sign-in">Log In</Link></span>

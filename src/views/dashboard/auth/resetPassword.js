@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
-import { Login } from '../../../api/auth/login'
+// import { Login } from '../../../api/auth/login'
 import {Row, Col, Container, Form, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
-import {CheckValidaty} from '../../../api/auth/login'
+// import {CheckValidaty} from '../../../api/auth/login'
 //swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from 'swiper';
@@ -35,14 +35,14 @@ const ResetPassword = ()=>{
       [e.target.name]: e.target.value
     });
   }
-  const compareFields = ()=>{
-      newpassword['Password']===newpassword['Confirmedpassword']?alert('its same')
-      :alert('differice')
-  }
+//   const compareFields = ()=>{
+//       newpassword['Password']===newpassword['Confirmedpassword']?alert('its same')
+//       :alert('differice')
+//   }
 
-   const handleClick = async ()=>{
-    compareFields()
-   }
+//    const handleClick = async ()=>{
+//     compareFields()
+//    }
    return (
       <>
          <section className="sign-in-page">
@@ -106,7 +106,7 @@ const ResetPassword = ()=>{
                      
                            <div className="d-inline-block w-100">
                             
-                              <Button variant="primary" type="button"  className="float-end" onClick={() => handleClick()}>Submit</Button>
+                              <Button variant="primary" type="button"  className="float-end" >Submit</Button>
                            </div>
                            <div className="sign-info">
                               <span className="dark-color d-inline-block line-height-2">Don't have an account? <Link to="/auth/sign-up">Sign up</Link></span>
