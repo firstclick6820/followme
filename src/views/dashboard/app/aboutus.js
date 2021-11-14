@@ -19,6 +19,8 @@ import accountconnection from "../../../assets/images/accountconnection.jpg";
 import orders from "../../../assets/images/orders.jpg";
 import trade from "../../../assets/images/trade.png";
 import img52 from "../../../assets/images/page-img/52.jpg";
+import img53 from "../../../assets/images/page-img/53.jpg";
+import img54 from "../../../assets/images/page-img/54.jpg";
 import img5 from "../../../assets/images/page-img/profile-bg1.jpg";
 
 const Aboutus = () => {
@@ -28,7 +30,7 @@ const Aboutus = () => {
       <div id="aboutus-page" className="aboutus-page">
         <Container>
           <Row>
-            <div className="col-lg-4 col-md-6">
+            {/* <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3 mt-3">
                 <img
                   src={accountconnection}
@@ -37,8 +39,8 @@ const Aboutus = () => {
                 />
                 Account connection
               </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
+            </div> */}
+            {/* <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3 mt-3">
                 <img
                   src={orders}
@@ -58,8 +60,8 @@ const Aboutus = () => {
                 />
                 Trading Volume (USD)
               </div>
-            </div>
-            <div className="col-lg-12 col-md-12">
+            </div> */}
+            <div className="col-lg-12 col-md-12 mt-5" >
               <div className="user-images position-relative overflow-hidden mb-3">
                 <div className="ratio ratio-16x9">
                   <iframe
@@ -108,7 +110,7 @@ const Aboutus = () => {
             <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3">
                 <img
-                  src={img52}
+                  src={img53}
                   className="img-fluid rounded"
                   alt="Responsive"
                 />
@@ -117,7 +119,7 @@ const Aboutus = () => {
             <div className="col-lg-4 col-md-6">
               <div className="user-images position-relative overflow-hidden mb-3">
                 <img
-                  src={img52}
+                  src={img54}
                   className="img-fluid rounded"
                   alt="Responsive"
                 />
