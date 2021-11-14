@@ -65,11 +65,12 @@ const Settings = () => {
 
 <>
 { val.heading ?
-                        <Accordion id="accordionExample" defaultActiveKey="0" >
+                         <Accordion id="accordionExample" defaultActiveKey="0" >
                             <Accordion.Item className="mb-1" eventKey="0" >
-                                <Accordion.Header id="heading1"  >
+                                <Accordion.Header id="heading1">
                                 <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column',border:'none',margin:'0',padding:'0'}} > 
-                                <li style={{listStyle:'none',}}>{val.heading}</li>
+                                <li style={{listStyle:'none',}}>
+                                    {val.heading}</li>
                                 </ul>
                                 </Accordion.Header>
                                 <Accordion.Body >
@@ -77,28 +78,23 @@ const Settings = () => {
                                 </Accordion.Body>
                             </Accordion.Item>
                             </Accordion>
-       
-    
-   :<ul className="list-group"><li className="list-group-item" style={{listStyle:'none',border:"0"}}>{val}</li></ul>
+
+
+   
+
+
+
+
+:<ul className="list-group"><li className="list-group-item" style={{listStyle:'none',border:"0"}}>{val}</li></ul>
    }
-
-
-
-  
-  </>
-
-
-   ))
- 
+</>
+))
 }
-    </ul>
-  
+</ul>
 ))} 
 </div>
-
-
-    </div>
-  );
+</div>
+);
 };
 
 export default Settings;
