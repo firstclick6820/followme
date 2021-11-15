@@ -38,14 +38,14 @@ const SignIn = ()=>{
   }
   const sessionFunc =(data)=>{
 
+  sessionStorage.setItem('Token',data['Result'].Token.access_token)
   const {FullName,Email} = data['Result'];
   console.log(FullName,Email)
   for(let i  in data['Result']){
  localStorage.setItem(i,data['Result'][i])
   }
-  history.push('/')
-  
-  
+
+  history.push('/')  
   }
    const handleClick = async ()=>{
       const {Email,Password}=signin;

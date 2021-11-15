@@ -43,25 +43,38 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
-// import { CreatePost } from '../../api/auth/login'
+import {postCreatePost,getGetPosts  } from '../../api/post/post'
 
 
 const Index = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [allPost,setAllPost] = useState([])
     const [post,setPost] = useState({
-        user_id:0,
-        description:'',
-        imageurl:'',
-        post_visibility:0
-    })
-//     const handleClick =async ()=>{
-//         alert('before')
-//         console.log(post  )
-// await CreatePost(post)
-// alert('after')
-//     }
+        Text: "raza and ,mostafa  = love",
+        Visibility: 1,
+        Location: "internet city",
+        ImageUrls: "no problem",
+        UserTagId: [
+          2
+        ]
+      })
+    const hadnleChage = (e)=>{
+       let  val = e.target.vlaue;
+        setPost({
+            ...post,
+            [e.target.name]:val
+        })
+    }
+    const handleClick =async ()=>{
+   
+   const token = sessionStorage.getItem('Token')
+await postCreatePost({post,token})
+    }
+const getPosts = async()=>{
+    await getGetPosts().then(res=>res.data)
+}
   
     return (
         <>
@@ -81,7 +94,7 @@ const Index = () => {
                                             <img src={user1} alt="user1" className="avatar-60 rounded-circle"/>
                                         </div>
                                         <form className="post-text ms-3 w-100 "   onClick={handleShow}>
-                                            <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}}/>
+                                            <input type="text" className="form-control rounded" name="Text" placeholder="Write something here..." style={{border:"none"}} onChange={hadnleChage}/>
                                         </form>
                                     </div>
                                     <hr/>
@@ -183,7 +196,7 @@ const Index = () => {
                                                 <h6>Your Story</h6>
                                                 </div>
                                                 <div className="card-post-toolbar">
-                                                    <Dropdown>
+                                                    <Dropdown  >
                                                         <Dropdown.Toggle as={CustomToggle} role="button">
                                                         <span className="btn btn-primary">Friend</span>
                                                         </Dropdown.Toggle>
@@ -229,7 +242,7 @@ const Index = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        <button type="submit"  className="btn btn-primary d-block w-100 mt-3">Post</button>
+                                        <button type="submit"  className="btn btn-primary d-block w-100 mt-3" onClick={()=>handleClick()}>Post</button>
                                     </Modal.Body>
                                 </Modal>
                             </Card>

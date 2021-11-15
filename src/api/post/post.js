@@ -4,7 +4,7 @@ const apis = axios.create({
     baseURL: 'http://192.168.0.115/api/Post'
 })
 const postImageUpload = () => apis.post("/ImageUpload")
-const postCreatePost = (payload) => apis.post("/CreatePost", payload)
+ const postCreatePost = payload => apis.post("/CreatePost",payload.post,{ headers: {"Authorization" : `Bearer ${payload.token}`} })
 const getGetPosts = () => apis.get("/GetPosts")
 const getGetPostsByUserId = () => apis.get("/GetPostsByUserId")
 const getGetPostByPostId = () => apis.get("/GetPostByPostId")

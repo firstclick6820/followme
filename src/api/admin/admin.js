@@ -1,10 +1,11 @@
 import axios from "axios";
+import Header from "../../components/partials/dashboard/headerStyle/header";
 
 const apis = axios.create({
     baseURL: 'http://192.168.0.115/api/Admin'
 })
 const postAddAdmin = () => apis.post("/AddAdmin")
-const getSearchAdmins = () => apis.get("/SearchAdmins")
+const getSearchAdmins = (payload) => apis.get(`/SearchAdmins?FirstName=${payload}&LastName=${payload}&Email=${payload}&Phone=${payload}&StoreId=${payload}`,)
 const getDeleteEntity = () => apis.get("/DeleteEntity")
 const postChangePassword = (payload) => apis.post("/ChangePassword", payload)
 const postAddNotification = (payload) => apis.post("/AddNotification", payload)
