@@ -5,8 +5,8 @@ const apis = axios.create({
 })
 const postImageUpload = () => apis.post("/ImageUpload")
  const postCreatePost = payload => apis.post("/CreatePost",payload.post,{ headers: {"Authorization" : `Bearer ${payload.token}`} })
-const getGetPosts = () => apis.get("/GetPosts")
-const getGetPostsByUserId = () => apis.get("/GetPostsByUserId")
+//const getGetPosts = () => apis.get("/GetPosts")
+const getGetPosts = (payload) => apis.get(`/GetPostsByUserId?User_Id=${payload.data.userid}&PageSize=${payload.data.pagesize}&pageno=${payload.data.pageno}`,{ headers: {"Authorization" : `Bearer ${payload.token}`} })
 const getGetPostByPostId = () => apis.get("/GetPostByPostId")
 const getTagFriend = () => apis.get("/TagFriend")
 const getLikePost = () => apis.get("/LikePost")
@@ -26,7 +26,7 @@ export {
     postImageUpload,
     postCreatePost,
     getGetPosts,
-    getGetPostsByUserId,
+  
     getGetPostByPostId,
     getTagFriend,
     getLikePost,
@@ -44,3 +44,4 @@ export {
 
 
 }
+//getGetPostsByUserId,

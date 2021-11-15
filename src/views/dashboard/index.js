@@ -73,11 +73,18 @@ const Index = () => {
 await postCreatePost({post,token})
     }
 const getPosts = async()=>{
-    await getGetPosts().then(res=>res.data)
+    const token = sessionStorage.getItem('Token')
+  const data = {userid:4,pagesize:4,pageno:0};
+  await getGetPosts({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
+useEffect(()=>{
+    getPosts()
+
+},[])
   
     return (
         <>
+        {console.log(allPost)}
             <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">
@@ -247,7 +254,10 @@ const getPosts = async()=>{
                                 </Modal>
                             </Card>
                         </Col>
+                        {allPost.map(i =>
                         <Col sm={12}>
+                   
+                      
                             <Card className=" card-block card-stretch card-height">
                                 <Card.Body>
                                     <div className="user-post-data">
@@ -314,7 +324,7 @@ const getPosts = async()=>{
                                             </div>
                                         </div>
                                         <div className="mt-3">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus</p>
+                                            <p>{i.Text}</p>
                                         </div>
                                         <div className="user-post">
                                             <div className=" d-grid grid-rows-2 grid-flow-col gap-3">
@@ -433,7 +443,10 @@ const getPosts = async()=>{
                                     </div>
                                 </Card.Body>
                             </Card>
+
+                        
                         </Col>
+                        )}
                         <Col sm={12}>
                             <div className="card card-block card-stretch card-height">
                                 <div className="card-body">
