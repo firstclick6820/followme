@@ -62,12 +62,7 @@ const Index = () => {
 // await CreatePost(post)
 // alert('after')
 //     }
-    const fetchPost = ()=>{
-      axios.get("http://192.168.0.115/api/Post/GetPosts").then(data => console.log(data)).then(console.log('hey execute the get post api'))
-    }
-    useEffect(()=>{
-        fetchPost()
-    },[post])
+  
     return (
         <>
             <Container>
