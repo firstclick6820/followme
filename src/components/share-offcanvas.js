@@ -11,7 +11,7 @@ import icon13 from '../assets/images/icon/13.png'
 import { Link } from 'react-router-dom'
 
 
-const ShareOffcanvas = () => {
+const ShareOffcanvas = ({sharecount}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,7 +20,7 @@ const ShareOffcanvas = () => {
         <>
             <div className="d-flex align-items-center feather-icon mt-2 mt-md-0">
                 <Link to="#" onClick={handleShow}><i className="ri-share-line"></i>
-                    <span className="ms-1">99 Share</span>
+                    <span className="ms-1">{sharecount} Shares</span>
                 </Link>  
             </div>
             <Offcanvas show={show} onHide={handleClose}  placement='bottom'>
