@@ -46,10 +46,7 @@ import loader from '../../assets/images/page-img/page-load-loader.gif'
 import {postCreatePost,getGetPosts,getGetPostByPostId  } from '../../api/post/post'
 
 
-// var today = new Date();
-// var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-// var time = today.getHours() + ":" + today.getMinutes();
-// var dateTime = date+' '+time;
+
 const Index = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -276,7 +273,7 @@ useEffect(()=>{
                                 </Modal>
                             </Card>
                         </Col>
-                        {console.log(allPost)}
+              
                         {allPost.map(i =>
                         <Col sm={12}>
                    
@@ -459,9 +456,9 @@ useEffect(()=>{
                                             </li> */}
                                         </ul>
                                         <form className="comment-text d-flex align-items-center mt-3" onSubmit={handleSubmit} >
-                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment"/>
+                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment" />
                                             <div className="comment-attagement d-flex">
-                                                {/* <button type="submit" onClick={()=>addComment()}>add comment</button> */}
+                                            
                                                 <Link to="#"><i className="ri-link me-3"></i></Link>
                                                 <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
                                                 <Link to="#"><i className="ri-camera-line me-3"></i></Link>

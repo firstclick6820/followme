@@ -94,18 +94,21 @@ const UserProfile =() =>{
    const [allPost,setAllPost] = useState([])
 
    const [post,setPost] = useState({
-       Text: "raza and ,mostafa  = love",
+       Text: "",
        Visibility: 1,
-       Location: "internet city",
-       ImageUrls: "no problem",
+       Location: "",
+       ImageUrls: "",
        UserTagId: [
          2
        ]
      })
-   const hadnleChage = (e)=>{
+     const [commentorreply ,setCommentorReply] = useState({
+        Text:''
+     })
+   const hadnleChage = (e,func,state)=>{
       let  val = e.target.vlaue;
-       setPost({
-           ...post,
+      func({
+           ...state,
            [e.target.name]:val
        })
    }
@@ -138,6 +141,7 @@ useEffect(()=>{
 
   return(
       <>
+      {console.log(commentorreply)}
          <Container>
             <Row>
                <Col sm={12}>
@@ -645,7 +649,11 @@ useEffect(()=>{
                                                    </li>
                                                 </ul>
                                                 <form className="comment-text d-flex align-items-center mt-3" >
-                                                   <input type="text" className="form-control rounded" placeholder="Enter Your Comment"/>
+                                                   <input type="text" className="form-control rounded" name="Text" placeholder="Enter Your Comment" 
+                                                   onChange={(e)=>setCommentorReply({
+                                                      ...commentorreply,
+                                                      Text:e.target.value
+                                                   })}/>
                                                    <div className="comment-attagement d-flex">
                                                       <Link to="#"><i className="ri-link me-3"></i></Link>
                                                       <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
