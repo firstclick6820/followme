@@ -1,4 +1,4 @@
-import React, {useState,useEffect}  from 'react'
+import React, {useState,useEffect,useRef}  from 'react'
 import { Row, Col, Container, Dropdown, OverlayTrigger, Tooltip, Modal} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Card from '../../components/Card'
@@ -43,7 +43,7 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
-import {postCreatePost,getGetPosts,getGetPostByPostId  } from '../../api/post/post'
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply  } from '../../api/post/post'
 
 
 // var today = new Date();
@@ -54,7 +54,9 @@ const Index = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [iscomment,setIsComment] = useState(false);
     const [allPost,setAllPost] = useState([])
+    const inputRef = useRef();
     const [post,setPost] = useState({
         Text: "raza and ,mostafa = love",
         Visibility: 1,
@@ -64,7 +66,17 @@ const Index = () => {
           2
         ]
       })
+      const[commentorreply,setCommentorReply]= useState({
+        Text: "string",
+        Post_Id: 1,
+        ParentComment_Id: 1
+      })
       const [comment,setComment] = useState({
+        Text: "testing",
+        Post_Id: 2,
+        ParentComment_Id: 1
+      })
+      const [replycomment,setReplyComment] = useState({
         Text: "string",
         Post_Id: 1,
         ParentComment_Id: 1
@@ -76,19 +88,36 @@ const Index = () => {
             [e.target.name]:val
         })
     }
-    const handleSubmit = async(e)=>{
+  
+     const handleSubmit = async(e,n)=>{
         e.preventDefault();
+        console.log(n)
         const token = sessionStorage.getItem('Token');
-        await postComment({comment,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
+
+        if(iscomment ==false){
+            await postComment({comment,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
+      
+        }else{
+            // console.log(inputRef.current)
+            await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
+
+        }}
+
+  
+    const handleReply =  ()=>{
+        setIsComment(true)
+        // inputRef.current.focus()
+      
+      
     }
     const handleClick =async ()=>{
-   
    const token = sessionStorage.getItem('Token')
-await postCreatePost({post,token})
+
     }
+
 const getPosts = async()=>{
     const token = sessionStorage.getItem('Token')
-  const data = {pagesize:13,pageno:0};
+  const data = {pagesize:10,pageno:0};
   await getGetPosts({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
 
@@ -276,9 +305,9 @@ useEffect(()=>{
                                 </Modal>
                             </Card>
                         </Col>
-                        {console.log(allPost)}
+                     
                         {allPost.map(i =>
-                        <Col sm={12}>
+                        <Col sm={12} key={i.Id}>
                    
                       
                             <Card className=" card-block card-stretch card-height">
@@ -360,7 +389,7 @@ useEffect(()=>{
                                         <div className="user-post">
                                             <div className=" d-grid grid-rows-2 grid-flow-col gap-3">
                                                 {i.Medias.map(val=>
-                                                <div className="row-span-2 row-span-md-1">
+                                                <div className="row-span-2 row-span-md-1" key={val.Id}>
                                                     <img src={val.Url} alt="image" className="img-fluid rounded w-100"/>
                                                 </div>
                                                 
@@ -420,9 +449,9 @@ useEffect(()=>{
                                             <li className="mb-2">
                                                 <div className="d-flex">
                                                     
-                                                    {i.CommentsCount >0  && i.Comments.map(val=>
+                                                    {i.Comments.map(val=>
                                                     <>
-                                                    <div className="user-img">
+                                                    <div className="user-img" >
                                                     <img src={user01} alt="user1" className="avatar-35 rounded-circle img-fluid"/>
                                                 </div>
                                                             <div className="comment-data-block ms-3">
@@ -430,7 +459,7 @@ useEffect(()=>{
                                                                 <p className="mb-0">{val.text}</p>
                                                                 <div className="d-flex flex-wrap align-items-center comment-activity">
                                                                     <Link to="#">like</Link>
-                                                                    <Link to="#">reply</Link>
+                                                                    <Link to="#"onClick={()=>handleReply()} >reply</Link>
                                                                     <Link to="#">translate</Link>
                                                                     <span> 5 min </span>
                                                                 </div>
@@ -440,7 +469,7 @@ useEffect(()=>{
 
                                                 </div>
                                             </li>
-                                            {/* <li>
+                                            <li>
                                                 <div className="d-flex">
                                                     <div className="user-img">
                                                         <img src={user3} alt="user1" className="avatar-35 rounded-circle img-fluid"/>
@@ -450,23 +479,22 @@ useEffect(()=>{
                                                         <p className="mb-0">Lorem ipsum dolor sit amet</p>
                                                         <div className="d-flex flex-wrap align-items-center comment-activity">
                                                             <Link to="#">like</Link>
-                                                            <Link to="#">reply</Link>
+                                                            <Link to="#"onClick={()=>handleReply()} >reply</Link>
                                                             <Link to="#">translate</Link>
                                                             <span> 5 min </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li> */}
+                                            </li>
                                         </ul>
-                                        <form className="comment-text d-flex align-items-center mt-3" onSubmit={handleSubmit} >
-                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment"/>
-                                            <div className="comment-attagement d-flex">
-                                                {/* <button type="submit" onClick={()=>addComment()}>add comment</button> */}
-                                                <Link to="#"><i className="ri-link me-3"></i></Link>
+                                        <form className="comment-text d-flex  mt-3" onSubmit={(e)=>handleSubmit(e,i)} >
+                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment"ref={inputRef} />
+                                            <div className="comment-attagement d-flex " style={{marginLeft:"10px"}}>
+                                              <Link to="#"><i className="ri-link me-3"></i></Link>
                                                 <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
                                                 <Link to="#"><i className="ri-camera-line me-3"></i></Link>
-                                            </div>
-                                            <input type="submit"  value="click me please"/>
+                                           </div>
+                                            <input type="submit"  style={{backgroundColor:"#50b5ff",border:"0",color:"white",padding:"0px 15px"}} value="send"/> 
                                         </form>
                                     </div>
                                 </Card.Body>

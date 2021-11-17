@@ -7,14 +7,15 @@ const postImageUpload = () => apis.post("/ImageUpload")
 const postCreatePost = payload => apis.post("/CreatePost", payload.post, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getGetPosts = (payload) => apis.get(`/GetPosts?PageSize=${payload.data.pagesize}&pageno=${payload.data.pageno}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getGetPostsByUserId = (payload) => apis.get(`/GetPostsByUserId?User_Id=${payload.data.userid}&PageSize=${payload.data.pagesize}&pageno=${payload.data.pageno}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
+const getGetCommentsByPostId = (payload) => apis.get(`/GetCommentsByPostId?Post_Id=${payload.data.Post_Id}&User_Id=${payload.data.userid}&PageSize=${payload.data.pagesize}&pageno=${payload.data.pageno}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getGetPostByPostId = (payload) => apis.get(`/GetPostByPostId?Post_Id=${payload.data.Post_Id}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getTagFriend = () => apis.get("/TagFriend")
 const getLikePost = (payload) => apis.get(`/LikePost?Post_Id=${payload.data.Post_Id}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getUnLikePost = () => apis.get("/UnLikePost")
 const getLikeComment = () => apis.get("/LikeComment")
 const getUnLikeComment = () => apis.get("/UnLikeComment")
-const postComment = (payload) => apis.post("/Comment", payload.comment, { headers: { "Authorization": `Bearer ${payload.token}` } })
-const postCommentReply = (payload) => apis.post("/CommentReply", payload.data, { headers: { "Authorization": `Bearer ${payload.token}` } })
+const postComment = (payload) => apis.post("/Comment", payload.commentorreply, { headers: { "Authorization": `Bearer ${payload.token}` } })
+const postCommentReply = (payload) => apis.post("/CommentReply", payload.commentorreply, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getRepost = () => apis.get("/Repost")
 const getHidePost = () => apis.get("/HidePost")
 const getHideAllPost = () => apis.get("/HideAllPost")
@@ -27,7 +28,7 @@ export {
     postCreatePost,
     getGetPosts,
     getGetPostsByUserId,
-
+    getGetCommentsByPostId,
     getGetPostByPostId,
     getTagFriend,
     getLikePost,

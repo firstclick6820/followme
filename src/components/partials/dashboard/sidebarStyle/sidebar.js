@@ -90,7 +90,7 @@ const Sidebar = () => {
                         </Accordion.Item> */}
                        
                       
-                        <li className={`${location.pathname === '/dashboard/app/profile' ? 'active' : ''}`}>
+                        <li className={`${location.pathname === '#/dashboard/app/profile' ? 'active' : ''}`}>
                            <Link to="/dashboard/app/profile" ><i class="las la-store-alt"></i><span>Market</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboards/app/friend-list' ? 'active' : ''}`}>

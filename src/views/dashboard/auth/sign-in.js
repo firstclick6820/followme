@@ -32,7 +32,7 @@ const SignIn = ()=>{
       if( EMAIL_REGEXP.test(em))
       return true;
       else{
-         alert("Kindly provide Your Email ya arsa")
+         alert("Kindly provide Your Email")
          return false;
       }
   }
