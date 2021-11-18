@@ -93,12 +93,10 @@ const UserProfile =() =>{
    const handleShow = () => setShow(true);
    const [allPost,setAllPost] = useState([])
    const [iscomment,setIsComment] = useState(false);
-   
-   // const inputRef = useRef();
+   const [text,setText]=useState('')
+ 
    const [post,setPost] = useState({
-       Text: "raza and ,mostafa = love",
-       Visibility: 1,
-       Location: "internet city",
+       Text: " ",
        Visibility: 1,
        Location: "",
        ImageUrls: "",
@@ -107,26 +105,14 @@ const UserProfile =() =>{
        ]
      })
      const [commentorreply ,setCommentorReply] = useState({
-        Text:' ',
-        Post_Id: 0,
-        ParentComment_Id: 0
+        Text:'',
+      //   Post_Id=0,
+      //   ParentComment_Id=0
+        
+        
+        
      })
-   const hadnleChage = (e,func,state)=>{
-      let  val = e.target.vlaue;
-      func({
-           ...state,
-           [e.target.name]:val
-       })
-   }
-   const handleSubmit = async(e)=>{
-      e.preventDefault();
-      console.log(commentorreply.Text)
-      const token = sessionStorage.getItem('Token');
-       if(iscomment ==false){
-          await postComment({commentorreply,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
-    }else{
-      await postCommentReply({commentorreply,token}).then(res=>res.data).then(alert('we create the first reply '))
-      }}
+
 
 
   const handleReply =  ()=>{
@@ -134,8 +120,8 @@ const UserProfile =() =>{
   
   }
 
-   const handleClick =async ()=>{
-  const token = sessionStorage.getItem('Token')
+const handleClick =async ()=>{
+const token = sessionStorage.getItem('Token')
 await postCreatePost({post,token})
    }
 
@@ -144,20 +130,15 @@ const getPosts = async()=>{
  const data = {userid:2,pagesize:13,pageno:0};
  await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
-
-
-
-
-
 useEffect(()=>{
    getPosts()
- 
-
+   
 },[])
  
 
   return(
       <>
+      
       {console.log(commentorreply)}
          <Container>
             <Row>
@@ -666,11 +647,8 @@ useEffect(()=>{
                                                    </li>
                                                 </ul>
                                                 <form className="comment-text d-flex align-items-center mt-3" >
-                                                   <input type="text" className="form-control rounded" name="Text" placeholder="Enter Your Comment" 
-                                                   onChange={(e)=> hadnleChage({
-                                                      ...commentorreply,
-                                                      Text:e.target.value
-                                                   })}/>
+                                                   <input type="text" className="form-control rounded" placeholder="Enter Your Comment"
+                                                    onBlur={(e)=>setCommentorReply(e.target.value)} />
                                                    <div className="comment-attagement d-flex">
                                                       <Link to="#"><i className="ri-link me-3"></i></Link>
                                                       <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
