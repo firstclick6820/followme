@@ -46,10 +46,7 @@ import loader from '../../assets/images/page-img/page-load-loader.gif'
 import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply  } from '../../api/post/post'
 
 
-// var today = new Date();
-// var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-// var time = today.getHours() + ":" + today.getMinutes();
-// var dateTime = date+' '+time;
+
 const Index = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -305,7 +302,7 @@ useEffect(()=>{
                                 </Modal>
                             </Card>
                         </Col>
-                     
+              
                         {allPost.map(i =>
                         <Col sm={12} key={i.Id}>
                    
@@ -487,10 +484,11 @@ useEffect(()=>{
                                                 </div>
                                             </li>
                                         </ul>
-                                        <form className="comment-text d-flex  mt-3" onSubmit={(e)=>handleSubmit(e,i)} >
-                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment"ref={inputRef} />
-                                            <div className="comment-attagement d-flex " style={{marginLeft:"10px"}}>
-                                              <Link to="#"><i className="ri-link me-3"></i></Link>
+                                        <form className="comment-text d-flex align-items-center mt-3" onSubmit={handleSubmit} >
+                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment" />
+                                            <div className="comment-attagement d-flex">
+                                            
+                                                <Link to="#"><i className="ri-link me-3"></i></Link>
                                                 <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
                                                 <Link to="#"><i className="ri-camera-line me-3"></i></Link>
                                            </div>

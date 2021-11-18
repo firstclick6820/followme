@@ -99,23 +99,22 @@ const UserProfile =() =>{
        Text: "raza and ,mostafa = love",
        Visibility: 1,
        Location: "internet city",
-       ImageUrls: "no problem",
+       Visibility: 1,
+       Location: "",
+       ImageUrls: "",
        UserTagId: [
          2
        ]
      })
-     const[commentorreply,setCommentorReply]= useState({
-       Text: " ",
-       Post_Id: 2,
-       ParentComment_Id: 0
+     const [commentorreply ,setCommentorReply] = useState({
+        Text:' ',
+        Post_Id: 0,
+        ParentComment_Id: 0
      })
- 
-
-
-   const handleChange = (e)=>{
-      let  val = e.target.value;
-      setCommentorReply({
-           ...commentorreply,
+   const hadnleChage = (e,func,state)=>{
+      let  val = e.target.vlaue;
+      func({
+           ...state,
            [e.target.name]:val
        })
    }
@@ -159,6 +158,7 @@ useEffect(()=>{
 
   return(
       <>
+      {console.log(commentorreply)}
          <Container>
             <Row>
                <Col sm={12}>
@@ -665,10 +665,12 @@ useEffect(()=>{
                                                    )}
                                                    </li>
                                                 </ul>
-                                                
-                                                <form className="comment-text d-flex  mt-3" onSubmit={(e)=>handleSubmit(e)} >
-                                                   <input type="text" className="form-control rounded" name="Text" 
-                                                     onChange={handleChange} placeholder="Enter Your Comment"  />
+                                                <form className="comment-text d-flex align-items-center mt-3" >
+                                                   <input type="text" className="form-control rounded" name="Text" placeholder="Enter Your Comment" 
+                                                   onChange={(e)=> hadnleChage({
+                                                      ...commentorreply,
+                                                      Text:e.target.value
+                                                   })}/>
                                                    <div className="comment-attagement d-flex">
                                                       <Link to="#"><i className="ri-link me-3"></i></Link>
                                                       <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
