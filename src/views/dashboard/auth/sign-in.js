@@ -28,21 +28,15 @@ const SignIn = ()=>{
       Password:''
    })
    const  checkEmail = (em)=> {
-      var EMAIL_REGEXP = new RegExp('^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$', 'i');
-      if( EMAIL_REGEXP.test(em))
-      return true;
-      else{
-         alert("Kindly provide Your Email")
-         return false;
-      }
+      var EMAIL_REGEXP = new RegExp('^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$', 'i')
+      if( EMAIL_REGEXP.test(em)) return true;
+      return false;   
   }
   const sessionFunc =(data)=>{
-
   sessionStorage.setItem('Token',data['Result'].Token.access_token)
-  const {FullName,Email} = data['Result'];
-  console.log(FullName,Email)
+//   const {FullName,Email} = data['Result'];
   for(let i  in data['Result']){
- localStorage.setItem(i,data['Result'][i])
+      localStorage.setItem(i,data['Result'][i])
   }
 
   history.push('/')  
@@ -50,11 +44,11 @@ const SignIn = ()=>{
    const handleClick = async ()=>{
       const {Email,Password}=signin;
       if(checkEmail(Email) && Email && Password !==''){
-         await postLogin(signin).then(data=>  sessionFunc(data['data']))  
+         await postLogin(signin).then(data=>sessionFunc(data['data']))  
       }    
       else return ;  
      
-     
+
    }
 
    return (

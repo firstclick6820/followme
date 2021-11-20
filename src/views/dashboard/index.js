@@ -43,10 +43,21 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
+<<<<<<< HEAD
 import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost } from '../../api/post/post'
+=======
+
+
+import { useSelector } from 'react-redux'
+
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply  } from '../../api/post/post'
+
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
+
 
 
 const Index = () => {
+    const login = useSelector(c=>c)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -131,7 +142,11 @@ useEffect(()=>{
   
     return (
         <>
+<<<<<<< HEAD
       
+=======
+        {console.log(login)}
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">

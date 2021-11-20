@@ -4,10 +4,13 @@ import Card from '../../../components/Card'
 import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
-// import {getPosts} from '../../api/post/post'
 import axios from "axios";
+<<<<<<< HEAD
 import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply,getLikePost } from '../../../api/post/post'
 // images
+=======
+import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply } from '../../../api/post/post'
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
 import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
 import img2 from '../../../assets/images/user/11.png'
 import img3 from '../../../assets/images/icon/08.png'
@@ -20,23 +23,12 @@ import img9 from '../../../assets/images/page-img/07.jpg'
 import img10 from '../../../assets/images/page-img/06.jpg'
 import user1 from '../../../assets/images/user/1.jpg'
 import user05 from '../../../assets/images/user/05.jpg'
-import user01 from '../../../assets/images/user/01.jpg'
-import user02 from '../../../assets/images/user/02.jpg'
-import user03 from '../../../assets/images/user/03.jpg'
 import user06 from '../../../assets/images/user/06.jpg'
 import user07 from '../../../assets/images/user/07.jpg'
 import user08 from '../../../assets/images/user/08.jpg'
 import user09 from '../../../assets/images/user/09.jpg'
 import user10 from '../../../assets/images/user/10.jpg'
-import user13 from '../../../assets/images/user/13.jpg'
-import user14 from '../../../assets/images/user/14.jpg'
-import user15 from '../../../assets/images/user/15.jpg'
-import user16 from '../../../assets/images/user/16.jpg'
-import user17 from '../../../assets/images/user/17.jpg'
-import user18 from '../../../assets/images/user/18.jpg'
-import user19 from '../../../assets/images/user/19.jpg'
-import p1 from '../../../assets/images/page-img/p1.jpg'
-import p3 from '../../../assets/images/page-img/p3.jpg'
+
 import icon1 from '../../../assets/images/icon/01.png'
 import icon2 from '../../../assets/images/icon/02.png'
 import icon3 from '../../../assets/images/icon/03.png'
@@ -66,21 +58,8 @@ import small6 from '../../../assets/images/small/12.png'
 import small7 from '../../../assets/images/small/13.png'
 import small8 from '../../../assets/images/small/14.png'
 import user9 from '../../../assets/images/user/1.jpg'
-import img51 from '../../../assets/images/page-img/51.jpg'
-import img52 from '../../../assets/images/page-img/52.jpg'
-import img53 from '../../../assets/images/page-img/53.jpg'
-import img54 from '../../../assets/images/page-img/54.jpg'
-import img55 from '../../../assets/images/page-img/55.jpg'
-import img56 from '../../../assets/images/page-img/56.jpg'
-import img57 from '../../../assets/images/page-img/57.jpg'
-import img58 from '../../../assets/images/page-img/58.jpg'
-import img59 from '../../../assets/images/page-img/59.jpg'
-import img60 from '../../../assets/images/page-img/60.jpg'
-import img61 from '../../../assets/images/page-img/61.jpg'
-import img62 from '../../../assets/images/page-img/62.jpg'
-import img64 from '../../../assets/images/page-img/64.jpg'
-import img65 from '../../../assets/images/page-img/65.jpg'
-import img63 from '../../../assets/images/page-img/63.jpg'
+import { val } from 'dom7'
+
 
 
 
@@ -93,10 +72,16 @@ const UserProfile =() =>{
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
    const [allPost,setAllPost] = useState([])
+<<<<<<< HEAD
    const [iscomment,setIsComment] = useState(false);
   const [isliked,setIsliked] =useState(false)
    
    // const inputRef = useRef();
+=======
+   const [isComment,setIsComment] = useState(false);
+   const [text,setText]=useState('')
+ 
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
    const [post,setPost] = useState({
        Text: "raza and ,mostafa = love",
        Visibility: 1,
@@ -106,10 +91,17 @@ const UserProfile =() =>{
          2
        ]
      })
+<<<<<<< HEAD
      const[commentorreply,setCommentorReply]= useState({
        Text: "  ",
        Post_Id: 2,
        ParentComment_Id: 0
+=======
+     const [commentorreply ,setCommentorReply] = useState({
+        Text:'',
+        Post_Id:0,
+        ParentComment_Id:0
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
      })
  
     const getlikes = async(id)=>{
@@ -144,13 +136,50 @@ const UserProfile =() =>{
       }}
 
 
-  const handleReply =  ()=>{
-      setIsComment(true)
-  
-  }
+  const handleReply =(e,obj)=>{
+   setIsComment(true);
+   setCommentorReply({
+      ...commentorreply,
+      Text:text,
+      Post_Id:obj.Post_Id,
+      ParentComment_Id:obj.Id
+   })
 
+   setTimeout(()=>{
+     setIsComment(false)
+   },15000)
+  } 
+
+    const handleComment =  (e,obj)=>{
+       e.preventDefault(); 
+     const token = sessionStorage.getItem('Token');
+     console.log(text)
+      setCommentorReply({
+         ...commentorreply,
+         Text:text,
+         Post_Id:obj.Id,
+         ParentComment_Id:0
+      })
+      
+
+       console.log(commentorreply)
+       console.log(text)
+//       console.log(isComment)
+     
+   
+//          isComment ?  await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
+//          :await postComment({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is comment'))
+//          return
+  } 
+  
+
+<<<<<<< HEAD
    const handleClick =async ()=>{
   const token = sessionStorage.getItem('Token')
+=======
+const handleCreatePost =async ()=>{
+const token = sessionStorage.getItem('Token')
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
 await postCreatePost({post,token})
    }
 
@@ -174,8 +203,13 @@ useEffect(()=>{
 
   return(
       <>
+<<<<<<< HEAD
      
+=======
+    
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
          <Container>
+        
             <Row>
                <Col sm={12}>
                   <Card>
@@ -397,7 +431,7 @@ useEffect(()=>{
                                              <div className="user-img">
                                                 <img src={user1} alt="userimg" className="avatar-60 rounded-circle"/>
                                              </div>
-                                             <form className="post-text ms-3 w-100 " onClick={handleShow}>
+                                             <form className="post-text ms-3 w-100 " >
                                                 <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}}/>
                                              </form>
                                           </div>
@@ -434,7 +468,7 @@ useEffect(()=>{
                                                 <div className="user-img">
                                                     <img src={img5} alt="userimg" className="avatar-60 rounded-circle img-fluid"/>
                                                 </div>
-                                                <form className="post-text ms-3 w-100" action="">
+                                                <form className="post-text ms-3 w-100" >
                                                     <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border: "none"}}/>
                                                 </form>
                                             </div>
@@ -531,7 +565,7 @@ useEffect(()=>{
                                    
                                        {allPost.map(i =>
                                       
-                                          <div className="post-item mb-4" key={Math.random()}>
+                                          <div className="post-item "  key={Math.random()}>
                                              <div className="user-post-data pb-3">
                                                 <div className="d-flex justify-content-between">
                                                    <div className="me-3">
@@ -670,11 +704,12 @@ useEffect(()=>{
                                                             <img src={val.ProfilePictureUrl}  className="avatar-35 rounded-circle img-fluid"/>
                                                          </div>
                                                          <div className="comment-data-block ms-3">
+                                
                                                             <h6>{}</h6>
                                                             <p className="mb-0">{val.Text}</p>
                                                             <div className="d-flex flex-wrap align-items-center comment-activity">
                                                                <Link to="#">like</Link>
-                                                               <Link to="#"onClick={()=>handleReply()} >reply</Link>
+                                                               <Link to="#"onClick={(e)=>handleReply(e,val)} >reply</Link>
                                                                <Link to="#">translate</Link>
                                                                <span> {val.CreatedDate.split(":")[1]+":"+i.CreatedDate.split(":")[2].split("").slice(0,2).join("")}</span>
                                                             </div>
@@ -683,10 +718,17 @@ useEffect(()=>{
                                                    )}
                                                    </li>
                                                 </ul>
+<<<<<<< HEAD
                                                 
                                                 <form className="comment-text d-flex  mt-3" onSubmit={(e)=>handleSubmit(e)} >
                                                    <input type="text" className="form-control rounded"  name="Text" 
                                                      placeholder="Enter Your Comment" onBlur={(e)=>setCommentorReply(e.target.value)} />
+=======
+                                                <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e)=>handleComment(e,i)} >
+                                                 <input type="text" placeholder="enter data"
+                                                 de={(e)=>setText(e.target.value)}/>
+                                                   
+>>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
                                                    <div className="comment-attagement d-flex">
                                                       <Link to="#"><i className="ri-link me-3"></i></Link>
                                                       <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
