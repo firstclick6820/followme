@@ -6,7 +6,7 @@ import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 // import {getPosts} from '../../api/post/post'
 import axios from "axios";
-import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply } from '../../../api/post/post'
+import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply,getLikePost } from '../../../api/post/post'
 // images
 import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
 import img2 from '../../../assets/images/user/11.png'
@@ -88,31 +88,60 @@ import img63 from '../../../assets/images/page-img/63.jpg'
 
 
 const UserProfile =() =>{
+   const [Post_Id,setPost_Id]=useState(0)
    const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
    const [allPost,setAllPost] = useState([])
    const [iscomment,setIsComment] = useState(false);
-   const [text,setText]=useState('')
- 
+  const [isliked,setIsliked] =useState(false)
+   
+   // const inputRef = useRef();
    const [post,setPost] = useState({
-       Text: " ",
+       Text: "raza and ,mostafa = love",
        Visibility: 1,
-       Location: "",
-       ImageUrls: "",
+       Location: "internet city",
+       ImageUrls: "no problem",
        UserTagId: [
          2
        ]
      })
-     const [commentorreply ,setCommentorReply] = useState({
-        Text:'',
-      //   Post_Id=0,
-      //   ParentComment_Id=0
-        
-        
-        
+     const[commentorreply,setCommentorReply]= useState({
+       Text: "  ",
+       Post_Id: 2,
+       ParentComment_Id: 0
      })
+ 
+    const getlikes = async(id)=>{
+      setPost_Id(id)
+      const token = sessionStorage.getItem('Token')
+      
+      setIsliked(!isliked)
+   await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+   
+   
+   
+   }
+ 
+ 
 
+
+   const handleChange = (e)=>{
+      let  val = e.target.value;
+         setCommentorReply({
+            ...commentorreply,
+            [e.target.name]:val
+         })
+   }
+   const handleSubmit = async(e)=>{
+      e.preventDefault();
+      
+      const token = sessionStorage.getItem('Token');
+       if(iscomment ==false){
+          await postComment({commentorreply,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
+    }else{
+      await postCommentReply({commentorreply,token}).then(res=>res.data).then(alert('we create the first reply '))
+      }}
 
 
   const handleReply =  ()=>{
@@ -120,8 +149,8 @@ const UserProfile =() =>{
   
   }
 
-const handleClick =async ()=>{
-const token = sessionStorage.getItem('Token')
+   const handleClick =async ()=>{
+  const token = sessionStorage.getItem('Token')
 await postCreatePost({post,token})
    }
 
@@ -130,16 +159,22 @@ const getPosts = async()=>{
  const data = {userid:2,pagesize:13,pageno:0};
  await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
+
+
+
+
 useEffect(()=>{
    getPosts()
-   
-},[])
+
+
+ 
+
+},[isliked])
  
 
   return(
       <>
-      
-      {console.log(commentorreply)}
+     
          <Container>
             <Row>
                <Col sm={12}>
@@ -581,9 +616,11 @@ useEffect(()=>{
                                                          <div className="like-data">
                                                             <Dropdown>
                                                                <Dropdown.Toggle  as={CustomToggle} >
-                                                                  <img src={icon1} className="img-fluid" alt=""/>
+                                                               <a  onClick={()=>getlikes(i.Id)}>
+                                                                    <i className="lar la-heart " style={{fontSize:"24px"}}></i>
+                                                                    </a>
                                                                </Dropdown.Toggle>
-                                                               <Dropdown.Menu className=" py-2">
+                                                               {/* <Dropdown.Menu className=" py-2">
                                                                   <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
                                                                   <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
                                                                   <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
@@ -591,13 +628,13 @@ useEffect(()=>{
                                                                   <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
                                                                   <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
                                                                   <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                               </Dropdown.Menu>
+                                                               </Dropdown.Menu> */}
                                                             </Dropdown>
                                                          </div>
                                                          <div className="total-like-block ms-2 me-3">
                                                             <Dropdown>
                                                                <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                  {i.IsLiked}{i.LikesCount}
+                                                                  {i.LikesCount}
                                                                </Dropdown.Toggle>
                                                                {/* <Dropdown.Menu>
                                                                      <Dropdown.Item  to="#">Max Emum</Dropdown.Item>
@@ -646,9 +683,10 @@ useEffect(()=>{
                                                    )}
                                                    </li>
                                                 </ul>
-                                                <form className="comment-text d-flex align-items-center mt-3" >
-                                                   <input type="text" className="form-control rounded" placeholder="Enter Your Comment"
-                                                    onBlur={(e)=>setCommentorReply(e.target.value)} />
+                                                
+                                                <form className="comment-text d-flex  mt-3" onSubmit={(e)=>handleSubmit(e)} >
+                                                   <input type="text" className="form-control rounded"  name="Text" 
+                                                     placeholder="Enter Your Comment" onBlur={(e)=>setCommentorReply(e.target.value)} />
                                                    <div className="comment-attagement d-flex">
                                                       <Link to="#"><i className="ri-link me-3"></i></Link>
                                                       <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
