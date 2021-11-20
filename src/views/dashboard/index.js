@@ -44,10 +44,12 @@ import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
 import {postCreatePost,getGetPosts,getGetPostByPostId  } from '../../api/post/post'
+import { useSelector } from 'react-redux'
 
 
 
 const Index = () => {
+    const login = useSelector(c=>c)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -104,6 +106,7 @@ useEffect(()=>{
   
     return (
         <>
+        {console.log(login)}
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">

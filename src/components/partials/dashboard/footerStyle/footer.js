@@ -1,51 +1,17 @@
 import React from 'react'
-import { Link} from 'react-router-dom'
-import {Row, Col, Container, Button} from 'react-bootstrap'
-import {bindActionCreators} from "redux"
-import {getDarkMode, ModeAction, getRtlMode, DirAction} from '../../../../store/mode/mode'
-import {connect} from "react-redux"
 
-const mapStateToProps = (state) => {
-    return {
-        darkMode: getDarkMode(state),
-        rtlMode: getRtlMode(state),
-    };
-}
-const mapDispatchToProps = dispatch => ({
-    ...bindActionCreators(
-        {
-            ModeAction,
-            DirAction,
-        },
-        dispatch
-    )
-})
+
+
+
+
+
 
 const Footer = (props) => {
-    var  dark = props.darkMode
-    const urlParams = new URLSearchParams(window.location.search);
-    const mode = urlParams.get('dark');
-    if (mode !== null) {
-      document.body.classList=''
-      dark = false
-    switch (mode) {
-        case "true":
-            document.body.classList='dark'
-            dark = true
-        break;
-        case "false":
-             document.body.classList=''
-             dark = false
-        break;
-        default:
-             document.body.classList=''
-           dark = false
-            break;
-    }
-    }
+    
+    
     return (
             <>
-                <footer className="iq-footer bg-white">
+                {/* <footer className="iq-footer bg-white">
                     <Container fluid>
                         <Row>
                             <Col lg="6">
@@ -70,9 +36,9 @@ const Footer = (props) => {
                         <Button bsPrefix="iq-float-menu-item bg-info" onClick={() => {props.DirAction(!props.rtlMode)}}><i className={`${props.rtlMode ? 'ri-text-direction-r' : 'ri-text-direction-l'}`}></i></Button>
                         <Button bsPrefix="iq-float-menu-item bg-danger"  onClick={() => {props.ModeAction(!props.darkMode)}} ><i className={`${props.darkMode ? 'ri-moon-clear-line':'ri-sun-line'}` } checked={props.darkMode || dark} data-active={props.darkMode? 'true' : 'false' || dark ? 'true' : 'false'} ></i></Button>
                         <Button bsPrefix="iq-float-menu-item bg-warning" title="Comming Soon"><i className="ri-palette-line"></i></Button> 
-                </div>
+                </div> */}
             </>
         )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer)
+export default Footer
