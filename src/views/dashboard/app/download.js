@@ -27,7 +27,7 @@ const download =()=> {
                 <Container>
                    
                         <h1 className="text-center">App</h1>
-                    <div className="d-grid gap-1 d-grid-template-1fr-15 mt-4 mb-4">
+                    <div className="d-grid gap-1 d-grid-template-1fr-13 mt-4 mb-4">
                             <Card className="mb-0">
                                
                                 <Card.Body className=" text-center d-flex flex-column justify-content-center align-items-center">
@@ -82,7 +82,7 @@ const download =()=> {
                 </Container>
                 <Container>
                 <h1 className="text-center">MT4</h1>
-                    <div className="d-grid gap-1 d-grid-template-1fr-15 mt-4 mb-4">
+                    <div className="d-grid gap-1 d-grid-template-1fr-13 mt-4 mb-4">
                             <Card className="mb-0">
                                
                                 <Card.Body className=" text-center d-flex flex-column justify-content-center align-items-center">

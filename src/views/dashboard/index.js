@@ -6,6 +6,10 @@ import CustomToggle from '../../components/dropdowns'
 import ShareOffcanvas from '../../components/share-offcanvas'
 import {getPosts, postComment} from '../../api/post/post'
 import axios from "axios";
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost } from '../../api/post/post'
+import { useSelector } from 'react-redux'
+
+
 //image
 import user1 from '../../assets/images/user/1.jpg'
 import user01 from '../../assets/images/user/01.jpg'
@@ -43,16 +47,8 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
-<<<<<<< HEAD
-import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost } from '../../api/post/post'
-=======
 
 
-import { useSelector } from 'react-redux'
-
-import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply  } from '../../api/post/post'
-
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
 
 
 
@@ -63,7 +59,8 @@ const Index = () => {
     const handleShow = () => setShow(true);
     const [iscomment,setIsComment] = useState(false);
     const [allPost,setAllPost] = useState([])
-    const [isliked,setIsliked] = useState(false);
+    const [Post_Id,setPost_Id]=useState(0)
+    const [isliked,setIsliked] =useState(false)
     const [post,setPost] = useState({
         Text: "raza and ,mostafa = love",
         Visibility: 1,
@@ -72,9 +69,6 @@ const Index = () => {
         UserTagId: [
           2
         ]
-      })
-      const [LikePost,setLikePost]=useState({
-        Post_Id:0
       })
       const[commentorreply,setCommentorReply]= useState({
         Text: "string",
@@ -98,33 +92,36 @@ const Index = () => {
             [e.target.name]:val
         })
     }
-  
-  
-     const handleSubmit = async(e,n)=>{
+    const handleSubmit = async(e,n)=>{
         e.preventDefault();
         console.log(n)
         const token = sessionStorage.getItem('Token');
 
         if(iscomment ==false){
             await postComment({comment,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
-      
         }else{
-            // console.log(inputRef.current)
-            await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
-
-        }}
+             await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
+    }}
     const handleReply =  ()=>{
         setIsComment(true)
-        // inputRef.current.focus()
+        
     }
     const handleClick =async ()=>{
    const token = sessionStorage.getItem('Token')
     }
+    // const getlikes = async(id)=>{
+    //     setLikePost({...LikePost,Post_Id:id})
+    //     const token = sessionStorage.getItem('Token')
+    //     await getLikePost({LikePost,token}).then(res=>console.log(res.data['Result']))
+    // }
     const getlikes = async(id)=>{
-        setLikePost({...LikePost,Post_Id:id})
+        setPost_Id(id)
+     
         const token = sessionStorage.getItem('Token')
-        await getLikePost({LikePost,token}).then(res=>console.log(res.data['Result']))
-    }
+        
+        setIsliked(!isliked)
+     await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+     }
 
     const getPosts = async()=>{
         const token = sessionStorage.getItem('Token')
@@ -137,16 +134,12 @@ const Index = () => {
     
 useEffect(()=>{
     getPosts()
-    getlikes()
-},[])
+
+},[isliked])
   
     return (
         <>
-<<<<<<< HEAD
-      
-=======
-        {console.log(login)}
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
+       
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">

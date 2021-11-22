@@ -1,12 +1,18 @@
+import { Radio, Select } from "@mui/material";
+import { display } from "@mui/system";
 import { data } from "jquery";
 import React, { useEffect, useState } from "react";
-import {Accordion, useAccordionButton, AccordionContext} from 'react-bootstrap'
+import {Accordion, useAccordionButton, AccordionContext, ToggleButton} from 'react-bootstrap'
 import { Link } from "react-router-dom";
+import  Switch from "react-switch";
+import SwitchButton from '../../../components/switchButton'
+import RadioButton from '../../../components/radio'
 
 
 const Settings = () => {
    const [content,setContent] = useState([]);
    let [dynamic,setDynamic] = useState([]);
+   const [isTrue,setIsTrue]= useState(false)
 
 
     useEffect(()=>{
@@ -18,6 +24,14 @@ const Settings = () => {
     const Filterstate = (index,str)=>{
         setDynamic(content[index][str])
     }
+    const toggle=()=>{
+        setIsTrue(!isTrue)
+    }
+    
+   
+
+  
+
 
   return (
 
@@ -61,7 +75,9 @@ const Settings = () => {
 {dynamic.map(i=>(
    
     <ul key={Math.random(10)} className="list-group" style={{borderBottom:"4px solid #ccc"}}>
-    <li  className="list-group-item"  style={{fontWeight:"500",fontSize:"16px",color:"#50b5ff" }}><span>{i.title}</span></li>
+    <li  className="list-group-item"  style={{fontWeight:"500",fontSize:"16px",color:"#50b5ff" }}><span>{i.toggled? <div style={{display:"flex",flexDirection:"row-reverse",alignItems:"baseline",justifyContent:"space-between"}}><SwitchButton/>{i.title}</div>:<>{i.title}<br/><div style={{fontSize:"12px",color:"gray",fontWeight:"normal"}}>{i.smalltext}</div></>}</span></li>
+  
+
    { i.subtitle.length >0 && i.subtitle.map((val) =>(
 
 <>
@@ -80,13 +96,10 @@ const Settings = () => {
                                 </Accordion.Body>
                             </Accordion.Item>
                             </Accordion>
+:<ul className="list-group">
+<li className="list-group-item" style={{listStyle:'none',border:"0" }}>{val.radio ?<><div style={{display:"flex",flexDirection:"row-reverse",alignItems:"baseline",justifyContent:"space-between"}}><RadioButton/>{val.radiopara}</div><span style={{fontSize:"12px",color:"gray"}}>{val.smalltext}</span></>:<>{val}</>}
+</li></ul>
 
-   
-
-                  
-              
-                    
-:<ul className="list-group"><li className="list-group-item" style={{listStyle:'none',border:"0"}}>{val}</li></ul>
    }
 </>
 ))
@@ -100,6 +113,6 @@ const Settings = () => {
 
     </div>
   );
-};
+}
 
-export default Settings;
+export default Settings

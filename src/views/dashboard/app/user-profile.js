@@ -5,12 +5,9 @@ import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 import axios from "axios";
-<<<<<<< HEAD
 import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply,getLikePost } from '../../../api/post/post'
 // images
-=======
-import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply } from '../../../api/post/post'
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
+
 import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
 import img2 from '../../../assets/images/user/11.png'
 import img3 from '../../../assets/images/icon/08.png'
@@ -61,27 +58,19 @@ import user9 from '../../../assets/images/user/1.jpg'
 import { val } from 'dom7'
 
 
-
-
-
-
-
 const UserProfile =() =>{
    const [Post_Id,setPost_Id]=useState(0)
    const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
    const [allPost,setAllPost] = useState([])
-<<<<<<< HEAD
    const [iscomment,setIsComment] = useState(false);
   const [isliked,setIsliked] =useState(false)
    
    // const inputRef = useRef();
-=======
-   const [isComment,setIsComment] = useState(false);
+
    const [text,setText]=useState('')
  
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
    const [post,setPost] = useState({
        Text: "raza and ,mostafa = love",
        Visibility: 1,
@@ -91,28 +80,19 @@ const UserProfile =() =>{
          2
        ]
      })
-<<<<<<< HEAD
-     const[commentorreply,setCommentorReply]= useState({
-       Text: "  ",
-       Post_Id: 2,
-       ParentComment_Id: 0
-=======
      const [commentorreply ,setCommentorReply] = useState({
         Text:'',
         Post_Id:0,
         ParentComment_Id:0
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
      })
  
     const getlikes = async(id)=>{
       setPost_Id(id)
+   
       const token = sessionStorage.getItem('Token')
       
       setIsliked(!isliked)
    await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
-   
-   
-   
    }
  
  
@@ -153,7 +133,7 @@ const UserProfile =() =>{
     const handleComment =  (e,obj)=>{
        e.preventDefault(); 
      const token = sessionStorage.getItem('Token');
-     console.log(text)
+    
       setCommentorReply({
          ...commentorreply,
          Text:text,
@@ -173,13 +153,10 @@ const UserProfile =() =>{
   } 
   
 
-<<<<<<< HEAD
-   const handleClick =async ()=>{
-  const token = sessionStorage.getItem('Token')
-=======
+//    const handleClick =async ()=>{
+//   const token = sessionStorage.getItem('Token')}
 const handleCreatePost =async ()=>{
 const token = sessionStorage.getItem('Token')
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
 await postCreatePost({post,token})
    }
 
@@ -203,11 +180,7 @@ useEffect(()=>{
 
   return(
       <>
-<<<<<<< HEAD
-     
-=======
     
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
          <Container>
         
             <Row>
@@ -718,17 +691,10 @@ useEffect(()=>{
                                                    )}
                                                    </li>
                                                 </ul>
-<<<<<<< HEAD
-                                                
-                                                <form className="comment-text d-flex  mt-3" onSubmit={(e)=>handleSubmit(e)} >
-                                                   <input type="text" className="form-control rounded"  name="Text" 
-                                                     placeholder="Enter Your Comment" onBlur={(e)=>setCommentorReply(e.target.value)} />
-=======
                                                 <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e)=>handleComment(e,i)} >
                                                  <input type="text" placeholder="enter data"
                                                  de={(e)=>setText(e.target.value)}/>
                                                    
->>>>>>> 57c17bc6f0eb17e19f822e850a689bfdca69360f
                                                    <div className="comment-attagement d-flex">
                                                       <Link to="#"><i className="ri-link me-3"></i></Link>
                                                       <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
