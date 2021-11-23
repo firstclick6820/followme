@@ -9,9 +9,9 @@ function RadioButton() {
  
   return (
     <div>
-  <label className="container">
+  <label className="container" id="radiocontainer">
   <input type="radio" name="radio"/>
-  <span className="checkmark"></span>
+  <span className="checkmark" id="check"></span>
 </label>
 
 </div>
