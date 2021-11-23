@@ -35,7 +35,7 @@ const contactus =()=> {
                                     </div>
                                     <p style={{fontWeight:"600",color:"black",fontSize:"16px"}}>Address</p>
                                    
-                                    <p>38 Bridge Dr.
+                                    <p style={{fontSize:"14px"}}>38 Bridge Dr.
                                     Lewis Center, OH 43035 
                         
                                     9283 6th Avenue
@@ -51,7 +51,7 @@ const contactus =()=> {
                                    <img src={corporation} className="img-fluid w-50 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p style={{fontWeight:"600",color:"black",fontSize:"16px"}}>Cooperation</p>
-                                   <p>Advertising Cooperation / Ads Cooperation
+                                   <p style={{fontSize:"14px"}}>Advertising Cooperation / Ads Cooperation
                                     
                                     Business Cooperation
                                     info@bluebridge.com</p>
@@ -64,7 +64,7 @@ const contactus =()=> {
                                    <img src={feedback} className="img-fluid w-50 mb-3 mt-3" alt="group-bg"/>
                                    </div>
                                    <p style={{fontWeight:"600",color:"black",fontSize:"16px"}}>Feedback</p>
-                                   <p>Suggestions
+                                   <p style={{fontSize:"14px"}}> Suggestions
                                     support@bluebridge.com
                                     <br />
                                     <br />

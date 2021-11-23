@@ -91,7 +91,7 @@ const Sidebar = () => {
                        
                       
                         <li className={`${location.pathname === '#/dashboard/app/profile' ? 'active' : ''}`}>
-                           <Link to="/dashboard/app/profile" ><i class="las la-store-alt"></i><span>Market</span></Link>
+                           <Link to="/dashboard/app/market" ><i class="las la-store-alt"></i><span>Market</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboards/app/friend-list' ? 'active' : ''}`}>
                            <Link to="/dashboards/app/friend-list" ><i class="las la-signal"></i><span>Signal</span></Link>
@@ -171,7 +171,7 @@ const Sidebar = () => {
                            <Link to="#/dashboard/app/chat"><i class="las la-coins"></i><span>Fcoin</span></Link>
                         </li> */}
                         <li className={`${location.pathname === '/dashboard/app/contactus' ? 'active' : ''}`}>
-                           <Link to="/dashboard/app/contactus"><i class="las la-phone-volume"></i><span>Contact Us</span></Link>
+                           <Link to="/dashboard/app/contactus"><i class="las la-mail-bulk"></i><span>Contact Us</span></Link>
                         </li>
                         <li className={`${location.pathname === '/dashboard/extrapages/pages-faq' ? 'active' : ''}`}>
                            <Link to="/dashboard/extrapages/pages-faq"><i class="las la-question"></i><span>FAQ</span></Link>

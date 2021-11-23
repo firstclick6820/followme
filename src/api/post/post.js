@@ -10,7 +10,7 @@ const getGetPostsByUserId = (payload) => apis.get(`/GetPostsByUserId?User_Id=${p
 const getGetCommentsByPostId = (payload) => apis.get(`/GetCommentsByPostId?Post_Id=${payload.data.Post_Id}&User_Id=${payload.data.userid}&PageSize=${payload.data.pagesize}&pageno=${payload.data.pageno}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getGetPostByPostId = (payload) => apis.get(`/GetPostByPostId?Post_Id=${payload.data.Post_Id}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getTagFriend = () => apis.get("/TagFriend")
-const getLikePost = (payload) => apis.get(`/LikePost?Post_Id=${payload.data.Post_Id}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
+const getLikePost = (payload) => apis.get(`/LikePost?Post_Id=${payload.Post_Id}`, { headers: { "Authorization": `Bearer ${payload.token}` } })
 const getUnLikePost = () => apis.get("/UnLikePost")
 const getLikeComment = () => apis.get("/LikeComment")
 const getUnLikeComment = () => apis.get("/UnLikeComment")

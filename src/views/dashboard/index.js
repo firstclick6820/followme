@@ -6,6 +6,10 @@ import CustomToggle from '../../components/dropdowns'
 import ShareOffcanvas from '../../components/share-offcanvas'
 import {getPosts, postComment} from '../../api/post/post'
 import axios from "axios";
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost } from '../../api/post/post'
+import { useSelector } from 'react-redux'
+
+
 //image
 import user1 from '../../assets/images/user/1.jpg'
 import user01 from '../../assets/images/user/01.jpg'
@@ -45,10 +49,6 @@ import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
 
 
-import { useSelector } from 'react-redux'
-
-import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply  } from '../../api/post/post'
-
 
 
 
@@ -59,7 +59,8 @@ const Index = () => {
     const handleShow = () => setShow(true);
     const [iscomment,setIsComment] = useState(false);
     const [allPost,setAllPost] = useState([])
-    const inputRef = useRef();
+    const [Post_Id,setPost_Id]=useState(0)
+    const [isliked,setIsliked] =useState(false)
     const [post,setPost] = useState({
         Text: "raza and ,mostafa = love",
         Visibility: 1,
@@ -91,55 +92,54 @@ const Index = () => {
             [e.target.name]:val
         })
     }
-  
-     const handleSubmit = async(e,n)=>{
+    const handleSubmit = async(e,n)=>{
         e.preventDefault();
         console.log(n)
         const token = sessionStorage.getItem('Token');
 
         if(iscomment ==false){
             await postComment({comment,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
-      
         }else{
-            // console.log(inputRef.current)
-            await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
-
-        }}
-
-  
+             await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
+    }}
     const handleReply =  ()=>{
         setIsComment(true)
-        // inputRef.current.focus()
-      
-      
+        
     }
     const handleClick =async ()=>{
    const token = sessionStorage.getItem('Token')
-
     }
+    // const getlikes = async(id)=>{
+    //     setLikePost({...LikePost,Post_Id:id})
+    //     const token = sessionStorage.getItem('Token')
+    //     await getLikePost({LikePost,token}).then(res=>console.log(res.data['Result']))
+    // }
+    const getlikes = async(id)=>{
+        setPost_Id(id)
+     
+        const token = sessionStorage.getItem('Token')
+        
+        setIsliked(!isliked)
+     await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+     }
 
-const getPosts = async()=>{
-    const token = sessionStorage.getItem('Token')
-  const data = {pagesize:10,pageno:0};
-  await getGetPosts({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
-}
+    const getPosts = async()=>{
+        const token = sessionStorage.getItem('Token')
+        const data = {pagesize:10,pageno:0};
+        await getGetPosts({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
+    }
+  
 
-// const getPostByPostId = async()=>{
-//     const token = sessionStorage.getItem('Token')
-//     const data = {Post_Id:1}
-//    await getGetPostByPostId({data,token}).then(res =>console.log(res.data))
-   
-   
-//    }
 
     
 useEffect(()=>{
     getPosts()
-},[])
+
+},[isliked])
   
     return (
         <>
-        {console.log(login)}
+       
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">
@@ -407,9 +407,11 @@ useEffect(()=>{
                                                         <div className="like-data">
                                                             <Dropdown>
                                                                 <Dropdown.Toggle  as={CustomToggle} >
-                                                                    <img src={icon1} className="img-fluid" alt=""/> 
+                                                                    <a  onClick={()=>getlikes(i.Id)}>
+                                                                    <i className="lar la-heart " style={{fontSize:"24px"}}></i>
+                                                                    </a>
                                                                 </Dropdown.Toggle>
-                                                                <Dropdown.Menu className=" py-2">
+                                                                {/* <Dropdown.Menu className=" py-2">
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
@@ -417,7 +419,7 @@ useEffect(()=>{
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                </Dropdown.Menu>
+                                                                </Dropdown.Menu> */}
                                                             </Dropdown>
                                                         </div>
                                                         <div className="total-like-block ms-2 me-3">
@@ -440,7 +442,7 @@ useEffect(()=>{
                                                     <div className="total-comment-block">
                                                         <Dropdown>
                                                             <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                            {i.CommentsCount}
+                                                            {i.CommentsCount}  Commented
                                                             </Dropdown.Toggle>
                                                             
                                                         </Dropdown>
@@ -511,6 +513,14 @@ useEffect(()=>{
                         
                     </Col>
                     <Col lg={4}>
+                    <Card>
+                           
+                            <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                                <button className="btn btn-soft-primary mb-2" style={{width:"200px"}}>Connect Account</button>
+                                <button className="btn btn-soft-primary mb-2" style={{width:"200px"}}>Be a signal provider</button>
+                             
+                            </Card.Body>
+                        </Card>
                       
                         <Card>
                             <div className="card-header d-flex justify-content-between">
@@ -563,35 +573,11 @@ useEffect(()=>{
                                 </ul>
                             </Card.Body>
                         </Card>
+                     
                         <Card>
                             <div className="card-header d-flex justify-content-between">
                                 <div className="header-title">
-                                    <h4 className="card-title">Upcoming Birthday</h4>
-                                </div>
-                            </div>
-                            <Card.Body>
-                                <ul className="media-story list-inline m-0 p-0">
-                                    <li className="d-flex mb-4 align-items-center">
-                                        <img src={user01} alt="story3" className="rounded-circle img-fluid"/>
-                                        <div className="stories-data ms-3">
-                                            <h5>Anna Sthesia</h5>
-                                            <p className="mb-0">Today</p>
-                                        </div>
-                                    </li>
-                                    <li className="d-flex align-items-center">
-                                        <img src={user2} alt="story-img" className="rounded-circle img-fluid"/>
-                                        <div className="stories-data ms-3">
-                                            <h5>Paul Molive</h5>
-                                            <p className="mb-0">Tomorrow</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </Card.Body>
-                        </Card>
-                        <Card>
-                            <div className="card-header d-flex justify-content-between">
-                                <div className="header-title">
-                                    <h4 className="card-title">Suggested Pages</h4>
+                                    <h4 className="card-title">Who to Follow</h4>
                                 </div>
                                 <div className="card-header-toolbar d-flex align-items-center">
                                     <Dropdown>
@@ -609,29 +595,38 @@ useEffect(()=>{
                                 </div>
                             </div>
                             <Card.Body>
-                                <ul className="suggested-page-story m-0 p-0 list-inline">
-                                    <li className="mb-3">
-                                        <div className="d-flex align-items-center mb-3">
-                                            <img src={img42} alt="story-img" className="rounded-circle img-fluid avatar-50"/>
-                                            <div className="stories-data ms-3">
-                                            <h5>Iqonic Studio</h5>
-                                            <p className="mb-0">Lorem Ipsum</p>
-                                            </div>
+                                <ul className="media-story list-inline m-0 p-0">
+                                    <li className="d-flex mb-4 align-items-center justify-content-around ">
+                                        <img src={user8} alt="story1" className="rounded-circle img-fluid"/>
+                                        <div className="stories-data ">
+                                            <h6>Nim Doe</h6>
+                                            
                                         </div>
-                                        <img src={img9} className="img-fluid rounded" alt="Responsive"/>
-                                        <div className="mt-3"><Link to="#" className="btn d-block"><i className="ri-thumb-up-line me-2"></i> Like Page</Link></div>
-                                    </li>
-                                    <li>
-                                        <div className="d-flex align-items-center mb-3">
-                                            <img src={img42} alt="story-img" className="rounded-circle img-fluid avatar-50"/>
-                                            <div className="stories-data ms-3">
-                                            <h5>Cakes & Bakes </h5>
-                                            <p className="mb-0">Lorem Ipsum</p>
-                                            </div>
+                                        <div>
+                                        <button className="btn btn-outline-primary btn-sm">Follow</button>
                                         </div>
-                                        <img src={img10} className="img-fluid rounded" alt="Responsive"/>
-                                        <div className="mt-3"><Link to="#" className="btn d-block"><i className="ri-thumb-up-line me-2"></i> Like Page</Link></div>
                                     </li>
+                                    <li className="d-flex mb-4 align-items-center justify-content-around ">
+                                        <img src={user2} alt="story1" className="rounded-circle img-fluid"/>
+                                        <div className="stories-data ">
+                                            <h6>Paul Alex</h6>
+                                        </div>
+                                        <div>
+                                        <button className="btn btn-outline-primary btn-sm">Follow</button>
+                                        </div>
+                                    </li>
+                                    <li className="d-flex mb-4 align-items-center justify-content-around ">
+                                        <img src={user6} alt="story1" className="rounded-circle img-fluid"/>
+                                        <div className="stories-data">
+                                            <h6>Angel Mary</h6>
+                                            
+                                        </div>
+                                        <div>
+                                        <button className="btn btn-outline-primary btn-sm" >Follow</button>
+                                        </div>
+                                    </li>
+                                 
+                                
                                 </ul>
                             </Card.Body>
                         </Card>

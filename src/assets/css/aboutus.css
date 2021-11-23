@@ -1,0 +1,60 @@
+    #longpara,
+    #roadmap {
+        font-size: 16px;
+    }
+    
+    #link {
+        font-size: 12px;
+    }
+    
+    #aboutpara {
+        font-size: 10px!important;
+        margin: 10px;
+    }
+    
+    #productcol {
+        width: 20%!important;
+    }
+    
+    p {
+        font-size: initial;
+    }
+    
+    .product .card {
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 10px;
+    }
+    
+    .product .card:hover {
+        background-color: rgb(224, 114, 10);
+        color: white;
+    }
+    
+    #icon {
+        font-size: 64px;
+    }
+    
+    #iconcounter {
+        font-size: 100px;
+    }
+    
+    .vision,
+    .mission,
+    .concept {
+        font-size: 15px;
+        height: 230px;
+        padding: 10px;
+        background-color: #ccc!important;
+        color: rgb(83, 72, 72);
+    }
+    
+    .vision:hover,
+    .mission:hover,
+    .concept:hover {
+        background-color: rgb(170, 137, 75);
+        color: rgb(2, 2, 2);
+    }

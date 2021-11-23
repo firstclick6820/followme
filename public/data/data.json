@@ -42,22 +42,35 @@
 
     {
         "Notification": [{ "title": "Notification", "subtitle": [] },
-            { "title": "Comment and Mention", "subtitle": ["Receive Notification when commented pr responded by"] },
-            { "title": "Any One", "subtitle": [], "checked": "true" },
-            { "title": "the people who  i have subscription relationship with or who i am following", "subtitle": [], "checked": "false" },
-            { "title": "Don't Receive Notification", "subtitle": [], "Cheked": "false" },
-            { "title": "Accept Private Message", "subtitle": ["you will receive private messages and notificaiton when someone text you"], "Cheked": "true" },
-            { "title": "Any One", "subtitle": ["Strangers can send  you up 3 private messages every day and the limit will be cancelled after replying "], "Cheked": "true" },
-            { "title": "The People who i have subscribtion with or who i am following", "subtitle": [], "Cheked": "false" }
+            {
+                "title": "Comment and Mention",
+                "smalltext": "Receive notification when commented or responded by",
+                "subtitle": [{
+                        "radio": "true",
+                        "radiopara": "Any One"
+                    },
+                    { "radio": "true", "radiopara": "The people who  i have subscription relationship with or who i am following" },
+                    { "radio": "true", "radiopara": "Don't Receive Notification" }
+                ]
+            },
+            {
+                "title": "Accept Private Message",
+                "smalltext": "You will receive private messages and notifications when someone texted you",
+                "subtitle": [{ "radio": "true", "radiopara": "Any One", "smalltext": "Strangers can send you up to 3 private messages every day, and limit will be cancelled after replying" },
+                    { "radio": "true", "radiopara": "The People who i have subscribtion with or who i am following" }
+                ],
+                "Checked": "true"
+            }
+
         ]
     },
     {
         "Trading": [{ "title": "Trading", "subtitle": [] },
             { "title": "open Trade in one Click", "subtitle": ["No More Confirmation when trading"], "toggled": "true" },
             { "title": "Close Trade in one Click", "subtitle": ["No More Confirmation when trading"], "toggled": "true" },
-            { "title": "Trading Volum Less Than Broker's Limit", "subtitle": [] },
-            { "title": "", "subtitle": ["Dont open Trade"], "Cheked": "false" },
-            { "title": "", "subtitle": ["Opent Trade with the minmum volume"], "Cheked": "true" }
+            { "title": "Trading Volume Less Than Broker's Limit", "subtitle": [{ "radiopara": "Dont open Trade", "radio": "true" }, { "radiopara": "Opent Trade with the minmum volume", "radio": "true" }], "checked": "true" }
+
+
         ]
     }
 
