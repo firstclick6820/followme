@@ -75,7 +75,7 @@ const UserProfile =() =>{
   
 
 
-   
+   const [text,setText]=useState('')
  /////////////////
    const [post,setPost] = useState({
        Text: "raza and ,mostafa = love",
