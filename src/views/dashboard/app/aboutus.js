@@ -36,7 +36,7 @@ const Aboutus = () => {
           <Col lg="4">
             <Card className="d-flex flex-row" >
            
-            <i class="las la-user-alt" id="iconcounter"></i>
+            <i className="las la-user-alt" id="iconcounter"></i>
             <div  style={{fontSize:"20px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",marginLeft:"30px"}} >
           <CountUp
           start={0}
@@ -51,7 +51,7 @@ const Aboutus = () => {
         <Col lg="4">
             <Card className="d-flex flex-row" >
             
-            <i class="las la-sort-amount-up" id="iconcounter"></i>
+            <i className="las la-sort-amount-up" id="iconcounter"></i>
             <div style={{fontSize:"20px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",marginLeft:"30px"}} >
           <CountUp
           start={0}
@@ -66,7 +66,7 @@ const Aboutus = () => {
         <Col lg="4">
             <Card className="d-flex flex-row" >
             
-            <i class="las la-chart-line" id="iconcounter"></i>
+            <i className="las la-chart-line" id="iconcounter"></i>
             <div style={{fontSize:"20px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",marginLeft:"30px"}} >
           <CountUp
           start={0}
@@ -157,7 +157,7 @@ const Aboutus = () => {
               <Card className="vision "  >
               
               <div className=" mb-3 mt-3 text-center">
-              <i class="las la-mountain mb-1" id="icon"></i>
+              <i className="las la-mountain mb-1" id="icon"></i>
               <p>To become the World most popular trading community platform.</p>
               <p>-Vision</p>
               
@@ -169,7 +169,7 @@ const Aboutus = () => {
               <Card className="mission" >
               
               <div className=" mt-3 mb-3 text-center">
-              <i class="las la-trophy mb-1" id="icon"></i>
+              <i className="las la-trophy mb-1" id="icon"></i>
               <p>Make trading easier and more transparent</p>
               <p>-Mission</p>
               
@@ -181,7 +181,7 @@ const Aboutus = () => {
               <Card className="concept" >
               
               <div className="mt-3 mb-3 text-center">
-              <i class="las la-plane mb-1" id="icon"></i>
+              <i className="las la-plane mb-1" id="icon"></i>
                 <p>User first, tech for good.</p>
                 <p>-Concept</p>
               </div>
@@ -403,19 +403,19 @@ const Aboutus = () => {
           <Col lg="3" className="m-3 text-center">
            
             <h4>Careers</h4>
-            <a href="#"id="link" >Learn More<i class="las la-angle-right"></i></a>
+            <a href="#"id="link" >Learn More<i className="las la-angle-right"></i></a>
                    
           </Col>
           <Col lg="3" className="m-3 text-center">
            
           <h4>Contact Us</h4>
-          <a href="#"id="link">Learn More<i class="las la-angle-right"></i> </a>
+          <a href="#"id="link">Learn More<i className="las la-angle-right"></i> </a>
                    
           </Col>
           <Col lg="3" className="m-3 text-center">
            
           <h4>Help Center</h4>
-          <a href="#"id="link">Learn More<i class="las la-angle-right"></i> </a>
+          <a href="#"id="link">Learn More<i className="las la-angle-right"></i> </a>
                    
           </Col>
           </Card> 

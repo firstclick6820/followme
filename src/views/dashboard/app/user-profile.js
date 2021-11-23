@@ -1,11 +1,11 @@
-import React, {useState,useEffect,useRef}  from 'react'
-import {Row, Col, Container, Dropdown, Nav, Tab, OverlayTrigger, Tooltip, Button, Modal } from 'react-bootstrap'
+import React, {useState,useEffect}  from 'react'
+import {Row, Col, Container, Dropdown, Nav, Tab, Button, Modal } from 'react-bootstrap'
 import Card from '../../../components/Card'
 import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 import axios from "axios";
-import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply,getLikePost } from '../../../api/post/post'
+import { postCreatePost,getGetPostsByUserId,postComment,postCommentReply,getLikePost,getUnLikePost } from '../../../api/post/post'
 // images
 
 import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
@@ -86,15 +86,19 @@ const UserProfile =() =>{
         ParentComment_Id:0
      })
  
-    const getlikes = async(id)=>{
+     const getlikes = async(id)=>{
       setPost_Id(id)
-   
       const token = sessionStorage.getItem('Token')
-      
       setIsliked(!isliked)
-   await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
-   }
+      if(isliked==false)
+      {
  
+      await getLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+      }else{
+       
+      await getUnLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+      }
+      }
  
 
 
@@ -106,11 +110,10 @@ const UserProfile =() =>{
          })
    }
    const handleSubmit = async(e)=>{
-      e.preventDefault();
-      
-      const token = sessionStorage.getItem('Token');
-       if(iscomment ==false){
-          await postComment({commentorreply,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
+   e.preventDefault();
+   const token = sessionStorage.getItem('Token');
+ if(iscomment ==false){
+      await postComment({commentorreply,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
     }else{
       await postCommentReply({commentorreply,token}).then(res=>res.data).then(alert('we create the first reply '))
       }}
@@ -624,7 +627,8 @@ useEffect(()=>{
                                                             <Dropdown>
                                                                <Dropdown.Toggle  as={CustomToggle} >
                                                                <a  onClick={()=>getlikes(i.Id)}>
-                                                                    <i className="lar la-heart " style={{fontSize:"24px"}}></i>
+                                                               
+                                                                    <i className="las la-thumbs-up "  style={{fontSize:"24px"}}></i>
                                                                     </a>
                                                                </Dropdown.Toggle>
                                                                {/* <Dropdown.Menu className=" py-2">
