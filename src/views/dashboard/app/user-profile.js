@@ -67,15 +67,15 @@ const UserProfile =() =>{
  
 
 
-   //////////////
+
 
    const [iscomment,setIsComment] = useState(false);
   const [isliked,setIsliked] =useState(false)
    
-   // const inputRef = useRef();
+  
 
 
-   const [text,setText]=useState('')
+   
  /////////////////
    const [post,setPost] = useState({
        Text: "raza and ,mostafa = love",
@@ -174,8 +174,8 @@ const UserProfile =() =>{
   } 
   
 
-//    const handleClick =async ()=>{
-//   const token = sessionStorage.getItem('Token')}
+
+
 const handleCreatePost =async ()=>{
 const token = sessionStorage.getItem('Token')
 await postCreatePost({post,token})
