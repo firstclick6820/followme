@@ -25,7 +25,7 @@ const Settings = () => {
     const toggle=()=>{
         setIsTrue(!isTrue)
     }
-    
+    console.log("hi")
    
 
   
