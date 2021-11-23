@@ -67,8 +67,11 @@ const UserProfile =() =>{
    const handleShow = () => setShow(true);
    const [allPost,setAllPost] = useState([])
    const [isComment,setIsComment] = useState(false);
+
+
+   //////////////
    const [text,setText]=useState('')
- 
+ /////////////////
    const [post,setPost] = useState({
        Text: " ",
        Visibility: 1,
@@ -86,40 +89,32 @@ const UserProfile =() =>{
 
 
 
-  const handleReply =(e,obj)=>{
+  const handleReply = async(e,obj)=>{
    setIsComment(true);
-   setCommentorReply({
-      ...commentorreply,
-      Text:text,
-      Post_Id:obj.Post_Id,
-      ParentComment_Id:obj.Id
-   })
-
+  console.log(obj)
    setTimeout(()=>{
      setIsComment(false)
    },15000)
   } 
 
-    const handleComment =  (e,obj)=>{
-       e.preventDefault(); 
-     const token = sessionStorage.getItem('Token');
-     console.log(text)
-      setCommentorReply({
-         ...commentorreply,
-         Text:text,
-         Post_Id:obj.Id,
-         ParentComment_Id:0
-      })
-      
-
-       console.log(commentorreply)
-       console.log(text)
-//       console.log(isComment)
-     
-   
-//          isComment ?  await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
-//          :await postComment({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is comment'))
-//          return
+    const handleRequest = async (e,obj)=>{
+      e.preventDefault(); 
+ 
+      const token = sessionStorage.getItem('Token');
+      console.log(isComment)
+    if(isComment){
+       await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
+      console.log(commentorreply)
+      return;
+    }
+    setCommentorReply({
+      ...commentorreply,
+      Post_Id:obj.Id,
+      ParentComment_Id:0
+   })
+     console.log(commentorreply)
+   await postComment({commentorreply,token}).then(res =>console.log(res.data)).then(alert('this is comment'))
+    return;
   } 
   
 
@@ -128,8 +123,9 @@ const token = sessionStorage.getItem('Token')
 await postCreatePost({post,token})
    }
 
+
 const getPosts = async()=>{
-   const token = sessionStorage.getItem('Token')
+ const token = sessionStorage.getItem('Token')
  const data = {userid:2,pagesize:13,pageno:0};
  await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
@@ -141,7 +137,7 @@ useEffect(()=>{
 
   return(
       <>
-    
+    {console.log(commentorreply)}
          <Container>
         
             <Row>
@@ -493,180 +489,205 @@ useEffect(()=>{
                                         </Modal.Body>
                                     </Modal>
                                     </Card>
+                               
                                    
-                                    <Card>
-                                       <Card.Body>
-                                   
-                                       {allPost.map(i =>
-                                      
-                                          <div className="post-item "  key={Math.random()}>
-                                             <div className="user-post-data pb-3">
+                                   {allPost.map(item =>
+                        <Col sm={12} key={item.Id}>
+                   
+                      
+                            <Card className=" card-block card-stretch card-height">
+                                <Card.Body>
+                                    <div className="user-post-data">
+                                        <div className="d-flex justify-content-between">
+                                            
+                                            <div className="me-3">
+                                                <img className="rounded-circle img-fluid" src={item.User.ProfilePictureUrl} alt=""/>
+                                            </div>
+                                            
+                                            <div className="w-100">
                                                 <div className="d-flex justify-content-between">
-                                                   <div className="me-3">
-                                                      <img className="rounded-circle  avatar-60" src={i.ProfilePictureUrl} alt=""/>
-                                                   </div>
-                                                   <div className="w-100">
-                                                      <div className="d-flex justify-content-between flex-wrap">
-                                                         
-                                                         <div>
-                                                            <h5 className="mb-0 d-inline-block"><Link to="#">{localStorage.getItem('FullName')}</Link></h5>
-                                                            <p className="ms-1 mb-0 d-inline-block">Added a Post</p>
-                                                            <p className="mb-0">{i.CreatedDate.split(":")[1]+":"+i.CreatedDate.split(":")[2].split("").slice(0,2).join("")}</p>
-                                                            <p>{i.Text}</p>
-                                                         </div>
-                                                         <div className="card-post-toolbar">
-                                                            <Dropdown>
-                                                               <Dropdown.Toggle className="bg-transparent border-white">
-                                                                  <i className="ri-more-fill"></i>
-                                                               </Dropdown.Toggle>
-                                                               <Dropdown.Menu className=" m-0 p-0">
-                                                                  <Dropdown.Item className=" p-3" to="#">
-                                                                     <div className="d-flex align-items-top">
-                                                                        <i className="ri-save-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                           <h6>Save Post</h6>
-                                                                           <p className="mb-0">Add this to your saved items</p>
+                                                    
+                                                   
+                                                    <div>
+                                                        <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
+                                                        <span className="mb-0 ps-1 d-inline-block">Added a post</span>
+                                                        <p className="mb-0 text-primary">
+                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    
+}
+                                                            </p>
+                                                    </div>
+                                                    
+                                                    <div className="card-post-toolbar">
+                                                        <Dropdown>
+                                                            <Dropdown.Toggle className="bg-transparent border-white">
+                                                            <i className="ri-more-fill"></i>
+                                                            </Dropdown.Toggle>
+                                                            <Dropdown.Menu className="dropdown-menu m-0 p-0">
+                                                                <Dropdown.Item className=" p-3" to="#">
+                                                                    <div className="d-flex align-items-top">
+                                                                        <div className="h4">
+                                                                            <i className="ri-save-line"></i>
                                                                         </div>
-                                                                     </div>
-                                                                  </Dropdown.Item>
-                                                                  <Dropdown.Item className=" p-3" to="#">
-                                                                     <div className="d-flex align-items-top">
-                                                                        <i className="ri-pencil-line h4"></i>
                                                                         <div className="data ms-2">
-                                                                           <h6>Edit Post</h6>
-                                                                           <p className="mb-0">Update your post and saved items</p>
+                                                                            <h6>Save Post</h6>
+                                                                            <p className="mb-0">Add this to your saved items</p>
                                                                         </div>
-                                                                     </div>
-                                                                  </Dropdown.Item>
-                                                                  <Dropdown.Item className=" p-3" to="#">
-                                                                     <div className="d-flex align-items-top">
+                                                                    </div>
+                                                                </Dropdown.Item>
+                                                                <Dropdown.Item className= "p-3" to="#">
+                                                                        <div className="d-flex align-items-top">
                                                                         <i className="ri-close-circle-line h4"></i>
                                                                         <div className="data ms-2">
-                                                                           <h6>Hide From Timeline</h6>
-                                                                           <p className="mb-0">See fewer posts like this.</p>
+                                                                            <h6>Hide Post</h6>
+                                                                            <p className="mb-0">See fewer posts like this.</p>
                                                                         </div>
-                                                                     </div>
-                                                                  </Dropdown.Item>
-                                                                  <Dropdown.Item className=" p-3" to="#">
-                                                                     <div className="d-flex align-items-top">
-                                                                        <i className="ri-delete-bin-7-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                           <h6>Delete</h6>
-                                                                           <p className="mb-0">Remove thids Post on Timeline</p>
+                                                                    </div>
+                                                                    </Dropdown.Item>
+                                                                    <Dropdown.Item className=" p-3" to="#">
+                                                                        <div className="d-flex align-items-top">
+                                                                            <i className="ri-user-unfollow-line h4"></i>
+                                                                            <div className="data ms-2">
+                                                                                <h6>Unfollow User</h6>
+                                                                                <p className="mb-0">Stop seeing posts but stay friends.</p>
+                                                                            </div>
                                                                         </div>
-                                                                     </div>
-                                                                  </Dropdown.Item>
-                                                                  <Dropdown.Item className=" p-3" to="#">
-                                                                     <div className="d-flex align-items-top">
-                                                                        <i className="ri-notification-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                           <h6>Notifications</h6>
-                                                                           <p className="mb-0">Turn on notifications for this post</p>
+                                                                    </Dropdown.Item>
+                                                                    <Dropdown.Item className=" p-3" to="#">
+                                                                        <div className="d-flex align-items-top">
+                                                                            <i className="ri-notification-line h4"></i>
+                                                                            <div className="data ms-2">
+                                                                                <h6>Notifications</h6>
+                                                                                <p className="mb-0">Turn on notifications for this post</p>
+                                                                            </div>
                                                                         </div>
-                                                                     </div>
-                                                                  </Dropdown.Item>
-                                                               </Dropdown.Menu>
+                                                                    </Dropdown.Item>
+                                                                </Dropdown.Menu>
                                                             </Dropdown>
-                                                         </div>
-                                                      </div>
-                                                   </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                             </div>
-                                             {i.Medias.map(val=>
-                                             <div className="user-post" key={Math.random()}>
-                                                <Link to="#"><img src={val.Url} alt="image" className="img-fluid w-100" /></Link>
-                                             </div>
-                                             )}
-                                             <div className="comment-area mt-3">
-                                                <div className="d-flex justify-content-between align-items-center flex-wrap">
-                                                   <div className="like-block position-relative d-flex align-items-center">
-                                                      <div className="d-flex align-items-center">
-                                                         <div className="like-data">
-                                                            <Dropdown>
-                                                               <Dropdown.Toggle  as={CustomToggle} >
-                                                                  <img src={icon1} className="img-fluid" alt=""/>
-                                                               </Dropdown.Toggle>
-                                                               <Dropdown.Menu className=" py-2">
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                               </Dropdown.Menu>
-                                                            </Dropdown>
-                                                         </div>
-                                                         <div className="total-like-block ms-2 me-3">
-                                                            <Dropdown>
-                                                               <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                  {i.IsLiked}{i.LikesCount}
-                                                               </Dropdown.Toggle>
-                                                               {/* <Dropdown.Menu>
-                                                                     <Dropdown.Item  to="#">Max Emum</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Bill Yerds</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Hap E. Birthday</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Tara Misu</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Midge Itz</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Sal Vidge</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Other</Dropdown.Item>
-                                                               </Dropdown.Menu> */}
-                                                            </Dropdown>
-                                                         </div>
-                                                      </div>
-                                                      <div className="total-comment-block">
-                                                      <Dropdown>
-                                                         <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                         {i.CommentsCount}  Comments
-                                                         </Dropdown.Toggle>
-                                                       
-                                                      </Dropdown>
-                                                      </div>
-                                                   </div>
-                                                <ShareOffcanvas sharecount={i.ShareCount} />
+                                            </div>
+                                        </div>
+                                        <div className="mt-3">
+                                            <p>{item.Text}</p>
+                                        </div>
+                                        <div className="user-post">
+                                            <div className=" d-grid grid-rows-2 grid-flow-col gap-3">
+                                                {item.Medias.map(val=>
+                                                <div className="row-span-2 row-span-md-1" key={val.Id}>
+                                                    <img src={val.Url} alt="image" className="img-fluid rounded w-100"/>
                                                 </div>
-                                                <hr/>
-                                                <ul className="post-comments p-0 m-0">
-                                                   
-                                                   <li>
-                                                   {i.CommentsCount >0  && i.Comments.map(val=>
-                                                      <div className="d-flex flex-wrap" key={Math.random()}>
-                                                         
-                                                         <div className="user-img">
-                                                            <img src={val.ProfilePictureUrl}  className="avatar-35 rounded-circle img-fluid"/>
-                                                         </div>
-                                                         <div className="comment-data-block ms-3">
-                                
-                                                            <h6>{}</h6>
-                                                            <p className="mb-0">{val.Text}</p>
-                                                            <div className="d-flex flex-wrap align-items-center comment-activity">
-                                                               <Link to="#">like</Link>
-                                                               <Link to="#"onClick={(e)=>handleReply(e,val)} >reply</Link>
-                                                               <Link to="#">translate</Link>
-                                                               <span> {val.CreatedDate.split(":")[1]+":"+i.CreatedDate.split(":")[2].split("").slice(0,2).join("")}</span>
+                                                
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="comment-area mt-3">
+                                            <div className="d-flex justify-content-between align-items-center flex-wrap">
+                                                <div className="like-block position-relative d-flex align-items-center">
+                                                    <div className="d-flex align-items-center">
+                                                        <div className="like-data">
+                                                            <Dropdown>
+                                                                <Dropdown.Toggle  as={CustomToggle} >
+                                                                    <img src={icon1} className="img-fluid" alt=""/> 
+                                                                </Dropdown.Toggle>
+                                                                <Dropdown.Menu className=" py-2">
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
+                                                                </Dropdown.Menu>
+                                                            </Dropdown>
+                                                        </div>
+                                                        <div className="total-like-block ms-2 me-3">
+                                                            <Dropdown>
+                                                                <Dropdown.Toggle as={CustomToggle}  id="post-option" >
+                                                                {item.LikesCount}
+                                                                </Dropdown.Toggle>
+                                                                {/* <Dropdown.Menu>
+                                                                    <Dropdown.Item  href="#">Max Emum</Dropdown.Item>
+                                                                    <Dropdown.Item  href="#">Bill Yerds</Dropdown.Item>
+                                                                    <Dropdown.Item  href="#">Hap E. Birthday</Dropdown.Item>
+                                                                    <Dropdown.Item  href="#">Tara Misu</Dropdown.Item>
+                                                                    <Dropdown.Item  href="#">Midge Itz</Dropdown.Item>
+                                                                    <Dropdown.Item  href="#">Sal Vidge</Dropdown.Item>
+                                                                    <Dropdown.Item  href="#">Other</Dropdown.Item>
+                                                                </Dropdown.Menu> */}
+                                                            </Dropdown>
+                                                        </div>
+                                                    </div>
+                                                    <div className="total-comment-block">
+                                                        <Dropdown>
+                                                            <Dropdown.Toggle as={CustomToggle}  id="post-option" >
+                                                            {item.CommentsCount}
+                                                            </Dropdown.Toggle>
+                                                            
+                                                        </Dropdown>
+                                                    </div>
+                                                </div>
+                                                <ShareOffcanvas sharecount={item.ShareCount} />
+                                            </div>
+                                        <hr/>
+                                        <ul className="post-comments list-inline p-0 m-0">
+                                            <li className="mb-2">
+                                                <div className="d-flex">
+                                                    
+                                                    {item.Comments.map(val=>
+                                                    <>
+                                                    <div className="user-img" >
+                                                    <img  className="avatar-35 rounded-circle img-fluid"/>
+                                                </div>
+                                                            <div className="comment-data-block ms-3">
+                                                                <h6>Name</h6>
+                                                                <p className="mb-0">{val.text}</p>
+                                                                <div className="d-flex flex-wrap align-items-center comment-activity">
+                                                                    <Link to="#">like</Link>
+                                                                    <Link to="#"onClick={()=>{
+                                                                       setTimeout(()=>{
+                                                                        setIsComment(false)
+                                                                       },10000)
+                                                                  
+                                                                       setCommentorReply({
+                                                                          ...commentorreply,
+                                                                          Post_Id:item.Id,
+                                                                          ParentComment_Id:val.Id
+                                                                       })
+                                                                   }} >reply</Link>
+                                                                    <Link to="#">translate</Link>
+                                                                    <span> 5 min </span>
+                                                                </div>
                                                             </div>
-                                                         </div>
-                                                      </div>
-                                                   )}
-                                                   </li>
-                                                </ul>
-                                                <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e)=>handleComment(e,i)} >
-                                                 <input type="text" placeholder="enter data"
-                                                 de={(e)=>setText(e.target.value)}/>
-                                                   
-                                                   <div className="comment-attagement d-flex">
-                                                      <Link to="#"><i className="ri-link me-3"></i></Link>
-                                                      <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
-                                                      <Link to="#"><i className="ri-camera-line me-3"></i></Link>
-                                                   </div>
-                                                   <input type="submit"  style={{backgroundColor:"#50b5ff",border:"0",color:"white",padding:"0px 15px"}} value="send"/> 
-                                                </form>
-                                             </div>
-                                          </div>
-                                       )}
+                                                            </>
+                                                    )}
+
+                                                </div>
+                                            </li>
                                          
-                                       </Card.Body>
-                                    </Card>
+                                        </ul>
+                                        <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e,n)=>handleRequest(e,item)}  >
+                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment" onChange={(e)=>setCommentorReply({
+                                               ...commentorreply,
+                                               Text:e.target.value,
+                                                Post_Id:item.Id
+                                            })} />
+                                            <div className="comment-attagement d-flex">
+                                                <Link to="#"><i className="ri-link me-3"></i></Link>
+                                                <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
+                                                <Link to="#"><i className="ri-camera-line me-3"></i></Link>
+                                           </div>
+                                            <input type="submit"  style={{backgroundColor:"#50b5ff",border:"0",color:"white",padding:"0px 15px"}} value="send"/> 
+                                        </form>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+
+                        
+                        </Col>
+                        )}
+                             
+                                   
                                     
                                  </Col>
                               </Row>
