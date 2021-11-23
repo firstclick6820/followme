@@ -5,7 +5,7 @@ import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 import axios from "axios";
-import { postCreatePost,getGetPostsByUserId,getGetPostByPostId,postComment,postCommentReply,getLikePost } from '../../../api/post/post'
+import { postCreatePost,getGetPostsByUserId,postComment,postCommentReply,getLikePost,getUnLikePost } from '../../../api/post/post'
 // images
 
 import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
@@ -91,18 +91,20 @@ const UserProfile =() =>{
         ParentComment_Id:0
      })
  
-    const getlikes = async(id)=>{
+     const getlikes = async(id)=>{
       setPost_Id(id)
       const token = sessionStorage.getItem('Token')
       setIsliked(!isliked)
-   await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
-   }
+      if(isliked==false)
+      {
  
+      await getLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+      }else{
+       
+      await getUnLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+      }
+      }
  
-
-
-
-
 
 
   const handleReply = async(e,obj)=>{
@@ -643,8 +645,10 @@ useEffect(()=>{
                                                                 </Dropdown.Menu>
 
                                                                <Dropdown.Toggle  as={CustomToggle} >
+
                                                                <a  onClick={()=>getlikes(item.Id)}>
                                                                     <i className="lar la-heart " style={{fontSize:"24px"}}></i>
+
                                                                     </a>
                                                                </Dropdown.Toggle>
                                                                {/* <Dropdown.Menu className=" py-2">

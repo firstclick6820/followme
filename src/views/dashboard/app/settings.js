@@ -1,10 +1,8 @@
-import { Radio, Select } from "@mui/material";
-import { display } from "@mui/system";
-import { data } from "jquery";
+
 import React, { useEffect, useState } from "react";
-import {Accordion, useAccordionButton, AccordionContext, ToggleButton} from 'react-bootstrap'
+import {Accordion} from 'react-bootstrap'
 import { Link } from "react-router-dom";
-import  Switch from "react-switch";
+
 import SwitchButton from '../../../components/switchButton'
 import RadioButton from '../../../components/radio'
 
@@ -27,7 +25,7 @@ const Settings = () => {
     const toggle=()=>{
         setIsTrue(!isTrue)
     }
-    
+    console.log("hi")
    
 
   
@@ -75,14 +73,14 @@ const Settings = () => {
 {dynamic.map(i=>(
    
     <ul key={Math.random(10)} className="list-group" style={{borderBottom:"4px solid #ccc"}}>
-    <li  className="list-group-item"  style={{fontWeight:"500",fontSize:"16px",color:"#50b5ff" }}><span>{i.toggled? <div style={{display:"flex",flexDirection:"row-reverse",alignItems:"baseline",justifyContent:"space-between"}}><SwitchButton/>{i.title}</div>:<>{i.title}<br/><div style={{fontSize:"12px",color:"gray",fontWeight:"normal"}}>{i.smalltext}</div></>}</span></li>
+    <li  className="list-group-item"  style={{fontWeight:"500",fontSize:"16px",color:"#50b5ff" }}><span>{i.toggled? <div style={{display:"flex",flexDirection:"row-reverse",alignItems:"baseline",justifyContent:"space-between"}}><SwitchButton />{i.title}</div>:<>{i.title}<br/><div style={{fontSize:"12px",color:"gray",fontWeight:"normal"}}>{i.smalltext}</div></>}</span></li>
   
 
    { i.subtitle.length >0 && i.subtitle.map((val) =>(
 
-<>
+<span key={Math.random(10)}>
 { val.heading ?
-                         <Accordion id="accordionExample" defaultActiveKey="0" >
+                         <Accordion id="accordionExample"  defaultActiveKey="0" >
                             <Accordion.Item  eventKey="0" style={{borderBottom:"1px solid #eee"}} >
                                 <Accordion.Header id="heading1">
                                 <ul className="list-group-item" style={{display:'flex',justifyContent:'space-between',flexDirection:'column',border:'none',margin:'0',padding:'0'}} > 
@@ -96,12 +94,12 @@ const Settings = () => {
                                 </Accordion.Body>
                             </Accordion.Item>
                             </Accordion>
-:<ul className="list-group">
+:<ul key={Math.random(10)} className="list-group">
 <li className="list-group-item" style={{listStyle:'none',border:"0" }}>{val.radio ?<><div style={{display:"flex",flexDirection:"row-reverse",alignItems:"baseline",justifyContent:"space-between"}}><RadioButton/>{val.radiopara}</div><span style={{fontSize:"12px",color:"gray"}}>{val.smalltext}</span></>:<>{val}</>}
 </li></ul>
 
    }
-</>
+</span>
 ))
  
 }

@@ -6,8 +6,9 @@ import CustomToggle from '../../components/dropdowns'
 import ShareOffcanvas from '../../components/share-offcanvas'
 import {getPosts, postComment} from '../../api/post/post'
 import axios from "axios";
-import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost } from '../../api/post/post'
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost,getUnLikePost } from '../../api/post/post'
 import { useSelector } from 'react-redux'
+
 
 
 //image
@@ -47,6 +48,7 @@ import icon7 from '../../assets/images/icon/07.png'
 import img9 from '../../assets/images/small/img-1.jpg'
 import img10 from '../../assets/images/small/img-2.jpg'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
+import LikeButton from '../../components/like'
 
 
 
@@ -60,6 +62,8 @@ const Index = () => {
     const [iscomment,setIsComment] = useState(false);
     const [allPost,setAllPost] = useState([])
     const [Post_Id,setPost_Id]=useState(0)
+    const [toggleClass, setToggleClass] = useState(false)
+   
     const [isliked,setIsliked] =useState(false)
     const [post,setPost] = useState({
         Text: "raza and ,mostafa = love",
@@ -98,6 +102,7 @@ const Index = () => {
         const token = sessionStorage.getItem('Token');
 
         if(iscomment ==false){
+           
             await postComment({comment,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
         }else{
              await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
@@ -109,19 +114,22 @@ const Index = () => {
     const handleClick =async ()=>{
    const token = sessionStorage.getItem('Token')
     }
-    // const getlikes = async(id)=>{
-    //     setLikePost({...LikePost,Post_Id:id})
-    //     const token = sessionStorage.getItem('Token')
-    //     await getLikePost({LikePost,token}).then(res=>console.log(res.data['Result']))
-    // }
+  
     const getlikes = async(id)=>{
+       
         setPost_Id(id)
-     
         const token = sessionStorage.getItem('Token')
-        
         setIsliked(!isliked)
-     await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
-     }
+        if(isliked==false)
+        {
+            
+        await getLikePost({id,token}).then(res=>res.data['Result'])
+        }else{
+        
+        await getUnLikePost({id,token}).then(res=>res.data['Result'])
+        }
+        }
+       
 
     const getPosts = async()=>{
         const token = sessionStorage.getItem('Token')
@@ -408,8 +416,9 @@ useEffect(()=>{
                                                             <Dropdown>
                                                                 <Dropdown.Toggle  as={CustomToggle} >
                                                                     <a  onClick={()=>getlikes(i.Id)}>
-                                                                    <i className="lar la-heart " style={{fontSize:"24px"}}></i>
-                                                                    </a>
+                                                                    
+                                                                      <i className="lar la-heart" style={{fontSize:"25px"}}></i>
+                                                                    </a>    
                                                                 </Dropdown.Toggle>
                                                                 {/* <Dropdown.Menu className=" py-2">
                                                                     <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
