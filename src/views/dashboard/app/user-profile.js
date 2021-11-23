@@ -92,16 +92,17 @@ const UserProfile =() =>{
      })
  
      const getlikes = async(id)=>{
+       
       setPost_Id(id)
       const token = sessionStorage.getItem('Token')
       setIsliked(!isliked)
       if(isliked==false)
       {
- 
-      await getLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+          
+      await getLikePost({id,token}).then(res=>res.data['Result'])
       }else{
-       
-      await getUnLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+      
+      await getUnLikePost({id,token}).then(res=>res.data['Result'])
       }
       }
  
@@ -172,7 +173,7 @@ const getPosts = async()=>{
 
 useEffect(()=>{
    getPosts()
-},[])
+},[isliked])
 
 
 
@@ -631,18 +632,7 @@ useEffect(()=>{
                                                         <div className="like-data">
                                                             <Dropdown>
 
-                                                                <Dropdown.Toggle  as={CustomToggle} >
-                                                                    <img src={icon1} className="img-fluid" alt=""/> 
-                                                                </Dropdown.Toggle>
-                                                                <Dropdown.Menu className=" py-2">
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                </Dropdown.Menu>
+                                                               
 
                                                                <Dropdown.Toggle  as={CustomToggle} >
 
@@ -651,15 +641,7 @@ useEffect(()=>{
 
                                                                     </a>
                                                                </Dropdown.Toggle>
-                                                               {/* <Dropdown.Menu className=" py-2">
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                               </Dropdown.Menu> */}
+                                                              
 
                                                             </Dropdown>
                                                         </div>
@@ -669,27 +651,9 @@ useEffect(()=>{
                                                                 <Dropdown.Toggle as={CustomToggle}  id="post-option" >
                                                                 {item.LikesCount}
                                                                 </Dropdown.Toggle>
-                                                                {/* <Dropdown.Menu>
-                                                                    <Dropdown.Item  href="#">Max Emum</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Bill Yerds</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Hap E. Birthday</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Tara Misu</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Midge Itz</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Sal Vidge</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Other</Dropdown.Item>
-                                                                </Dropdown.Menu> */}
-                                                               <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                  {item.LikesCount}
-                                                               </Dropdown.Toggle>
-                                                               {/* <Dropdown.Menu>
-                                                                     <Dropdown.Item  to="#">Max Emum</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Bill Yerds</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Hap E. Birthday</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Tara Misu</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Midge Itz</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Sal Vidge</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Other</Dropdown.Item>
-                                                               </Dropdown.Menu> */}
+                                                               
+                                                              
+                                                               
 
                                                             </Dropdown>
                                                         </div>
@@ -708,9 +672,10 @@ useEffect(()=>{
                                         <hr/>
                                         <ul className="post-comments list-inline p-0 m-0">
                                             <li className="mb-2">
+                                            {item.Comments.map(val=>
                                                 <div className="d-flex">
                                                     
-                                                    {item.Comments.map(val=>
+                                                    
                                                     <>
                                                     <div className="user-img" >
                                                     <img  className="avatar-35 rounded-circle img-fluid"/>
@@ -736,9 +701,10 @@ useEffect(()=>{
                                                                 </div>
                                                             </div>
                                                             </>
-                                                    )}
+                                                   
 
                                                 </div>
+                                                 )}
                                             </li>
                                          
                                         </ul>
