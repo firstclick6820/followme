@@ -1,5 +1,5 @@
 import React, {useState,useEffect}  from 'react'
-import {Row, Col, Container, Dropdown, Nav, Tab, Button, Modal } from 'react-bootstrap'
+import {Row, Col, Container, Dropdown, Nav, Tab, OverlayTrigger, Tooltip, Button, Modal } from 'react-bootstrap'
 import Card from '../../../components/Card'
 import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
@@ -55,7 +55,6 @@ import small6 from '../../../assets/images/small/12.png'
 import small7 from '../../../assets/images/small/13.png'
 import small8 from '../../../assets/images/small/14.png'
 import user9 from '../../../assets/images/user/1.jpg'
-import { val } from 'dom7'
 
 
 const UserProfile =() =>{
@@ -93,36 +92,20 @@ const UserProfile =() =>{
      })
  
      const getlikes = async(id)=>{
+       
       setPost_Id(id)
       const token = sessionStorage.getItem('Token')
       setIsliked(!isliked)
       if(isliked==false)
       {
- 
-      await getLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+          
+      await getLikePost({id,token}).then(res=>res.data['Result'])
       }else{
-       
-      await getUnLikePost({id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
+      
+      await getUnLikePost({id,token}).then(res=>res.data['Result'])
       }
       }
  
-
-      console.log("hi")
-   const handleChange = (e)=>{
-      let  val = e.target.value;
-         setCommentorReply({
-            ...commentorreply,
-            [e.target.name]:val
-         })
-   }
-   const handleSubmit = async(e)=>{
-   e.preventDefault();
-   const token = sessionStorage.getItem('Token');
- if(iscomment ==false){
-      await postComment({commentorreply,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
-    }else{
-      await postCommentReply({commentorreply,token}).then(res=>res.data).then(alert('we create the first reply '))
-      }}
 
 
   const handleReply = async(e,obj)=>{
@@ -136,9 +119,7 @@ const UserProfile =() =>{
 
     const handleRequest = async (e,obj)=>{
       e.preventDefault(); 
- 
       const token = sessionStorage.getItem('Token');
-    
     if(iscomment){
        await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
       console.log(commentorreply)
@@ -152,8 +133,7 @@ const UserProfile =() =>{
      console.log(commentorreply)
    await postComment({commentorreply,token}).then(res =>console.log(res.data)).then(alert('this is comment'))
     return;
-}
-
+    }
     const handleComment =  (e,obj)=>{
        e.preventDefault(); 
      const token = sessionStorage.getItem('Token');
@@ -180,10 +160,9 @@ const UserProfile =() =>{
 
 
 
-const handleCreatePost =async ()=>{
-const token = sessionStorage.getItem('Token')
-await postCreatePost({post,token})
-   }
+
+
+
 
 
 const getPosts = async()=>{
@@ -193,13 +172,15 @@ const getPosts = async()=>{
 }
 useEffect(()=>{
    getPosts()
-
 },[isliked])
+
+
+
  
 
   return(
       <>
-    {console.log(commentorreply)}
+
          <Container>
         
             <Row>
@@ -574,8 +555,8 @@ useEffect(()=>{
                                                         <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                         <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                         <p className="mb-0 text-primary">
-                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    
-}
+                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    }
+ 
                                                             </p>
                                                     </div>
                                                     
@@ -649,18 +630,30 @@ useEffect(()=>{
                                                     <div className="d-flex align-items-center">
                                                         <div className="like-data">
                                                             <Dropdown>
+
+                                                               
+
                                                                <Dropdown.Toggle  as={CustomToggle} >
+
                                                                <a  onClick={()=>getlikes(item.Id)}>
-                                                               <i className="lar la-heart "  style={{fontSize:"24px"}}></i>
-                                                               </a>
+                                                                    <i className="lar la-heart " style={{fontSize:"24px"}}></i>
+
+                                                                    </a>
                                                                </Dropdown.Toggle>
+                                                              
+
                                                             </Dropdown>
                                                         </div>
                                                         <div className="total-like-block ms-2 me-3">
                                                             <Dropdown>
-                                                               <Dropdown.Toggle as={CustomToggle}  id="post-option" >
+
+                                                                <Dropdown.Toggle as={CustomToggle}  id="post-option" >
                                                                 {item.LikesCount}
-                                                               </Dropdown.Toggle>
+                                                                </Dropdown.Toggle>
+                                                               
+                                                              
+                                                               
+
                                                             </Dropdown>
                                                         </div>
                                                     </div>
@@ -679,7 +672,9 @@ useEffect(()=>{
                                             <li className="mb-2">
                                             {item.Comments.map(val=>
                                                 <div className="d-flex">
-                                                 <>
+                                                    
+                                                    
+                                                    <>
                                                     <div className="user-img" >
                                                     <img  className="avatar-35 rounded-circle img-fluid"/>
                                                 </div>
@@ -704,9 +699,11 @@ useEffect(()=>{
                                                                 </div>
                                                             </div>
                                                             </>
-                                                         </div>
-                                                       )}
-                                                    </li>
+                                                   
+
+                                                </div>
+                                                 )}
+                                            </li>
                                          
                                                  </ul>
                                         <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e,n)=>handleRequest(e,item)}  >
@@ -746,7 +743,6 @@ useEffect(()=>{
          </Container>   
       </>
   )
-
 }
-
-export default UserProfile
+                                          
+  export default UserProfile;
