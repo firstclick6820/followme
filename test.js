@@ -1,6 +1,6 @@
 
 
 const sayHello = ()=>{
-    const greeting = "good morning";
+    const greeting = "good night";
     console.log(greeting)
 }
