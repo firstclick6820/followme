@@ -170,7 +170,6 @@ const getPosts = async()=>{
  const data = {userid:2,pagesize:13,pageno:0};
  await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
-
 useEffect(()=>{
    getPosts()
 },[isliked])
@@ -663,8 +662,7 @@ useEffect(()=>{
                                                             <Dropdown.Toggle as={CustomToggle}  id="post-option" >
                                                             {item.CommentsCount}
                                                             </Dropdown.Toggle>
-                                                            
-                                                        </Dropdown>
+                                                         </Dropdown>
                                                     </div>
                                                 </div>
                                                 <ShareOffcanvas sharecount={item.ShareCount} />
@@ -707,7 +705,7 @@ useEffect(()=>{
                                                  )}
                                             </li>
                                          
-                                        </ul>
+                                                 </ul>
                                         <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e,n)=>handleRequest(e,item)}  >
                                             <input type="text" className="form-control rounded" placeholder="Enter Your Comment" onChange={(e)=>setCommentorReply({
                                                ...commentorreply,
