@@ -138,8 +138,8 @@ const UserProfile =() =>{
       e.preventDefault(); 
  
       const token = sessionStorage.getItem('Token');
-      console.log(isComment)
-    if(isComment){
+    
+    if(iscomment){
        await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
       console.log(commentorreply)
       return;
@@ -152,6 +152,7 @@ const UserProfile =() =>{
      console.log(commentorreply)
    await postComment({commentorreply,token}).then(res =>console.log(res.data)).then(alert('this is comment'))
     return;
+}
 
     const handleComment =  (e,obj)=>{
        e.preventDefault(); 
@@ -190,15 +191,8 @@ const getPosts = async()=>{
  const data = {userid:2,pagesize:13,pageno:0};
  await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
-
-
-
-
 useEffect(()=>{
    getPosts()
-
-
- 
 
 },[isliked])
  
@@ -655,67 +649,18 @@ useEffect(()=>{
                                                     <div className="d-flex align-items-center">
                                                         <div className="like-data">
                                                             <Dropdown>
-
-                                                                <Dropdown.Toggle  as={CustomToggle} >
-                                                                    <img src={icon1} className="img-fluid" alt=""/> 
-                                                                </Dropdown.Toggle>
-                                                                <Dropdown.Menu className=" py-2">
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                </Dropdown.Menu>
-
                                                                <Dropdown.Toggle  as={CustomToggle} >
-                                                               <a  onClick={()=>getlikes(i.Id)}>
-                                                               
-                                                                    <i className="las la-thumbs-up "  style={{fontSize:"24px"}}></i>
-                                                                    </a>
+                                                               <a  onClick={()=>getlikes(item.Id)}>
+                                                               <i className="lar la-heart "  style={{fontSize:"24px"}}></i>
+                                                               </a>
                                                                </Dropdown.Toggle>
-                                                               {/* <Dropdown.Menu className=" py-2">
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                  <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                               </Dropdown.Menu> */}
-
                                                             </Dropdown>
                                                         </div>
                                                         <div className="total-like-block ms-2 me-3">
                                                             <Dropdown>
-
-                                                                <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                {item.LikesCount}
-                                                                </Dropdown.Toggle>
-                                                                {/* <Dropdown.Menu>
-                                                                    <Dropdown.Item  href="#">Max Emum</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Bill Yerds</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Hap E. Birthday</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Tara Misu</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Midge Itz</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Sal Vidge</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Other</Dropdown.Item>
-                                                                </Dropdown.Menu> */}
-=======
                                                                <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                  {i.LikesCount}
+                                                                {item.LikesCount}
                                                                </Dropdown.Toggle>
-                                                               {/* <Dropdown.Menu>
-                                                                     <Dropdown.Item  to="#">Max Emum</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Bill Yerds</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Hap E. Birthday</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Tara Misu</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Midge Itz</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Sal Vidge</Dropdown.Item>
-                                                                     <Dropdown.Item  to="#">Other</Dropdown.Item>
-                                                               </Dropdown.Menu> */}
-
                                                             </Dropdown>
                                                         </div>
                                                     </div>
@@ -724,8 +669,7 @@ useEffect(()=>{
                                                             <Dropdown.Toggle as={CustomToggle}  id="post-option" >
                                                             {item.CommentsCount}
                                                             </Dropdown.Toggle>
-                                                            
-                                                        </Dropdown>
+                                                         </Dropdown>
                                                     </div>
                                                 </div>
                                                 <ShareOffcanvas sharecount={item.ShareCount} />
@@ -733,10 +677,9 @@ useEffect(()=>{
                                         <hr/>
                                         <ul className="post-comments list-inline p-0 m-0">
                                             <li className="mb-2">
+                                            {item.Comments.map(val=>
                                                 <div className="d-flex">
-                                                    
-                                                    {item.Comments.map(val=>
-                                                    <>
+                                                 <>
                                                     <div className="user-img" >
                                                     <img  className="avatar-35 rounded-circle img-fluid"/>
                                                 </div>
@@ -761,12 +704,11 @@ useEffect(()=>{
                                                                 </div>
                                                             </div>
                                                             </>
-                                                    )}
-
-                                                </div>
-                                            </li>
+                                                         </div>
+                                                       )}
+                                                    </li>
                                          
-                                        </ul>
+                                                 </ul>
                                         <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e,n)=>handleRequest(e,item)}  >
                                             <input type="text" className="form-control rounded" placeholder="Enter Your Comment" onChange={(e)=>setCommentorReply({
                                                ...commentorreply,
@@ -805,6 +747,6 @@ useEffect(()=>{
       </>
   )
 
-}}
+}
 
 export default UserProfile
