@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useRef}  from 'react'
+import React, {useState,useEffect}  from 'react'
 import {Row, Col, Container, Dropdown, Nav, Tab, OverlayTrigger, Tooltip, Button, Modal } from 'react-bootstrap'
 import Card from '../../../components/Card'
 import CustomToggle from '../../../components/dropdowns'
@@ -55,7 +55,6 @@ import small6 from '../../../assets/images/small/12.png'
 import small7 from '../../../assets/images/small/13.png'
 import small8 from '../../../assets/images/small/14.png'
 import user9 from '../../../assets/images/user/1.jpg'
-import { val } from 'dom7'
 
 
 const UserProfile =() =>{
@@ -94,9 +93,7 @@ const UserProfile =() =>{
  
     const getlikes = async(id)=>{
       setPost_Id(id)
-   
       const token = sessionStorage.getItem('Token')
-      
       setIsliked(!isliked)
    await getLikePost({Post_Id,token}).then(res=>res.data['Result']).catch(err => alert("there is no likes"))
    }
@@ -104,22 +101,8 @@ const UserProfile =() =>{
  
 
 
-   const handleChange = (e)=>{
-      let  val = e.target.value;
-         setCommentorReply({
-            ...commentorreply,
-            [e.target.name]:val
-         })
-   }
-   const handleSubmit = async(e)=>{
-      e.preventDefault();
-      
-      const token = sessionStorage.getItem('Token');
-       if(iscomment ==false){
-          await postComment({commentorreply,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
-    }else{
-      await postCommentReply({commentorreply,token}).then(res=>res.data).then(alert('we create the first reply '))
-      }}
+
+
 
 
   const handleReply = async(e,obj)=>{
@@ -133,10 +116,8 @@ const UserProfile =() =>{
 
     const handleRequest = async (e,obj)=>{
       e.preventDefault(); 
- 
       const token = sessionStorage.getItem('Token');
-      console.log(isComment)
-    if(isComment){
+    if(iscomment){
        await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
       console.log(commentorreply)
       return;
@@ -149,7 +130,7 @@ const UserProfile =() =>{
      console.log(commentorreply)
    await postComment({commentorreply,token}).then(res =>console.log(res.data)).then(alert('this is comment'))
     return;
-
+    }
     const handleComment =  (e,obj)=>{
        e.preventDefault(); 
      const token = sessionStorage.getItem('Token');
@@ -176,10 +157,9 @@ const UserProfile =() =>{
 
 
 
-const handleCreatePost =async ()=>{
-const token = sessionStorage.getItem('Token')
-await postCreatePost({post,token})
-   }
+
+
+
 
 
 const getPosts = async()=>{
@@ -188,21 +168,17 @@ const getPosts = async()=>{
  await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
 }
 
-
-
-
 useEffect(()=>{
    getPosts()
+},[])
 
 
- 
 
-},[isliked])
  
 
   return(
       <>
-    {console.log(commentorreply)}
+
          <Container>
         
             <Row>
@@ -577,8 +553,8 @@ useEffect(()=>{
                                                         <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                         <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                         <p className="mb-0 text-primary">
-                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    
-}
+                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    }
+ 
                                                             </p>
                                                     </div>
                                                     
@@ -667,7 +643,7 @@ useEffect(()=>{
                                                                 </Dropdown.Menu>
 
                                                                <Dropdown.Toggle  as={CustomToggle} >
-                                                               <a  onClick={()=>getlikes(i.Id)}>
+                                                               <a  onClick={()=>getlikes(item.Id)}>
                                                                     <i className="lar la-heart " style={{fontSize:"24px"}}></i>
                                                                     </a>
                                                                </Dropdown.Toggle>
@@ -698,9 +674,8 @@ useEffect(()=>{
                                                                     <Dropdown.Item  href="#">Sal Vidge</Dropdown.Item>
                                                                     <Dropdown.Item  href="#">Other</Dropdown.Item>
                                                                 </Dropdown.Menu> */}
-=======
                                                                <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                  {i.LikesCount}
+                                                                  {item.LikesCount}
                                                                </Dropdown.Toggle>
                                                                {/* <Dropdown.Menu>
                                                                      <Dropdown.Item  to="#">Max Emum</Dropdown.Item>
@@ -800,7 +775,6 @@ useEffect(()=>{
          </Container>   
       </>
   )
-
-}}
-
-export default UserProfile
+}
+                                          
+  export default UserProfile;
