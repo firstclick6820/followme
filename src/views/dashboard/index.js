@@ -6,7 +6,7 @@ import CustomToggle from '../../components/dropdowns'
 import ShareOffcanvas from '../../components/share-offcanvas'
 import {getPosts, postComment} from '../../api/post/post'
 import axios from "axios";
-import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost,getUnLikePost } from '../../api/post/post'
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost,getUnLikePost,postImage} from '../../api/post/post'
 import { useSelector } from 'react-redux'
 
 
@@ -66,14 +66,15 @@ const Index = () => {
    
     const [isliked,setIsliked] =useState(false)
     const [post,setPost] = useState({
-        Text: "raza and ,mostafa = love",
+        Text: "",
         Visibility: 1,
         Location: "internet city",
-        ImageUrls: "no problem",
+        ImageUrls: "one.png",
         UserTagId: [
           2
         ]
       })
+      const [image,setImage] = useState()
       const[commentorreply,setCommentorReply]= useState({
         Text: "string",
         Post_Id: 1,
@@ -98,14 +99,14 @@ const Index = () => {
     }
     const handleSubmit = async(e,n)=>{
         e.preventDefault();
-        console.log(n)
+   
         const token = sessionStorage.getItem('Token');
 
         if(iscomment ==false){
            
-            await postComment({comment,token}).then(res=>console.log(res.data)).then(alert('we create the first comment'))
+            await postComment({comment,token}).then(res=>res.data).then(alert('we create the first comment'))
         }else{
-             await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
+             await postCommentReply({replycomment,token}).then(res=>res.data).then(alert('we create the first reply '))
     }}
     const handleReply =  ()=>{
         setIsComment(true)
@@ -132,14 +133,20 @@ const Index = () => {
        
 
     const getPosts = async()=>{
+      
         const token = sessionStorage.getItem('Token')
         const data = {pagesize:10,pageno:0};
         await getGetPosts({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
     }
   
+const createPost =async ()=>{
+     const fromData = new FormData();
+    fromData.append('image',image)
+    const token = sessionStorage.getItem('Token');
+     await postImage({fromData,token}).then(res=>console.log(res.data)).then('we upload the image ')
 
+}
 
-    
 useEffect(()=>{
     getPosts()
 
@@ -147,7 +154,6 @@ useEffect(()=>{
   
     return (
         <>
-       
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">
@@ -217,15 +223,22 @@ useEffect(()=>{
                                             <form className="post-text ms-3 w-100 "  data-bs-toggle="modal" data-bs-target="#post-modal">
                                             <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}} onChange={(e)=>setPost({
                                                 ...post,
-                                                description:e.target.value
+                                                Text:e.target.value
                                             })}/>
                                         </form>
                                         </div>
                                         <hr/>
                                         <ul className="d-flex flex-wrap align-items-center list-inline m-0 p-0">
                                             <li className="col-md-6 mb-3">
-                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3">
+
+                                                
                                                 <img src={img1} alt="icon" className="img-fluid"/> Photo/Video</div>
+                                                <input type="file" placeholder="Enter your image "onChange={(e)=>{
+                                                   setImage(e.target.files[0])
+                                                    
+                                                }}/>
+                                           
                                             </li>
                                             <li className="col-md-6 mb-3">
                                                 <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
@@ -312,7 +325,7 @@ useEffect(()=>{
                                                     </div>
                                                 </div>
                                             </div>
-                                        <button type="submit"  className="btn btn-primary d-block w-100 mt-3" onClick={()=>handleClick()}>Post</button>
+                                        <button type="submit"  className="btn btn-primary d-block w-100 mt-3" onClick={()=>createPost()}>Post</button>
                                     </Modal.Body>
                                 </Modal>
                             </Card>
@@ -401,7 +414,9 @@ useEffect(()=>{
                                         <div className="user-post">
                                             <div className=" d-grid grid-rows-2 grid-flow-col gap-3">
                                                 {i.Medias.map(val=>
+                                         
                                                 <div className="row-span-2 row-span-md-1" key={val.Id}>
+                                                       
                                                     <img src={val.Url} alt="image" className="img-fluid rounded w-100"/>
                                                 </div>
                                                 

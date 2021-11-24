@@ -77,10 +77,10 @@ const UserProfile =() =>{
    const [text,setText]=useState('')
  /////////////////
    const [post,setPost] = useState({
-       Text: "raza and ,mostafa = love",
+       Text: "",
        Visibility: 1,
        Location: "internet city",
-       ImageUrls: "no problem",
+       ImageUrls: "",
        UserTagId: [
          2
        ]
@@ -180,7 +180,7 @@ useEffect(()=>{
 
   return(
       <>
-
+  
          <Container>
         
             <Row>
@@ -392,147 +392,184 @@ useEffect(()=>{
                                        </Card.Body>
                                     </Card>
                                  </Col>
+
+                       
                                  <Col lg={8}>
-                                    <Card id="post-modal-data" >
-                                       <div className="card-header d-flex justify-content-between">
-                                          <div className="header-title">
-                                             <h4 className="card-title">Create Post</h4>
-                                          </div>
-                                       </div>
-                                       <Card.Body>
-                                          <div className="d-flex align-items-center">
-                                             <div className="user-img">
-                                                <img src={user1} alt="userimg" className="avatar-60 rounded-circle"/>
-                                             </div>
-                                             <form className="post-text ms-3 w-100 " >
-                                                <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}}/>
-                                             </form>
-                                          </div>
-                                          <hr/>
-                                          <ul className=" post-opt-block d-flex list-inline m-0 p-0 flex-wrap">
-                                                <li className="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3 mb-md-0 mb-2"><img src={small07} alt="icon" className="img-fluid me-2"/> Photo/Video</li>
-                                                <li className="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3 mb-md-0 mb-2"><img src={small08} alt="icon" className="img-fluid me-2"/> Tag Friend</li>
-                                                <li className="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3"><img src={small09} alt="icon" className="img-fluid me-2"/> Feeling/Activity</li>
-                                                <li className="bg-soft-primary rounded p-2 pointer text-center">
-                                                   <div className="card-header-toolbar d-flex align-items-center">
-                                                      <Dropdown>
-                                                         <Dropdown.Toggle as={CustomToggle}  id="post-option"  >
+                   
+                                 <Col sm={12} >
+                            <Card id="post-modal-data" className="card-block card-stretch card-height">
+                                <div className="card-header d-flex justify-content-between">
+                                    <div className="header-title">
+                                        <h4 className="card-title">Create Post</h4>
+                                    </div>
+                                </div>
+                                <Card.Body >
+                                    <div className="d-flex align-items-center">
+                                        <div className="user-img">
+                                            <img src={user1} alt="user1" className="avatar-60 rounded-circle"/>
+                                        </div>
+                                        <form className="post-text ms-3 w-100  "   onClick={handleShow}>
+                                            <input type="text" className="form-control rounded" name="Text" placeholder="Write something here..." onChange={(e)=>setPost({
+                                                  ...post,
+                                                  Text:e.target.value
+                                               })
+                                            } style={{border:"none"}} />
+                                        </form>
+                                    </div>
+                                    <hr/>
+                                    <ul className=" post-opt-block d-flex list-inline m-0 p-0 flex-wrap">
+                                        <li className="me-3 mb-md-0 mb-2">
+                                            {/* <Link to="#" className="btn btn-soft-primary"> */}
+                                               <input type="file"  placeholder="Enter Image"onChange={(e)=>setPost({
+                                                  ...post,
+                                                  ImageUrls:e.target
+                                               })} />
+                                                <img src={img1} alt="icon" className="img-fluid me-2"/> Photo/Video
+                                            {/* </Link> */}
+                                        </li>
+                                        <li className="me-3 mb-md-0 mb-2">
+                                            <Link to="#" className="btn btn-soft-primary">
+                                                <img src={img2} alt="icon" className="img-fluid me-2"/> Tag Friend
+                                            </Link>
+                                        </li>
+                                        <li className="me-3">
+                                            <Link to="#" className="btn btn-soft-primary">
+                                                <img src={img3} alt="icon" className="img-fluid me-2"/> Feeling/Activity
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <button className=" btn btn-soft-primary">
+                                                <div className="card-header-toolbar d-flex align-items-center">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle as='div'>
                                                             <i className="ri-more-fill h4"></i>
-                                                         </Dropdown.Toggle>
-                                                         <Dropdown.Menu className=" dropdown-menu-right" aria-labelledby="post-option" >
-                                                               <Dropdown.Item onClick={handleShow}  href="#" >Check in</Dropdown.Item>
-                                                               <Dropdown.Item onClick={handleShow}  href="#" >Live Video</Dropdown.Item>
-                                                               <Dropdown.Item onClick={handleShow}  href="#" >Gif</Dropdown.Item>
-                                                               <Dropdown.Item onClick={handleShow}  href="#" >Watch Party</Dropdown.Item>
-                                                               <Dropdown.Item onClick={handleShow}  href="#" >Play with Friend</Dropdown.Item>
-                                                         </Dropdown.Menu>
-                                                      </Dropdown>
-                                                   </div>
-                                                </li>
-                                          </ul>
-                                       </Card.Body>
-                                       <Modal show={show} onHide={handleClose} size="lg">
-                                        <Modal.Header className="d-flex justify-content-between">
-                                            <h5 className="modal-title" id="post-modalLabel">Create Post</h5>
-                                            <button type="button" className="btn btn-secondary"  onClick={handleClose} ><i className="ri-close-fill"></i></button>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <div className="d-flex align-items-center">
-                                                <div className="user-img">
-                                                    <img src={img5} alt="userimg" className="avatar-60 rounded-circle img-fluid"/>
+                                                        </Dropdown.Toggle>
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item  onClick={handleShow}  href="#">Check in</Dropdown.Item>
+                                                            <Dropdown.Item  onClick={handleShow}  href="#">Live Video</Dropdown.Item>
+                                                            <Dropdown.Item  onClick={handleShow}  href="#">Gif</Dropdown.Item> 
+                                                            <Dropdown.Item  onClick={handleShow}  href="#">Watch Party</Dropdown.Item> 
+                                                            <Dropdown.Item  onClick={handleShow}  href="#">Play with Friend</Dropdown.Item> 
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
                                                 </div>
-                                                <form className="post-text ms-3 w-100" >
-                                                    <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border: "none"}}/>
-                                                </form>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </Card.Body>
+                                <Modal size="lg" className=" fade" id="post-modal" onHide={handleClose} show={show} >
+                                    <Modal.Header  className="d-flex justify-content-between">
+                                        <Modal.Title id="post-modalLabel">Create Post</Modal.Title>
+                                        <button type="button" className="btn btn-secondary"  onClick={handleClose} ><i className="ri-close-fill"></i></button>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div className="d-flex align-items-center">
+                                            <div className="user-img">
+                                                <img src={user1} alt="user1" className="avatar-60 rounded-circle img-fluid"/>
                                             </div>
-                                            <hr/>
-                                            <ul className="d-flex flex-wrap align-items-center list-inline m-0 p-0">
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small1} alt="icon" className="img-fluid"/> Photo/Video</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small2} alt="icon" className="img-fluid"/> Tag Friend</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small3} alt="icon" className="img-fluid"/> Feeling/Activity</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small4} alt="icon" className="img-fluid"/> Check in</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small5} alt="icon" className="img-fluid"/> Live Video</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small6} alt="icon" className="img-fluid"/> Gif</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small7} alt="icon" className="img-fluid"/> Watch Party</div>
-                                                </li>
-                                                <li className="col-md-6 mb-3">
-                                                    <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link><img src={small8} alt="icon" className="img-fluid"/> Play with Friends</div>
-                                                </li>
-                                            </ul>
-                                            <hr/>
-                                            <div className="other-option">
-                                                <div className="d-flex align-items-center justify-content-between">
-                                                    <div className="d-flex align-items-center">
-                                                        <div className="user-img me-3">
-                                                            <img src={user9} alt="userimg" className="avatar-60 rounded-circle img-fluid"/>
-                                                        </div>
-                                                        <h6>Your Story</h6>
-                                                    </div>
-                                                    <div className="card-post-toolbar">
-                                                        <Dropdown>
-                                                            <Dropdown.Toggle className="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                                <span className="btn btn-primary">Friend</span>
-                                                            </Dropdown.Toggle>
-                                                            <Dropdown.Menu clemassName="dropdown-menu m-0 p-0">
-                                                                <Dropdown.Item className="dropdown-item p-3" href="#">
-                                                                    <div className="d-flex align-items-top">
-                                                                        <i className="ri-save-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                            <h6>Public</h6>
-                                                                            <p className="mb-0">Anyone on or off Facebook</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </Dropdown.Item>
-                                                                <Dropdown.Item className="dropdown-item p-3" href="#">
-                                                                    <div className="d-flex align-items-top">
-                                                                        <i className="ri-close-circle-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                            <h6>Friends</h6>
-                                                                            <p className="mb-0">Your Friend on facebook</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </Dropdown.Item>
-                                                                <Dropdown.Item className="dropdown-item p-3" href="#">
-                                                                    <div className="d-flex align-items-top">
-                                                                        <i className="ri-user-unfollow-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                            <h6>Friends except</h6>
-                                                                            <p className="mb-0">Don't show to some friends</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </Dropdown.Item>
-                                                                <Dropdown.Item className="dropdown-item p-3" href="#">
-                                                                    <div className="d-flex align-items-top">
-                                                                        <i className="ri-notification-line h4"></i>
-                                                                        <div className="data ms-2">
-                                                                            <h6>Only Me</h6>
-                                                                            <p className="mb-0">Only me</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </Dropdown.Item>
-                                                            </Dropdown.Menu>
-                                                        </Dropdown>
+                                            <form className="post-text ms-3 w-100 "  data-bs-toggle="modal" data-bs-target="#post-modal">
+                                            <input type="text" className="form-control rounded" placeholder="Write something here..." style={{border:"none"}} onChange={(e)=>setPost({
+                                                ...post,
+                                                description:e.target.value
+                                            })}/>
+                                        </form>
+                                        </div>
+                                        <hr/>
+                                        <ul className="d-flex flex-wrap align-items-center list-inline m-0 p-0">
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img1} alt="icon" className="img-fluid"/> Photo/Video</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img2} alt="icon" className="img-fluid"/> Tag Friend</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img3} alt="icon" className="img-fluid"/> Feeling/Activity</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img4} alt="icon" className="img-fluid"/> Check in</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img5} alt="icon" className="img-fluid"/> Live Video</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img6} alt="icon" className="img-fluid"/> Gif</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img7} alt="icon" className="img-fluid"/> Watch Party</div>
+                                            </li>
+                                            <li className="col-md-6 mb-3">
+                                                <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
+                                                <img src={img8} alt="icon" className="img-fluid"/> Play with Friends</div>
+                                            </li>
+                                        </ul>
+                                        <hr/>
+                                        <div className="other-option">
+                                            <div className="d-flex align-items-center justify-content-between">
+                                                <div className="d-flex align-items-center">
+                                                <div className="user-img me-3">
+                                                    <img src={user1} alt="user1" className="avatar-60 rounded-circle img-fluid"/>
+                                                </div>
+                                                <h6>Your Story</h6>
+                                                </div>
+                                                <div className="card-post-toolbar">
+                                                    <Dropdown  >
+                                                        <Dropdown.Toggle as={CustomToggle} role="button">
+                                                        <span className="btn btn-primary">Friend</span>
+                                                        </Dropdown.Toggle>
+                                                        <Dropdown.Menu className=" m-0 p-0">
+                                                            <Dropdown.Item className=" p-3" to="#">
+                                                                <div className="d-flex align-items-top">
+                                                                <i className="ri-save-line h4"></i>
+                                                                <div className="data ms-2">
+                                                                    <h6>Public</h6>
+                                                                    <p className="mb-0">Anyone on or off Facebook</p>
+                                                                </div>
+                                                                </div>
+                                                            </Dropdown.Item>
+                                                            <Dropdown.Item className="p-3" to="#">
+                                                                <div className="d-flex align-items-top">
+                                                                <i className="ri-close-circle-line h4"></i>
+                                                                <div className="data ms-2">
+                                                                    <h6>Friends</h6>
+                                                                    <p className="mb-0">Your Friend on facebook</p>
+                                                                </div>
+                                                                </div>
+                                                            </Dropdown.Item>        
+                                                            <Dropdown.Item className=" p-3" to="#">
+                                                                <div className="d-flex align-items-top">
+                                                                <i className="ri-user-unfollow-line h4"></i>
+                                                                <div className="data ms-2">
+                                                                    <h6>Friends except</h6>
+                                                                    <p className="mb-0">Don't show to some friends</p>
+                                                                </div>
+                                                                </div>
+                                                            </Dropdown.Item>
+                                                            <Dropdown.Item className=" p-3" to="#">
+                                                                <div className="d-flex align-items-top">
+                                                                <i className="ri-notification-line h4"></i>
+                                                                <div className="data ms-2">
+                                                                    <h6>Only Me</h6>
+                                                                    <p className="mb-0">Only me</p>
+                                                                </div>
+                                                                </div>
+                                                            </Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Button variant="primary" className="d-block w-100 mt-3">Post</Button>
-                                        </Modal.Body>
-                                    </Modal>
-                                    </Card>
-                               
+                                        <button type="submit"  className="btn btn-primary d-block w-100 mt-3" >Post</button>
+                                    </Modal.Body>
+                                </Modal>
+                            </Card>
+                        </Col>
                                    
                                    {allPost.map(item =>
                         <Col sm={12} key={item.Id}>
