@@ -6,7 +6,7 @@ import CustomToggle from '../../components/dropdowns'
 import ShareOffcanvas from '../../components/share-offcanvas'
 import {getPosts, postComment} from '../../api/post/post'
 import axios from "axios";
-import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost,getUnLikePost } from '../../api/post/post'
+import {postCreatePost,getGetPosts,getGetPostByPostId,postCommentReply ,getLikePost,getUnLikePost,getLikeComment,getUnLikeComment,getHidePost } from '../../api/post/post'
 import { useSelector } from 'react-redux'
 
 
@@ -62,8 +62,11 @@ const Index = () => {
     const [iscomment,setIsComment] = useState(false);
     const [allPost,setAllPost] = useState([])
     const [Post_Id,setPost_Id]=useState(0)
-    const [toggleClass, setToggleClass] = useState(false)
-   
+    const [hidepostId,setHidePostId] = useState (0)
+    const [text,setText]=useState('')
+    const [islikedcomment,setIslikedComment] =useState(false)
+  const [comment_Id,setComment_Id]=useState(0)
+   const [ishided,setIsHided]=useState(false)
     const [isliked,setIsliked] =useState(false)
     const [post,setPost] = useState({
         Text: "raza and ,mostafa = love",
@@ -107,35 +110,88 @@ const Index = () => {
         }else{
              await postCommentReply({replycomment,token}).then(res=>console.log(res.data)).then(alert('we create the first reply '))
     }}
-    const handleReply =  ()=>{
-        setIsComment(true)
-        
-    }
+   
     const handleClick =async ()=>{
    const token = sessionStorage.getItem('Token')
     }
-  
-    const getlikes = async(id)=>{
-       
+    const getunlikes = async(id)=>{
         setPost_Id(id)
+         const token = sessionStorage.getItem('Token')
+         setIsliked(!isliked)
+        await getUnLikePost({id,token}).then(res=>res.data['Result'])
+         
+         }
+    
+    const getlikes = async(id)=>{
+       setPost_Id(id)
         const token = sessionStorage.getItem('Token')
         setIsliked(!isliked)
-        if(isliked==false)
-        {
-            
         await getLikePost({id,token}).then(res=>res.data['Result'])
-        }else{
-        
-        await getUnLikePost({id,token}).then(res=>res.data['Result'])
+      
         }
+        const getlikecomment = async(id)=>{
+            setComment_Id(id)
+            console.log(comment_Id)
+            const token = sessionStorage.getItem('Token')
+            setIslikedComment(!islikedcomment)
+            await getLikeComment({id,token}).then(res=>res.data['Result']).then(alert("liked"))
+            }
+                                                                                                                   ////unlike comment
+            const getunlikecomment = async(id)=>{
+            setComment_Id(id)
+            const token = sessionStorage.getItem('Token')
+            setIslikedComment(!islikedcomment)
+            await getUnLikeComment({id,token}).then(res=>res.data['Result']).then(alert("unliked"))
+            }
+        const gethidepost = async (id)=>{
+            setHidePostId(id)
+            const token = sessionStorage.getItem('Token')
+           
+            await getHidePost({id,token}).then(res=>res.data['Result']).then(console.log("hided"))
         }
        
 
     const getPosts = async()=>{
         const token = sessionStorage.getItem('Token')
-        const data = {pagesize:10,pageno:0};
+        const data = {pagesize:20,pageno:0};
         await getGetPosts({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
     }
+    const handleReply = async(e,obj)=>{
+        setIsComment(true);
+        console.log(obj)
+        setTimeout(()=>{
+        setIsComment(false)
+        },15000)
+        } 
+        const handleRequest = async (e,obj)=>{
+        e.preventDefault(); 
+        const token = sessionStorage.getItem('Token');
+        if(iscomment){
+           await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
+           console.log(commentorreply)
+           return;
+        }
+        setCommentorReply({
+        ...commentorreply,
+        Post_Id:obj.Id,
+        ParentComment_Id:0
+        })
+        console.log(commentorreply)
+        await postComment({commentorreply,token}).then(res =>console.log(res.data)).then(alert('this is comment'))
+        return;
+        }
+        const handleComment =  (e,obj)=>{
+        e.preventDefault(); 
+        const token = sessionStorage.getItem('Token');
+        setCommentorReply({
+        ...commentorreply,
+        Text:text,
+        Post_Id:obj.Id,
+        ParentComment_Id:0
+        })
+        console.log(commentorreply)
+        console.log(text)
+        }
   
 
 
@@ -147,7 +203,7 @@ useEffect(()=>{
   
     return (
         <>
-       
+       {console.log(allPost)}
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">
@@ -318,8 +374,8 @@ useEffect(()=>{
                             </Card>
                         </Col>
               
-                        {allPost.map(i =>
-                        <Col sm={12} key={i.Id}>
+                        {allPost.map(item =>
+                        <Col sm={12} key={item.Id}>
                    
                       
                             <Card className=" card-block card-stretch card-height">
@@ -328,7 +384,7 @@ useEffect(()=>{
                                         <div className="d-flex justify-content-between">
                                             
                                             <div className="me-3">
-                                                <img className="rounded-circle img-fluid" src={i.User.ProfilePictureUrl} alt=""/>
+                                                <img className="rounded-circle img-fluid" src={item.User.ProfilePictureUrl} alt=""/>
                                             </div>
                                             
                                             <div className="w-100">
@@ -336,11 +392,10 @@ useEffect(()=>{
                                                     
                                                    
                                                     <div>
-                                                        <h5 className="mb-0 d-inline-block">{i.User.FullName}</h5>
+                                                        <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                         <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                         <p className="mb-0 text-primary">
-                                                             {i.CreatedDate.split(":")[1]+":"+i.CreatedDate.split(":")[2].split("").slice(0,2).join("")    
-}
+                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    }
                                                             </p>
                                                     </div>
                                                     
@@ -362,7 +417,7 @@ useEffect(()=>{
                                                                     </div>
                                                                 </Dropdown.Item>
                                                                 <Dropdown.Item className= "p-3" to="#">
-                                                                        <div className="d-flex align-items-top">
+                                                                        <div className="d-flex align-items-top" onClick={()=>gethidepost(item.Id)}>
                                                                         <i className="ri-close-circle-line h4"></i>
                                                                         <div className="data ms-2">
                                                                             <h6>Hide Post</h6>
@@ -396,11 +451,11 @@ useEffect(()=>{
                                             </div>
                                         </div>
                                         <div className="mt-3">
-                                            <p>{i.Text}</p>
+                                            <p>{item.Text}</p>
                                         </div>
                                         <div className="user-post">
                                             <div className=" d-grid grid-rows-2 grid-flow-col gap-3">
-                                                {i.Medias.map(val=>
+                                                {item.Medias.map(val=>
                                                 <div className="row-span-2 row-span-md-1" key={val.Id}>
                                                     <img src={val.Url} alt="image" className="img-fluid rounded w-100"/>
                                                 </div>
@@ -415,97 +470,86 @@ useEffect(()=>{
                                                         <div className="like-data">
                                                             <Dropdown>
                                                                 <Dropdown.Toggle  as={CustomToggle} >
-                                                                    <a  onClick={()=>getlikes(i.Id)}>
+                                                                <a  onClick={()=>{item.IsLiked ? getunlikes(item.Id): getlikes(item.Id)}}>
                                                                     
-                                                                      <i className="lar la-heart" style={{fontSize:"25px"}}></i>
-                                                                    </a>    
+                                                                <i className={item.IsLiked?"las la-heart":"lar la-heart"} id="like" style={{fontSize:"26px",color:"red"}}></i>
+                                                                      </a>
+                                                                        
                                                                 </Dropdown.Toggle>
-                                                                {/* <Dropdown.Menu className=" py-2">
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Like</Tooltip>} className="ms-2 me-2" ><img src={icon1} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Love</Tooltip>} className="me-2" ><img src={icon2} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Happy</Tooltip>} className="me-2" ><img src={icon3} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>HaHa</Tooltip>} className="me-2" ><img src={icon4} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Think</Tooltip>} className="me-2" ><img src={icon5} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Sade</Tooltip>} className="me-2" ><img src={icon6} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Lovely</Tooltip>} className="me-2" ><img src={icon7} className="img-fluid" alt=""/></OverlayTrigger>
-                                                                </Dropdown.Menu> */}
+                                                              
                                                             </Dropdown>
                                                         </div>
                                                         <div className="total-like-block ms-2 me-3">
                                                             <Dropdown>
                                                                 <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                                {i.LikesCount}
+                                                                {item.LikesCount}
                                                                 </Dropdown.Toggle>
-                                                                {/* <Dropdown.Menu>
-                                                                    <Dropdown.Item  href="#">Max Emum</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Bill Yerds</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Hap E. Birthday</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Tara Misu</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Midge Itz</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Sal Vidge</Dropdown.Item>
-                                                                    <Dropdown.Item  href="#">Other</Dropdown.Item>
-                                                                </Dropdown.Menu> */}
+                                                               
                                                             </Dropdown>
                                                         </div>
                                                     </div>
                                                     <div className="total-comment-block">
                                                         <Dropdown>
                                                             <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                            {i.CommentsCount}  Commented
+                                                            {item.CommentsCount? <> {item.CommentsCount} Commented</>: ""} 
                                                             </Dropdown.Toggle>
                                                             
                                                         </Dropdown>
                                                     </div>
                                                 </div>
-                                                <ShareOffcanvas sharecount={i.ShareCount} />
+                                                <ShareOffcanvas sharecount={item.ShareCount} />
                                             </div>
                                         <hr/>
                                         <ul className="post-comments list-inline p-0 m-0">
                                             <li className="mb-2">
-                                                <div className="d-flex">
+                                            {item.Comments.map(val=>
+                                                <div className="d-flex"key={val.Id}>
                                                     
-                                                    {i.Comments.map(val=>
+                                                    
                                                     <>
                                                     <div className="user-img" >
-                                                    <img src={user01} alt="user1" className="avatar-35 rounded-circle img-fluid"/>
+                                                    <img  className="avatar-35 rounded-circle img-fluid"/>
                                                 </div>
                                                             <div className="comment-data-block ms-3">
-                                                                <h6>Name</h6>
-                                                                <p className="mb-0">{val.text}</p>
+                                                                <h6>{item.User.FullName}</h6>
+                                                                
+                                                                <p className="mb-0">{val.Text}</p>
                                                                 <div className="d-flex flex-wrap align-items-center comment-activity">
-                                                                    <Link to="#">like</Link>
-                                                                    <Link to="#"onClick={()=>handleReply()} >reply</Link>
+                                                                <a  onClick={()=>{val.IsLiked ? getunlikecomment(val.Id): getlikecomment(val.Id)}}>
+                                                                    
+                                                                    <i className={val.IsLiked?"las la-heart":"lar la-heart"} id="like" style={{fontSize:"15px"}}></i>
+                                                                          </a>
+                                                                    {/* <Link to="#" onClick={()=>{getlikecomment(val.Id)}}>Like</Link> */}
+                                                                    <Link to="#"onClick={()=>{
+                                                                       setTimeout(()=>{
+                                                                        setIsComment(false)
+                                                                       },10000)
+                                                                  
+                                                                       setCommentorReply({
+                                                                          ...commentorreply,
+                                                                          Post_Id:item.Id,
+                                                                          ParentComment_Id:val.Id
+                                                                       })
+                                                                   }} >reply</Link>
                                                                     <Link to="#">translate</Link>
                                                                     <span> 5 min </span>
                                                                 </div>
                                                             </div>
                                                             </>
-                                                    )}
+                                                   
 
                                                 </div>
+                                                 )}
                                             </li>
-                                            <li>
-                                                <div className="d-flex">
-                                                    <div className="user-img">
-                                                        <img src={user3} alt="user1" className="avatar-35 rounded-circle img-fluid"/>
-                                                    </div>
-                                                    <div className="comment-data-block ms-3">
-                                                        <h6>Paul Molive</h6>
-                                                        <p className="mb-0">Lorem ipsum dolor sit amet</p>
-                                                        <div className="d-flex flex-wrap align-items-center comment-activity">
-                                                            <Link to="#">like</Link>
-                                                            <Link to="#"onClick={()=>handleReply()} >reply</Link>
-                                                            <Link to="#">translate</Link>
-                                                            <span> 5 min </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <form className="comment-text d-flex align-items-center mt-3" onSubmit={handleSubmit} >
-                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment" />
+                                         
+                                                 </ul>
+                                                 <form className="comment-text d-flex align-items-center mt-3" onSubmit={(e,n)=>handleRequest(e,item)}  >
+                                            <input type="text" className="form-control rounded" placeholder="Enter Your Comment" onChange={(e)=>setCommentorReply({
+                                               ...commentorreply,
+                                               Text:e.target.value,
+                                                Post_Id:item.Id
+                                            })} />
                                             <div className="comment-attagement d-flex">
-                                            
                                                 <Link to="#"><i className="ri-link me-3"></i></Link>
                                                 <Link to="#"><i className="ri-user-smile-line me-3"></i></Link>
                                                 <Link to="#"><i className="ri-camera-line me-3"></i></Link>
