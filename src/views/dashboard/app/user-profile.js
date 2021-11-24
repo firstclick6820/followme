@@ -5,8 +5,37 @@ import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 import axios from "axios";
-import { postCreatePost,getGetPostsByUserId,postComment,postCommentReply,getLikePost,getUnLikePost } from '../../../api/post/post'
+import { postCreatePost,getGetPostsByUserId,postComment,postCommentReply,getLikePost,getUnLikePost,getLikeComment,getUnLikeComment } from '../../../api/post/post'
 // images
+
+
+
+import user13 from '../../../assets/images/user/13.jpg'
+import user14 from '../../../assets/images/user/14.jpg'
+import user15 from '../../../assets/images/user/15.jpg'
+import user16 from '../../../assets/images/user/16.jpg'
+import user17 from '../../../assets/images/user/17.jpg'
+import user18 from '../../../assets/images/user/18.jpg'
+import user19 from '../../../assets/images/user/19.jpg'
+
+
+
+
+import img51 from '../../../assets/images/page-img/51.jpg'
+import img52 from '../../../assets/images/page-img/52.jpg'
+import img53 from '../../../assets/images/page-img/53.jpg'
+import img54 from '../../../assets/images/page-img/54.jpg'
+import img55 from '../../../assets/images/page-img/55.jpg'
+import img56 from '../../../assets/images/page-img/56.jpg'
+import img57 from '../../../assets/images/page-img/57.jpg'
+import img58 from '../../../assets/images/page-img/58.jpg'
+import img59 from '../../../assets/images/page-img/59.jpg'
+import img60 from '../../../assets/images/page-img/60.jpg'
+import img61 from '../../../assets/images/page-img/61.jpg'
+import img62 from '../../../assets/images/page-img/62.jpg'
+import img64 from '../../../assets/images/page-img/64.jpg'
+import img65 from '../../../assets/images/page-img/65.jpg'
+
 
 import img1 from '../../../assets/images/page-img/profile-bg1.jpg'
 import img2 from '../../../assets/images/user/11.png'
@@ -16,9 +45,13 @@ import img5 from '../../../assets/images/icon/10.png'
 import img6 from '../../../assets/images/icon/11.png'
 import img7 from '../../../assets/images/icon/12.png'
 import img8 from '../../../assets/images/icon/13.png'
+import img63 from '../../../assets/images/icon/13.png'
 import img9 from '../../../assets/images/page-img/07.jpg'
 import img10 from '../../../assets/images/page-img/06.jpg'
 import user1 from '../../../assets/images/user/1.jpg'
+import user01 from '../../../assets/images/user/01.jpg'
+import user02 from '../../../assets/images/user/02.jpg'
+import user03 from '../../../assets/images/user/03.jpg'
 import user05 from '../../../assets/images/user/05.jpg'
 import user06 from '../../../assets/images/user/06.jpg'
 import user07 from '../../../assets/images/user/07.jpg'
@@ -26,13 +59,6 @@ import user08 from '../../../assets/images/user/08.jpg'
 import user09 from '../../../assets/images/user/09.jpg'
 import user10 from '../../../assets/images/user/10.jpg'
 
-import icon1 from '../../../assets/images/icon/01.png'
-import icon2 from '../../../assets/images/icon/02.png'
-import icon3 from '../../../assets/images/icon/03.png'
-import icon4 from '../../../assets/images/icon/04.png'
-import icon5 from '../../../assets/images/icon/05.png'
-import icon6 from '../../../assets/images/icon/06.png'
-import icon7 from '../../../assets/images/icon/07.png'
 import g1 from '../../../assets/images/page-img/g1.jpg'
 import g2 from '../../../assets/images/page-img/g2.jpg'
 import g3 from '../../../assets/images/page-img/g3.jpg'
@@ -63,20 +89,14 @@ const UserProfile =() =>{
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
    const [allPost,setAllPost] = useState([])
- 
-
-
-
-
-   const [iscomment,setIsComment] = useState(false);
+  const [iscomment,setIsComment] = useState(false);
   const [isliked,setIsliked] =useState(false)
-   
-  
-
-
-   const [text,setText]=useState('')
+  const [islikedcomment,setIslikedComment] =useState(false)
+  const [comment_Id,setComment_Id]=useState(0)
+ const [text,setText]=useState('')
  /////////////////
    const [post,setPost] = useState({
+<<<<<<< HEAD
        Text: "",
        Visibility: 1,
        Location: "internet city",
@@ -107,80 +127,99 @@ const UserProfile =() =>{
       }
  
 
+=======
+   Text: "raza and ,mostafa = love",
+   Visibility: 1,
+   Location: "internet city",
+   ImageUrls: "no problem",
+   UserTagId: [2]
+   })
+   const [commentorreply ,setCommentorReply] = useState({
+   Text:'',
+   Post_Id:0,
+   ParentComment_Id:0
+   })
+                                                                                                         ////like comment
+   const getlikecomment = async(id)=>{
+   setComment_Id(id)
+   console.log(comment_Id)
+   const token = sessionStorage.getItem('Token')
+   setIslikedComment(!islikedcomment)
+   await getLikeComment({id,token}).then(res=>res.data['Result']).then(alert("liked"))
+   }
+                                                                                                          ////unlike comment
+   const getunlikecomment = async(id)=>{
+   setComment_Id(id)
+   const token = sessionStorage.getItem('Token')
+   setIslikedComment(!islikedcomment)
+   await getUnLikeComment({id,token}).then(res=>res.data['Result']).then(alert("unliked"))
+   }
+>>>>>>> b76533a11941e3963f17d25941c842e189dacf8f
 
-  const handleReply = async(e,obj)=>{
+   const getlikes = async(id)=>{
+   setPost_Id(id)
+   const token = sessionStorage.getItem('Token')
+   setIsliked(!isliked)
+   await getLikePost({id,token}).then(res=>res.data['Result'])
+   }
+   const getunlikes = async(id)=>{
+   setPost_Id(id)
+   const token = sessionStorage.getItem('Token')
+   setIsliked(!isliked)
+   await getUnLikePost({id,token}).then(res=>res.data['Result'])
+   }
+   const handleReply = async(e,obj)=>{
    setIsComment(true);
-  console.log(obj)
+   console.log(obj)
    setTimeout(()=>{
-     setIsComment(false)
+   setIsComment(false)
    },15000)
-  } 
-
-
-    const handleRequest = async (e,obj)=>{
-      e.preventDefault(); 
-      const token = sessionStorage.getItem('Token');
-    if(iscomment){
-       await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
+   } 
+   const handleRequest = async (e,obj)=>{
+   e.preventDefault(); 
+   const token = sessionStorage.getItem('Token');
+   if(iscomment){
+      await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
       console.log(commentorreply)
       return;
-    }
-    setCommentorReply({
-      ...commentorreply,
-      Post_Id:obj.Id,
-      ParentComment_Id:0
+   }
+   setCommentorReply({
+   ...commentorreply,
+   Post_Id:obj.Id,
+   ParentComment_Id:0
    })
-     console.log(commentorreply)
+   console.log(commentorreply)
    await postComment({commentorreply,token}).then(res =>console.log(res.data)).then(alert('this is comment'))
-    return;
-    }
-    const handleComment =  (e,obj)=>{
-       e.preventDefault(); 
-     const token = sessionStorage.getItem('Token');
-    
-      setCommentorReply({
-         ...commentorreply,
-         Text:text,
-         Post_Id:obj.Id,
-         ParentComment_Id:0
-      })
-      
-
-       console.log(commentorreply)
-       console.log(text)
-//       console.log(isComment)
-     
-   
-//          isComment ?  await postCommentReply({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is reply'))
-//          :await postComment({commentorreply,token}).then(res =>console.log( res.data)).then(alert('this is comment'))
-//          return
-
-  } 
-  
-
-
-
-
-
-
-
-
-const getPosts = async()=>{
- const token = sessionStorage.getItem('Token')
- const data = {userid:2,pagesize:13,pageno:0};
- await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
-}
-useEffect(()=>{
+   return;
+   }
+   const handleComment =  (e,obj)=>{
+   e.preventDefault(); 
+   const token = sessionStorage.getItem('Token');
+   setCommentorReply({
+   ...commentorreply,
+   Text:text,
+   Post_Id:obj.Id,
+   ParentComment_Id:0
+   })
+   console.log(commentorreply)
+   console.log(text)
+   } 
+   const getPosts = async()=>{
+   const token = sessionStorage.getItem('Token')
+   const data = {userid:2,pagesize:13,pageno:0};
+   await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
+   }
+   useEffect(()=>{
    getPosts()
-},[isliked])
+   },[isliked,islikedcomment])
 
-
-
- 
-
-  return(
+return(
       <>
+<<<<<<< HEAD
   
+=======
+         {console.log(allPost)}
+>>>>>>> b76533a11941e3963f17d25941c842e189dacf8f
          <Container>
         
             <Row>
@@ -669,14 +708,13 @@ useEffect(()=>{
                                                             <Dropdown>
 
                                                                
-
-                                                               <Dropdown.Toggle  as={CustomToggle} >
-
-                                                               <a  onClick={()=>getlikes(item.Id)}>
-                                                                    <i className="lar la-heart " style={{fontSize:"24px"}}></i>
-
-                                                                    </a>
-                                                               </Dropdown.Toggle>
+                                                            <Dropdown.Toggle  as={CustomToggle} >
+                                                                <a  onClick={()=>{item.IsLiked ? getunlikes(item.Id): getlikes(item.Id)}}>
+                                                                    
+                                                                <i className={item.IsLiked?"las la-heart":"lar la-heart"} id="like" style={{fontSize:"26px",color:"red"}}></i>
+                                                                      </a>
+                                                                        
+                                                                </Dropdown.Toggle>
                                                               
 
                                                             </Dropdown>
@@ -697,7 +735,7 @@ useEffect(()=>{
                                                     <div className="total-comment-block">
                                                         <Dropdown>
                                                             <Dropdown.Toggle as={CustomToggle}  id="post-option" >
-                                                            {item.CommentsCount}
+                                                            {item.CommentsCount? <> {item.CommentsCount} Commented</>: ""} 
                                                             </Dropdown.Toggle>
                                                          </Dropdown>
                                                     </div>
@@ -708,7 +746,7 @@ useEffect(()=>{
                                         <ul className="post-comments list-inline p-0 m-0">
                                             <li className="mb-2">
                                             {item.Comments.map(val=>
-                                                <div className="d-flex">
+                                                <div className="d-flex"key={val.Id}>
                                                     
                                                     
                                                     <>
@@ -716,10 +754,15 @@ useEffect(()=>{
                                                     <img  className="avatar-35 rounded-circle img-fluid"/>
                                                 </div>
                                                             <div className="comment-data-block ms-3">
-                                                                <h6>Name</h6>
-                                                                <p className="mb-0">{val.text}</p>
+                                                                <h6>{item.User.FullName}</h6>
+                                                                
+                                                                <p className="mb-0">{val.Text}</p>
                                                                 <div className="d-flex flex-wrap align-items-center comment-activity">
-                                                                    <Link to="#">like</Link>
+                                                                <a  onClick={()=>{val.IsLiked ? getunlikecomment(val.Id): getlikecomment(val.Id)}}>
+                                                                    
+                                                                    <i className={val.IsLiked?"las la-heart":"lar la-heart"} id="like" style={{fontSize:"15px"}}></i>
+                                                                          </a>
+                                                                    {/* <Link to="#" onClick={()=>{getlikecomment(val.Id)}}>Like</Link> */}
                                                                     <Link to="#"onClick={()=>{
                                                                        setTimeout(()=>{
                                                                         setIsComment(false)
@@ -763,13 +806,3007 @@ useEffect(()=>{
                         
                         </Col>
                         )}
-                             
-                                   
-                                    
-                                 </Col>
+                        </Col>
                               </Row>
                            </Card.Body>
                         </Tab.Pane> 
+                        <Tab.Pane eventKey="second">
+                           <Tab.Container id="left-tabs-example" defaultActiveKey="about1">
+                              <Card>
+                                 <Card.Body>
+                                    <Row>
+                                       <Col md={3}>
+                                          <Nav variant="pills"  className=" basic-info-items list-inline d-block p-0 m-0">
+                                             <Nav.Item >
+                                                <Nav.Link href="#" eventKey="about1">Contact and Basic Info</Nav.Link>
+                                             </Nav.Item>
+                                             <Nav.Item >
+                                                <Nav.Link href="#" eventKey="about2">Family and Relationship</Nav.Link>
+                                             </Nav.Item>
+                                             <Nav.Item >
+                                                <Nav.Link href="#" eventKey="about3">Work and Education</Nav.Link>
+                                             </Nav.Item>
+                                             <Nav.Item >
+                                                <Nav.Link href="#" eventKey="about4">Places You've Lived</Nav.Link>
+                                             </Nav.Item>
+                                             <Nav.Item >
+                                                <Nav.Link href="#" eventKey="about5">Details About You</Nav.Link>
+                                             </Nav.Item>
+                                          </Nav>
+                                       </Col>
+                                       <Col md={9} className=" ps-4">
+                                          <Tab.Content >
+                                             <Tab.Pane eventKey="about1">
+                                                <h4>Contact Information</h4>
+                                                <hr/>
+                                                <Row>
+                                                   <div className="col-3">
+                                                      <h6>Email</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">Bnijohn@gmail.com</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>Mobile</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">(001) 4544 565 456</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>Address</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">United States of America</p>
+                                                   </div>
+                                                </Row>
+                                                <h4 className="mt-3">Websites and Social Links</h4>
+                                                <hr/>
+                                                <div className="row">
+                                                   <div className="col-3">
+                                                      <h6>Website</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">www.bootstrap.com</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>Social Link</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">www.bootstrap.com</p>
+                                                   </div>
+                                                </div>
+                                                <h4 className="mt-3">Basic Information</h4>
+                                                <hr/>
+                                                <Row>
+                                                   <div className="col-3">
+                                                      <h6>Birth Date</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">24 January</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>Birth Year</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">1994</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>Gender</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">Female</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>interested in</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">Designing</p>
+                                                   </div>
+                                                   <div className="col-3">
+                                                      <h6>language</h6>
+                                                   </div>
+                                                   <div className="col-9">
+                                                      <p className="mb-0">English, French</p>
+                                                   </div>
+                                                </Row>
+                                             </Tab.Pane>
+                                             <Tab.Pane eventKey="about2">
+                                                <h4 className="mb-3">Relationship</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex mb-4 align-items-center">
+                                                      <div className="user-img img-fluid"><i className="ri-add-fill"></i></div>
+                                                      <div className="media-support-info ms-3">
+                                                         <h6>Add Your Relationship Status</h6>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                                <h4 className="mt-3 mb-3">Family Members</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex mb-4 align-items-center">
+                                                      <div className="user-img img-fluid"><i className="ri-add-fill"></i></div>
+                                                      <div className="media-support-info ms-3">
+                                                         <h6>Add Family Members</h6>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user01} alt="story1" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>Paul Molive</h6>
+                                                               <p className="mb-0">Brothe</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex justify-content-between mb-4  align-items-center">
+                                                      <div className="user-img img-fluid"><img src={user02} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex flex-wrap justify-content-between">
+                                                            <div className=" ms-3">
+                                                               <h6>Anna Mull</h6>
+                                                               <p className="mb-0">Sister</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user03} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>Paige Turner</h6>
+                                                               <p className="mb-0">Cousin</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                             </Tab.Pane>
+                                             <Tab.Pane eventKey="about3">
+                                                <h4 className="mb-3">Work</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex justify-content-between mb-4  align-items-center">
+                                                      <div className="user-img img-fluid"><i className="ri-add-fill"></i></div>
+                                                      <div className="ms-3">
+                                                         <h6>Add Work Place</h6>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user01} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>Themeforest</h6>
+                                                               <p className="mb-0">Web Designer</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user02} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex flex-wrap justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>iqonicdesign</h6>
+                                                               <p className="mb-0">Web Developer</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user03} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex flex-wrap justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>W3school</h6>
+                                                               <p className="mb-0">Designer</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                                <h4 className="mb-3">Professional Skills</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex mb-4 align-items-center">
+                                                      <div className="user-img img-fluid"><i className="ri-add-fill"></i></div>
+                                                      <div className="ms-3">
+                                                         <h6>Add Professional Skills</h6>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                                <h4 className="mt-3 mb-3">College</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex mb-4 align-items-center">
+                                                      <div className="user-img img-fluid"><i className="ri-add-fill"></i></div>
+                                                      <div className="ms-3">
+                                                         <h6>Add College</h6>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center">
+                                                      <div className="user-img img-fluid"><img src={user01} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex flex-wrap justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>Lorem ipsum</h6>
+                                                               <p className="mb-0">USA</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                             </Tab.Pane>
+                                             <Tab.Pane eventKey="about4">
+                                                <h4 className="mb-3">Current City and Hometown</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user01} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex flex-wrap justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>Georgia</h6>
+                                                               <p className="mb-0">Georgia State</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                   <li className="d-flex mb-4 align-items-center justify-content-between">
+                                                      <div className="user-img img-fluid"><img src={user02} alt="story-img" className="rounded-circle avatar-40"/></div>
+                                                      <div className="w-100">
+                                                         <div className="d-flex flex-wrap justify-content-between">
+                                                            <div className="ms-3">
+                                                               <h6>Atlanta</h6>
+                                                               <p className="mb-0">Atlanta City</p>
+                                                            </div>
+                                                            <div className="edit-relation"><Link to="#"><i className="ri-edit-line me-2"></i>Edit</Link></div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                                <h4 className="mt-3 mb-3">Other Places Lived</h4>
+                                                <ul className="suggestions-lists m-0 p-0">
+                                                   <li className="d-flex mb-4 align-items-center">
+                                                      <div className="user-img img-fluid"><i className="ri-add-fill"></i></div>
+                                                      <div className="ms-3">
+                                                         <h6>Add Place</h6>
+                                                      </div>
+                                                   </li>
+                                                </ul>
+                                             </Tab.Pane>
+                                             <Tab.Pane eventKey="about5">
+                                                <h4 className="mb-3">About You</h4>
+                                                <p>Hi, I’m Bni, I’m 26 and I work as a Web Designer for the iqonicdesign.</p>
+                                                <h4 className="mt-3 mb-3">Other Name</h4>
+                                                <p>Bini Rock</p>
+                                                <h4 className="mt-3 mb-3">Favorite Quotes</h4>
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                             </Tab.Pane>
+                                          </Tab.Content>
+                                       </Col>
+                                    </Row>
+                                 </Card.Body>
+                              </Card>
+                           </Tab.Container>
+                        </Tab.Pane> 
+                        <Tab.Pane eventKey="third" >
+                           <Tab.Container id="left-tabs-example" defaultActiveKey="all-friends">
+                              <Card>
+                                 <Card.Body>
+                                    <h2>Friends</h2>
+                                    <div className="friend-list-tab mt-2">
+                                       <Nav variant="pills" className=" d-flex align-items-center justify-content-left friend-list-items p-0 mb-2">
+                                          <Nav.Item>
+                                             <Nav.Link  href="#pill-all-friends" eventKey="all-friends">All Friends</Nav.Link>
+                                          </Nav.Item>
+                                          <Nav.Item>
+                                             <Nav.Link href="#pill-recently-add" eventKey="recently-add">Recently Added</Nav.Link>
+                                          </Nav.Item>
+                                          <Nav.Item>
+                                             <Nav.Link href="#pill-closefriends" eventKey="closefriends"> Close friends</Nav.Link>
+                                          </Nav.Item>
+                                          <Nav.Item>
+                                             <Nav.Link href="#pill-home" eventKey="home-town"> Home/Town</Nav.Link>
+                                          </Nav.Item>
+                                          <Nav.Item>
+                                             <Nav.Link href="#pill-following" eventKey="following">Following</Nav.Link>
+                                          </Nav.Item>
+                                       </Nav>
+                                       <Tab.Content>
+                                          <Tab.Pane eventKey="all-friends">
+                                             <Card.Body className="p-0">
+                                                <Row>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                               <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Petey Cruiser</h5>
+                                                                  <p className="mb-0">15  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Anna Sthesia</h5>
+                                                                  <p className="mb-0">50  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Paul Molive</h5>
+                                                                  <p className="mb-0">10  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user08} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Gail Forcewind</h5>
+                                                                  <p className="mb-0">20  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user09} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Paige Turner</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user10} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>b Frapples</h5>
+                                                                  <p className="mb-0">6  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user13} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Walter Melon</h5>
+                                                                  <p className="mb-0">30  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user14} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Barb Ackue</h5>
+                                                                  <p className="mb-0">14  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user15} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Buck Kinnear</h5>
+                                                                  <p className="mb-0">16  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user16} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Ira Membrit</h5>
+                                                                  <p className="mb-0">22  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user17} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Shonda Leer</h5>
+                                                                  <p className="mb-0">10  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user18} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>ock Lee</h5>
+                                                                  <p className="mb-0">18  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user19} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Maya Didas</h5>
+                                                                  <p className="mb-0">40  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Rick O'Shea</h5>
+                                                                  <p className="mb-0">50  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Pete Sariya</h5>
+                                                                  <p className="mb-0">5  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Monty Carlo</h5>
+                                                                  <p className="mb-0">2  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user08} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Sal Monella</h5>
+                                                                  <p className="mb-0">0  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user09} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Sue Vaneer</h5>
+                                                                  <p className="mb-0">25  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user10} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Cliff Hanger</h5>
+                                                                  <p className="mb-0">18  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Barb Dwyer</h5>
+                                                                  <p className="mb-0">23  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Terry Aki</h5>
+                                                                  <p className="mb-0">8  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user13} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Cory Ander</h5>
+                                                                  <p className="mb-0">7  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2" >
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user14} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Robin Banks</h5>
+                                                                  <p className="mb-0">14  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user15} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Jimmy Changa</h5>
+                                                                  <p className="mb-0">10  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user16} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Barry Wine</h5>
+                                                                  <p className="mb-0">18  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user17} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Poppa Cherry</h5>
+                                                                  <p className="mb-0">16  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user18} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Zack Lee</h5>
+                                                                  <p className="mb-0">33  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user19} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Don Stairs</h5>
+                                                                  <p className="mb-0">15  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Peter Pants</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Hal Appeno </h5>
+                                                                  <p className="mb-0">13  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </Row>
+                                             </Card.Body>
+                                          </Tab.Pane>
+                                          <Tab.Pane eventKey="recently-add" >
+                                             <div className="card-body p-0">
+                                                <div className="row">
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Otto Matic</h5>
+                                                                  <p className="mb-0">4  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user08} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Moe Fugga</h5>
+                                                                  <p className="mb-0">16  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user09} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Tom Foolery</h5>
+                                                                  <p className="mb-0">14  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user10} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Bud Wiser</h5>
+                                                                  <p className="mb-0">16  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user15} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Polly Tech</h5>
+                                                                  <p className="mb-0">10  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user16} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Holly Graham</h5>
+                                                                  <p className="mb-0">8  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user17} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Tara Zona</h5>
+                                                                  <p className="mb-0">5  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user18} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Barry Cade</h5>
+                                                                  <p className="mb-0">20  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </Tab.Pane>
+                                          <Tab.Pane eventKey="closefriends" >
+                                             <div className="card-body p-0">
+                                                <div className="row">
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user19} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Bud Wiser</h5>
+                                                                  <p className="mb-0">32  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Otto Matic</h5>
+                                                                  <p className="mb-0">9  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Peter Pants</h5>
+                                                                  <p className="mb-0">2  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Zack Lee</h5>
+                                                                  <p className="mb-0">15  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user08} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Barry Wine</h5>
+                                                                  <p className="mb-0">36  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user09} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Robin Banks</h5>
+                                                                  <p className="mb-0">22  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user10} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Cory Ander</h5>
+                                                                  <p className="mb-0">18  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user15} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Moe Fugga</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user16} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Polly Tech</h5>
+                                                                  <p className="mb-0">30  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user17} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Hal Appeno</h5>
+                                                                  <p className="mb-0">25  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </Tab.Pane>
+                                          <Tab.Pane eventKey="home-town" >
+                                             <div className="card-body p-0">
+                                                <div className="row">
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user18} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Paul Molive</h5>
+                                                                  <p className="mb-0">14  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user19} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Paige Turner</h5>
+                                                                  <p className="mb-0">8  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Barb Ackue</h5>
+                                                                  <p className="mb-0">23  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Ira Membrit</h5>
+                                                                  <p className="mb-0">16  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Maya Didas</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </Tab.Pane>
+                                          <Tab.Pane eventKey="following" >
+                                             <div className="card-body p-0">
+                                                <div className="row">
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Maya Didas</h5>
+                                                                  <p className="mb-0">20  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Monty Carlo</h5>
+                                                                  <p className="mb-0">3  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Cliff Hanger</h5>
+                                                                  <p className="mb-0">20  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user08} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>b Ackue</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user09} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Bob Frapples</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user10} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Anna Mull</h5>
+                                                                  <p className="mb-0">6  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user15} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>ry Wine</h5>
+                                                                  <p className="mb-0">15  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user16} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Don Stairs</h5>
+                                                                  <p className="mb-0">12  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user17} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Peter Pants</h5>
+                                                                  <p className="mb-0">8  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user18} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Polly Tech</h5>
+                                                                  <p className="mb-0">18  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user19} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Tara Zona</h5>
+                                                                  <p className="mb-0">30  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user05} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Arty Ficial</h5>
+                                                                  <p className="mb-0">15  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user06} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Bill Emia</h5>
+                                                                  <p className="mb-0">25  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user07} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Bill Yerds</h5>
+                                                                  <p className="mb-0">9  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div className="col-md-6 col-lg-6 mb-3">
+                                                      <div className="iq-friendlist-block">
+                                                         <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center">
+                                                               <Link to="#">
+                                                                  <img src={user08} alt="profile-img" className="img-fluid"/>
+                                                               </Link>
+                                                               <div className="friend-info ms-3">
+                                                                  <h5>Matt Innae</h5>
+                                                                  <p className="mb-0">19  friends</p>
+                                                               </div>
+                                                            </div>
+                                                            <div className="card-header-toolbar d-flex align-items-center">
+                                                               <Dropdown>
+                                                                  <Dropdown.Toggle  className=" btn btn-secondary me-2">
+                                                                     <i className="ri-check-line me-1 text-white"></i> Friend
+                                                                  </Dropdown.Toggle>
+                                                                  <Dropdown.Menu className="dropdown-menu-right" >
+                                                                     <Dropdown.Item  href="#">Get Notification</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Close Friend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfollow</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Unfriend</Dropdown.Item>
+                                                                     <Dropdown.Item href="#">Block</Dropdown.Item>
+                                                                  </Dropdown.Menu>
+                                                               </Dropdown>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </Tab.Pane>
+                                       </Tab.Content>
+                                    </div>
+                                 </Card.Body>
+                              </Card>
+                           </Tab.Container>
+                        </Tab.Pane> 
+                        <Tab.Pane eventKey="forth" >
+                           <Tab.Container id="left-tabs-example" defaultActiveKey="p1">
+                              <Card>
+                                 <Card.Body>
+                                    <h2>Photos</h2>
+                                    <div className="friend-list-tab mt-2">
+                                       <Nav variant="pills"  className=" d-flex align-items-center justify-content-left friend-list-items p-0 mb-2">
+                                          <li>
+                                             <Nav.Link eventKey="p1" href="#pill-photosofyou">Photos of You</Nav.Link>
+                                          </li>
+                                          <li>
+                                             <Nav.Link eventKey="p2" href="#pill-your-photos" >Your Photos</Nav.Link>
+                                          </li>
+                                       </Nav>
+                                       <Tab.Content>
+                                          <Tab.Pane eventKey="p1">
+                                             <div className="card-body p-0">
+                                                <div className="d-grid gap-2 d-grid-template-1fr-13">
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img51} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img52} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img53} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img54} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img55} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img56} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img57} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img58} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img59} className="img-fluid rounded" alt=""/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img60} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img61} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img62} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img63} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img64} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img65} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img51} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img52} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img53} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img54} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img55} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img56} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img57} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img58} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img59} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </Tab.Pane>
+                                          <Tab.Pane eventKey="p2">
+                                             <div className="card-body p-0">
+                                                <div className="d-grid gap-2 d-grid-template-1fr-13 ">
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img51} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img52} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img53} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img54} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img55} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img56} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img57} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img58} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img59} className="img-fluid rounded" alt="Responsive "/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                   <div>
+                                                      <div className="user-images position-relative overflow-hidden">
+                                                         <Link to="#">
+                                                            <img src={img60} className="img-fluid rounded" alt="Responsive"/>
+                                                         </Link>
+                                                         <div className="image-hover-data">
+                                                            <div className="product-elements-icon">
+                                                               <ul className="d-flex align-items-center m-0 p-0 list-inline">
+                                                                  <li><Link to="#" className="pe-3 text-white"> 60 <i className="ri-thumb-up-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 30 <i className="ri-chat-3-line"></i> </Link></li>
+                                                                  <li><Link to="#" className="pe-3 text-white"> 10 <i className="ri-share-forward-line"></i> </Link></li>
+                                                               </ul>
+                                                            </div>
+                                                         </div>
+                                                         <OverlayTrigger placement="top" overlay={<Tooltip>Edit or Remove</Tooltip>}>
+                                                            <Link to="#" className="image-edit-btn"><i className="ri-edit-2-fill"></i></Link>
+                                                         </OverlayTrigger>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </Tab.Pane>
+                                       </Tab.Content>
+                                    </div>
+                                 </Card.Body>
+                              </Card>
+                           </Tab.Container>
+                        </Tab.Pane>
                         <div className="col-sm-12 text-center">
                            <img src={loader} alt="loader" style={{height: "100px"}} />
                         </div>
