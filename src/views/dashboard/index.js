@@ -214,10 +214,7 @@ useEffect(()=>{
   
     return (
         <>
-<<<<<<< HEAD
-=======
        {console.log(allPost)}
->>>>>>> b76533a11941e3963f17d25941c842e189dacf8f
         <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">
@@ -476,12 +473,7 @@ useEffect(()=>{
                                         </div>
                                         <div className="user-post">
                                             <div className=" d-grid grid-rows-2 grid-flow-col gap-3">
-<<<<<<< HEAD
-                                                {i.Medias.map(val=>
-                                         
-=======
                                                 {item.Medias.map(val=>
->>>>>>> b76533a11941e3963f17d25941c842e189dacf8f
                                                 <div className="row-span-2 row-span-md-1" key={val.Id}>
                                                        
                                                     <img src={val.Url} alt="image" className="img-fluid rounded w-100"/>
