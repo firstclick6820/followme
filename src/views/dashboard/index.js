@@ -8,7 +8,7 @@ import { postComment, getGetPosts } from '../../api/post/post'
 import { postCreatePost, postCommentReply, getLikePost, getUnLikePost, getLikeComment, getUnLikeComment, getHidePost } from '../../api/post/post'
 import { getGetFollowers, getGetFollowings, getGetTopFollowers } from '../../api/followfollower/followfollower'
 import { useSelector } from 'react-redux'
-
+import Moment from 'react-moment';
 
 
 
@@ -182,6 +182,7 @@ const Index = () => {
     }, [isliked])
     return (
         <>
+        {console.log(allPost)}
             <Container>
                 <Row>
                     <Col lg={8} className="row m-0 p-0">
@@ -423,7 +424,9 @@ const Index = () => {
                                                             <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                             <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                             <p className="mb-0 text-primary">
-                                                                {item.CreatedDate.split(":")[1] + ":" + item.CreatedDate.split(":")[2].split("").slice(0, 2).join("")}
+                                                            <Moment fromNow>{item.CreatedDate}</Moment>
+                                                        
+                                                                
                                                             </p>
                                                         </div>
 

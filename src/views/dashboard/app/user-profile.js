@@ -5,6 +5,7 @@ import CustomToggle from '../../../components/dropdowns'
 import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 import axios from "axios";
+import Moment from 'react-moment';
 import { getGetFollowers, getGetTopFollowers, getGetFollowings } from '../../../api/followfollower/followfollower'
 import { postCreatePost,getGetPostsByUserId,postComment,postCommentReply,getLikePost,getUnLikePost,getLikeComment,getUnLikeComment } from '../../../api/post/post'
 // images
@@ -655,7 +656,7 @@ return(
                                                         <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                         <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                         <p className="mb-0 text-primary">
-                                                             {item.CreatedDate.split(":")[1]+":"+item.CreatedDate.split(":")[2].split("").slice(0,2).join("")    }
+                                                        <Moment fromNow>{item.CreatedDate}</Moment>
  
                                                             </p>
                                                     </div>
