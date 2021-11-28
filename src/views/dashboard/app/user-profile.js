@@ -6,12 +6,10 @@ import ShareOffcanvas from '../../../components/share-offcanvas'
 import {Link} from 'react-router-dom'
 import axios from "axios";
 import Moment from 'react-moment';
+import moment from 'moment';
 import { getGetFollowers, getGetTopFollowers, getGetFollowings } from '../../../api/followfollower/followfollower'
 import { postCreatePost,getGetPostsByUserId,postComment,postCommentReply,getLikePost,getUnLikePost,getLikeComment,getUnLikeComment } from '../../../api/post/post'
 // images
-
-
-
 import user13 from '../../../assets/images/user/13.jpg'
 import user14 from '../../../assets/images/user/14.jpg'
 import user15 from '../../../assets/images/user/15.jpg'
@@ -19,10 +17,6 @@ import user16 from '../../../assets/images/user/16.jpg'
 import user17 from '../../../assets/images/user/17.jpg'
 import user18 from '../../../assets/images/user/18.jpg'
 import user19 from '../../../assets/images/user/19.jpg'
-
-
-
-
 import img51 from '../../../assets/images/page-img/51.jpg'
 import img52 from '../../../assets/images/page-img/52.jpg'
 import img53 from '../../../assets/images/page-img/53.jpg'
@@ -61,7 +55,6 @@ import user07 from '../../../assets/images/user/07.jpg'
 import user08 from '../../../assets/images/user/08.jpg'
 import user09 from '../../../assets/images/user/09.jpg'
 import user10 from '../../../assets/images/user/10.jpg'
-
 import g1 from '../../../assets/images/page-img/g1.jpg'
 import g2 from '../../../assets/images/page-img/g2.jpg'
 import g3 from '../../../assets/images/page-img/g3.jpg'
@@ -76,6 +69,7 @@ import loader from '../../../assets/images/page-img/page-load-loader.gif'
 
 
 const UserProfile =() =>{
+   var date;
    const [Post_Id,setPost_Id]=useState(0)
    const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
@@ -84,45 +78,42 @@ const UserProfile =() =>{
    const [tagName,setTagName]=useState('')
    const [allFollower,setAllFollower] = useState([])
    const [allFollowings,setAllFollowings] = useState([])
-   
    const [iscomment,setIsComment] = useState(false);
    const [isliked,setIsliked] =useState(false)
    const [islikedcomment,setIslikedComment] =useState(false)
    const [comment_Id,setComment_Id]=useState(0)
    const [text,setText]=useState('')
- /////////////////
- const [post, setPost] = useState({
-   Text: " ",
-   Visibility: 1,
-   Location: "",
-   ImageUrls: "",
-   UserTagId: []
-})
+
+   const [post, setPost] = useState({
+      Text: " ",
+      Visibility: 1,
+      Location: "",
+      ImageUrls: "",
+      UserTagId: []
+  })
    const [commentorreply ,setCommentorReply] = useState({
    Text:'',
    Post_Id:0,
    ParentComment_Id:0
    })
-                                                                                                         ////like comment
-   const getlikecomment = async(id)=>{
-   setComment_Id(id)
-   console.log(comment_Id)
-   const token = sessionStorage.getItem('Token')
-   setIslikedComment(!islikedcomment)
-   await getLikeComment({id,token}).then(res=>res.data['Result']).then(alert("liked"))
-   }
-                                                                                                          ////unlike comment
-   const getunlikecomment = async(id)=>{
-   setComment_Id(id)
-   const token = sessionStorage.getItem('Token')
-   setIslikedComment(!islikedcomment)
-   await getUnLikeComment({id,token}).then(res=>res.data['Result']).then(alert("unliked"))
-   }
+   const getlikecomment = async (id) => {
+      setComment_Id(id)
+      console.log(comment_Id)
+      const token = sessionStorage.getItem('Token')
+      setIslikedComment(!islikedcomment)
+      await getLikeComment({ id, token }).then(res => res.data['Result'])
+  }
+  const getunlikecomment = async (id) => {
+      setComment_Id(id)
+      const token = sessionStorage.getItem('Token')
+      setIslikedComment(!islikedcomment)
+      await getUnLikeComment({ id, token }).then(res => res.data['Result'])
+  }
    const handleClick = async () => {
       const token = sessionStorage.getItem("Token");
       await postCreatePost({ post, token }).then((res) => console.log(res.data));
     };
-
+ 
    const getlikes = async(id)=>{
    setPost_Id(id)
    const token = sessionStorage.getItem('Token')
@@ -174,33 +165,37 @@ const UserProfile =() =>{
    } 
    const getPosts = async()=>{
    const token = sessionStorage.getItem('Token')
-   const data = {userid:1,pagesize:13,pageno:0};
+   const data = {userid:2,pagesize:13,pageno:0};
    await getGetPostsByUserId({data,token}).then(res=>setAllPost(res.data['Result'].Posts))
    }
    const getfollower = async ()=>{
       const token = sessionStorage.getItem('Token')
       await getGetFollowers({token}).then(res=>setAllFollower(res.data['Result']))
   }
-  const getfollowings = async ()=>{
+   const getfollowings = async ()=>{
    const token = sessionStorage.getItem('Token')
    await getGetFollowings({token}).then(res=>setAllFollowings(res.data['Result']))
-const gettopfollowers = async ()=>{
+   const gettopfollowers = async ()=>{
    const token = sessionStorage.getItem('Token')
    await getGetTopFollowers({token}).then(res =>console.log(res.data))
+   }
 }
-}
-   useEffect(()=>{
-   getPosts()
-  
-   getfollowings()
+const newDate = (date)=>{
+   var createdDateTime = new Date(date + 'Z');
    
+   return createdDateTime;
+  
+}
 
-   },[isliked,islikedcomment])
-
+useEffect(() => {
+   getPosts()
+   getfollowings()
+   // gettopfollowers()
+}, [isliked,islikedcomment])
 return(
       <>
-        
-         <Container>
+      {console.log(allPost)}
+        <Container>
         
             <Row>
                <Col sm={12}>
@@ -440,16 +435,13 @@ return(
                                     <hr/>
                                     <ul className=" post-opt-block d-flex list-inline m-0 p-0 flex-wrap">
                                         <li className="me-3 mb-md-0 mb-2">
-                                            {/* <Link to="#" className="btn btn-soft-primary"> */}
-                                            <label className=" btn btn-soft-primary"> <img src={img14} alt="" /> Photo/Video
+                                          <label className=" btn btn-soft-primary"> <img src={img14} alt="" /> Photo/Video
                                                <input type="file" style={{display:"none"}}  placeholder="Enter Image"onChange={(e)=>setPost({
                                                   ...post,
                                                   ImageUrls:e.target.value
                                                })} /></label>
-                                                {/* <img src={img1} alt="icon" className="img-fluid me-2"/> Photo/Video */}
-                                            {/* </Link> */}
-                                        </li>
-                                        <li className="me-3">  
+                                               </li>
+                                        <li className="me-3 mb-2">  
                                             
                                             <button className=" btn btn-soft-primary" onClick={getfollower}> 
                                                 <div className="card-header-toolbar d-flex align-items-center" >
@@ -460,18 +452,14 @@ return(
                                                         <Dropdown.Menu>
                                                             <input type="text" placeholder="enter your friend's name"/>
                                                             {allFollower.map(follow =>
-                                                            
-                                                         
-                                                                 <Dropdown.Item key={Math.random(10)} onClick={()=>console.log(follow.FirstUser.Id)}  href="#">{follow.FirstUser.FullName}</Dropdown.Item>
+                                                             <Dropdown.Item key={Math.random(10)} onClick={()=>console.log(follow.FirstUser.Id)}  href="#">{follow.FirstUser.FullName}</Dropdown.Item>
                                                             )}
-                                                           
-                                                            
-                                                        </Dropdown.Menu>
+                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </div>
                                             </button>
                                         </li>
-                                        <li className="me-3">
+                                        <li className="me-3 mb-2">
                                             <Link to="#" className="btn btn-soft-primary">
                                                 <img src={img15} alt="icon" className="img-fluid me-2"/> Feeling/Activity
                                             </Link>
@@ -523,10 +511,8 @@ return(
                                                             ...post,
                                                             ImageUrls: e.target.value
                                                         })} /></label>
-
-
-                                                </div>
-                                            </li>
+                                                      </div>
+                                                   </li>
                                             <li className="col-md-6 mb-3">
                                                 <div className="bg-soft-primary rounded p-2 pointer me-3"><Link to="#"></Link>
                                                     <button className="text-primary" style={{ background: "transparent", border: 0 }} onClick={getfollower}>
@@ -540,9 +526,7 @@ return(
                                                                     {allFollower.map(follow =>
                                                                         <Dropdown.Item key={Math.random(10)} onClick={(e) => setPost({ ...post, UserTagId: [...post['UserTagId'], follow.FirstUser.Id] })} href="#">{follow.FirstUser.FullName}</Dropdown.Item>
                                                                     )}
-
-
-                                                                </Dropdown.Menu>
+                                                                  </Dropdown.Menu>
                                                             </Dropdown>
                                                         </div>
                                                     </button>
@@ -634,12 +618,9 @@ return(
                                 </Modal>
                             </Card>
                         </Col>
-                                   
-                                   {allPost.map(item =>
+                        {allPost.map(item =>
                         <Col sm={12} key={item.Id}>
-                   
-                      
-                            <Card className=" card-block card-stretch card-height">
+                           <Card className=" card-block card-stretch card-height">
                                 <Card.Body>
                                     <div className="user-post-data">
                                         <div className="d-flex justify-content-between">
@@ -656,10 +637,11 @@ return(
                                                         <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                         <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                         <p className="mb-0 text-primary">
-                                                        <Moment fromNow>{item.CreatedDate}</Moment>
- 
-                                                            </p>
-                                                    </div>
+  
+                                                        <Moment fromNow>{newDate(item.CreatedDate)}</Moment>
+                                                        
+                                                      </p>
+                                                  </div>
                                                     
                                                     <div className="card-post-toolbar">
                                                         <Dropdown>
@@ -734,11 +716,11 @@ return(
 
                                                                
                                                             <Dropdown.Toggle  as={CustomToggle} >
-                                                                <a  onClick={()=>{item.IsLiked ? getunlikes(item.Id): getlikes(item.Id)}}>
-                                                                    
-                                                                <i className={item.IsLiked?"las la-heart":"lar la-heart"} id="like" style={{fontSize:"26px",color:"red"}}></i>
-                                                                      </a>
-                                                                        
+                                                            <a onClick={() => { item.IsLiked ? getunlikes(item.Id) : getlikes(item.Id) }}>
+
+                                                                        <i className={item.IsLiked ? "las la-heart" : "lar la-heart"} id="like" style={{ fontSize: "26px", color: "red" }}></i>
+                                                                        </a>
+                                                                                                                                                
                                                                 </Dropdown.Toggle>
                                                               
 
@@ -783,11 +765,14 @@ return(
                                                                 
                                                                 <p className="mb-0">{val.Text}</p>
                                                                 <div className="d-flex flex-wrap align-items-center comment-activity">
-                                                                <a  onClick={()=>{val.IsLiked ? getunlikecomment(val.Id): getlikecomment(val.Id)}}>
+                                                                <a style={{cursor:"pointer"}} onClick={() => { val.IsLiked ? getunlikecomment(val.Id) : getlikecomment(val.Id) }}>
+                                                                                {
+                                                                                    val.IsLiked ? <> <i className="las la-heart"style={{ fontSize: "15px",color:"rgb(80, 181, 255)"}}></i></>:
+                                                                                    <i className= "lar la-heart" style={{ fontSize: "15px"}}></i>
+                                                                                }
+                                                                           
+                                                                        </a>
                                                                     
-                                                                    <i className={val.IsLiked?"las la-heart":"lar la-heart"} id="like" style={{fontSize:"15px"}}></i>
-                                                                          </a>
-                                                                    {/* <Link to="#" onClick={()=>{getlikecomment(val.Id)}}>Like</Link> */}
                                                                     <Link to="#"onClick={()=>{
                                                                        setTimeout(()=>{
                                                                         setIsComment(false)
@@ -800,7 +785,8 @@ return(
                                                                        })
                                                                    }} >reply</Link>
                                                                     <Link to="#">translate</Link>
-                                                                    <span> 5 min </span>
+                                                                   
+                                                                    
                                                                 </div>
                                                             </div>
                                                             </>

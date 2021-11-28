@@ -9,9 +9,6 @@ import { postCreatePost, postCommentReply, getLikePost, getUnLikePost, getLikeCo
 import { getGetFollowers, getGetFollowings, getGetTopFollowers } from '../../api/followfollower/followfollower'
 import { useSelector } from 'react-redux'
 import Moment from 'react-moment';
-
-
-
 //image
 import user1 from '../../assets/images/user/1.jpg'
 import user2 from '../../assets/images/user/02.jpg'
@@ -26,12 +23,6 @@ import img6 from '../../assets/images/small/12.png'
 import img7 from '../../assets/images/small/13.png'
 import img8 from '../../assets/images/small/14.png'
 import loader from '../../assets/images/page-img/page-load-loader.gif'
-
-
-
-
-
-
 const Index = () => {
     const login = useSelector(c => c)
     const [show, setShow] = useState(false);
@@ -109,18 +100,20 @@ const Index = () => {
         console.log(comment_Id)
         const token = sessionStorage.getItem('Token')
         setIslikedComment(!islikedcomment)
-        await getLikeComment({ id, token }).then(res => res.data['Result']).then(alert("liked"))
+        await getLikeComment({ id, token }).then(res => res.data['Result'])
     }
     const getunlikecomment = async (id) => {
         setComment_Id(id)
         const token = sessionStorage.getItem('Token')
         setIslikedComment(!islikedcomment)
-        await getUnLikeComment({ id, token }).then(res => res.data['Result']).then(alert("unliked"))
+        await getUnLikeComment({ id, token }).then(res => res.data['Result'])
     }
     const gethidepost = async (id) => {
         setHidePostId(id)
         const token = sessionStorage.getItem('Token')
+        setIsHided(!ishided)
         await getHidePost({ id, token }).then(res => res.data['Result']).then(console.log("hided"))
+        setIsHided(!ishided)
     }
     const getPosts = async () => {
         const token = sessionStorage.getItem('Token')
@@ -175,11 +168,16 @@ const Index = () => {
         const token = sessionStorage.getItem('Token')
         await getGetTopFollowers({ token }).then(res => setAllFollower(res.data['Result']))
     }
+    const newDate = (date)=>{
+    var createdDateTime = new Date(date + 'Z');
+    return createdDateTime;
+    }
+  
     useEffect(() => {
         getPosts()
         getfollowings()
         // gettopfollowers()
-    }, [isliked])
+    }, [isliked,islikedcomment])
     return (
         <>
         {console.log(allPost)}
@@ -232,9 +230,7 @@ const Index = () => {
                                                             {allFollower.map(follow =>
                                                                 <Dropdown.Item key={Math.random(10)} onClick={() => console.log(follow.FirstUser.Id)} href="#">{follow.FirstUser.FullName}</Dropdown.Item>
                                                             )}
-
-
-                                                        </Dropdown.Menu>
+                                                         </Dropdown.Menu>
                                                     </Dropdown>
                                                 </div>
                                             </button>
@@ -275,7 +271,7 @@ const Index = () => {
                                                 <img src={user1} alt="user1" className="avatar-60 rounded-circle img-fluid" />
                                             </div>
                                             <form className="post-text ms-3 w-100 " data-bs-toggle="modal" data-bs-target="#post-modal">
-                                                <input type="text" className="form-control rounded" placeholder="Write something here..." style={{ border: "none" }} onChange={(e) => setPost({
+                                                <input type="text" className="form-control rounded" placeholder="Write something here... " style={{ border: "none" }} onChange={(e) => setPost({
                                                     ...post,
                                                     Text: e.target.value
                                                 })} />
@@ -424,7 +420,7 @@ const Index = () => {
                                                             <h5 className="mb-0 d-inline-block">{item.User.FullName}</h5>
                                                             <span className="mb-0 ps-1 d-inline-block">Added a post</span>
                                                             <p className="mb-0 text-primary">
-                                                            <Moment fromNow>{item.CreatedDate}</Moment>
+                                                            <Moment fromNow>{newDate(item.CreatedDate)}</Moment>
                                                         
                                                                 
                                                             </p>
@@ -448,7 +444,8 @@ const Index = () => {
                                                                         </div>
                                                                     </Dropdown.Item>
                                                                     <Dropdown.Item className="p-3" to="#">
-                                                                        <div className="d-flex align-items-top" onClick={() => gethidepost(item.Id)}>
+                                                                        
+                                                                        <div className="d-flex align-items-top" onClick={() =>gethidepost(item.Id)}>
                                                                             <i className="ri-close-circle-line h4"></i>
                                                                             <div className="data ms-2">
                                                                                 <h6>Hide Post</h6>
@@ -546,9 +543,12 @@ const Index = () => {
 
                                                                     <p className="mb-0">{val.Text}</p>
                                                                     <div className="d-flex flex-wrap align-items-center comment-activity">
-                                                                        <a onClick={() => { val.IsLiked ? getunlikecomment(val.Id) : getlikecomment(val.Id) }}>
-
-                                                                            <i className={val.IsLiked ? "las la-heart" : "lar la-heart"} id="like" style={{ fontSize: "15px" }}></i>
+                                                                        <a style={{cursor:"pointer"}} onClick={() => { val.IsLiked ? getunlikecomment(val.Id) : getlikecomment(val.Id) }}>
+                                                                                {
+                                                                                    val.IsLiked ? <> <i className="las la-heart"style={{ fontSize: "15px",color:"rgb(80, 181, 255)"}}></i></>:
+                                                                                    <i className= "lar la-heart" style={{ fontSize: "15px"}}></i>
+                                                                                }
+                                                                           
                                                                         </a>
                                                                         {/* <Link to="#" onClick={()=>{getlikecomment(val.Id)}}>Like</Link> */}
                                                                         <Link to="#" onClick={() => {
