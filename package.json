@@ -18,6 +18,8 @@
     "axios": "^0.24.0",
     "bootstrap": "^5.1.0",
     "bootstrap-switch-button-react": "^1.2.0",
+    "digital": "^0.0.1",
+    "envelope": "^2.1.0",
     "fullcalendar-interaction": "^5.3.3",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
@@ -31,13 +33,13 @@
     "react-moment": "^1.1.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
     "react-slider-swiper": "^2.0.6",
     "react-switch": "^6.0.0",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.0",
+    "routines": "^0.3.0",
     "sass": "1.39.0",
     "sass-loader": "^12.1.0",
     "smooth-scrollbar": "^8.6.3",
@@ -72,6 +74,8 @@
   },
   "devDependencies": {
     "fslightbox-react": "^1.6.2-2",
-    "sortablejs": "^1.14.0"
+    "react-scripts": "^5.0.1",
+    "sortablejs": "^1.14.0",
+    "webpack": "^5.74.0"
   }
 }

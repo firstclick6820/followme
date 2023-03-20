@@ -27,9 +27,9 @@ const Layout1Router = () => {
     return (
         <>
             <Switch>
-            <Route path="/dashboard/app/contactus"                component={contactus}></Route>
-                <Route path="/dashboards/app/aboutus"                component={aboutus}></Route>
-                <Route path="/dashboards/app/download"          component={download}></Route>    
+                <Route path="/dashboard/app/contactus"              component={contactus}></Route>
+                <Route path="/dashboards/app/aboutus"               component={aboutus}></Route>
+                <Route path="/dashboards/app/download"              component={download}></Route>    
                 <Route path="/dashboards/app/groups"                component={Groups}></Route>
                 <Route path="/dashboards/app/group-detail"          component={GroupDetail}></Route>
                 <Route path="/dashboards/app/friend-list"           component={FriendList} />

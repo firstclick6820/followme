@@ -25,7 +25,7 @@ const Header = () => {
                         <div className="iq-navbar-logo d-flex justify-content-between">
                             <Link to="/">
                                 <Image src={logo} className="img-fluid" alt=""/>
-                                <span>ACE</span>
+                                <span>MKM STUDIO</span>
                             </Link>
                             <div className="iq-menu-bt align-self-center">
                                 <div className="wrapper-menu" onClick={minisidebar}>

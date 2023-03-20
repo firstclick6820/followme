@@ -150,7 +150,8 @@ const Aboutus = () => {
               </p>
             </div>
             
-            </Row>
+          </Row>
+          
             <Row>
 
             <Col lg="4"  >

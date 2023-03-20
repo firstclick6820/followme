@@ -20,7 +20,7 @@ ReactDOM.render(
     <BrowserRouter basename={process.env.PUBLIC_URL}>
      <Provider store={store}>
             <App />
- </Provider>
+    </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
